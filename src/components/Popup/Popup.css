@@ -1,0 +1,72 @@
+.pixel-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.pixel-popup {
+  position: relative;
+  padding: 5px;
+  color: var(--secondary-bg);
+  background: var(--primary-bg);
+  border-style: solid;
+  border-width: 5px;
+  border-image-slice: 3;
+  border-image-width: 2;
+  border-image-repeat: stretch;
+  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="rgb(0,0,0)"/></svg>');
+  border-image-outset: 2;
+  box-shadow: 2px 2px 0 2px var(--primary-bg), -2px -2px 0 2px var(--primary-bg);
+  font-family: "Minecraft", sans-serif;
+  color: var(--card-text-color);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.pixel-popup-inner {
+  padding: 15px;
+  background: var(--secondary-bg);
+  border-style: solid;
+  border-width: 5px;
+  border-image-slice: 3;
+  border-image-width: 2;
+  border-image-repeat: stretch;
+  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="rgb(0,0,0)"/></svg>');
+  border-image-outset: 2;
+  box-shadow: 2px 2px 0 2px var(--secondary-bg),
+    -2px -2px 0 2px var(--secondary-bg);
+  font-family: "Minecraft", sans-serif;
+  color: var(--card-text);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.pixel-popup-title {
+  font-family: "Minecraft", sans-serif;
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.pixel-popup-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: black;
+  font-size: 18px;
+  cursor: pointer;
+  font-family: "Minecraft", sans-serif;
+}
+
+.pixel-popup-content {
+  font-family: "Minecraft", sans-serif;
+}

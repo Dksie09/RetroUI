@@ -1,0 +1,74 @@
+.pixel-dropdown {
+  background-color: var(--primary-bg-dropdown);
+  position: relative;
+  display: inline-block;
+  font-family: "Minecraft", sans-serif;
+}
+
+.pixel-dropdown-trigger {
+  background-color: var(--primary-bg-dropdown);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-style: solid;
+  border-width: 5px;
+  border-image-slice: 3;
+  border-image-width: 2;
+  border-image-repeat: stretch;
+  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="rgb(0,0,0)"/></svg>');
+  border-image-outset: 2;
+  font-size: 16px;
+  color: var(--outline-text);
+  cursor: pointer;
+  width: 100%;
+}
+
+.pixel-dropdown-arrow {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  transition: transform 0.3s;
+}
+
+.pixel-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--primary-bg-dropdown);
+  min-width: 200px;
+  width: 110%;
+  left: -10px;
+  border-style: solid;
+  border-width: 5px;
+  border-image-slice: 3;
+  border-image-width: 2;
+  border-image-repeat: stretch;
+  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="rgb(0,0,0)"/></svg>');
+  z-index: 1;
+}
+
+.pixel-dropdown-item {
+  color: var(--outline-text);
+  padding: 12px 20px;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+  border-bottom: 3px solid var(--outline-text);
+  transition: filter 0.3s ease;
+}
+
+.pixel-dropdown-item:hover {
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.pixel-dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.pixel-dropdown:hover .pixel-dropdown-content {
+  display: block;
+}
+
+.pixel-dropdown:hover .pixel-dropdown-arrow {
+  transform: rotate(90deg);
+}
