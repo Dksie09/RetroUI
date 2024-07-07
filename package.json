@@ -50,6 +50,8 @@
     "fonts"
   ],
   "exports": {
+    ".": "./dist/index.js",
+    "./dist/retroui.css": "./dist/retroui.css",
     "./fonts/Minecraft.otf": "./fonts/Minecraft.otf"
   }
 }
