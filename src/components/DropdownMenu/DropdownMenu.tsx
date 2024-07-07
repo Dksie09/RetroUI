@@ -1,5 +1,5 @@
 import React, { useState, createContext, useContext, ReactNode } from "react";
-import "./DropdownMenu.css";
+import styles from "./DropdownMenu.css";
 
 interface DropdownContextType {
   isOpen: boolean;
@@ -23,7 +23,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
 
   return (
     <DropdownContext.Provider value={{ isOpen, setIsOpen }}>
-      <div className={`pixel-dropdown ${className}`}>{children}</div>
+      <div className={`${styles.pixelDropdown} ${className}`}>{children}</div>
     </DropdownContext.Provider>
   );
 };
@@ -36,12 +36,12 @@ export const DropdownMenuTrigger: React.FC<{ children: ReactNode }> = ({
     throw new Error("DropdownMenuTrigger must be used within a DropdownMenu");
 
   return (
-    <button className="pixel-dropdown-trigger">
+    <button className={styles.pixelDropdownTrigger}>
       {children}
       <img
         src="/icons/new_play.png"
         alt="Toggle Dropdown"
-        className="pixel-dropdown-arrow"
+        className={styles.pixelDropdownArrow}
       />
     </button>
   );
@@ -54,15 +54,17 @@ export const DropdownMenuContent: React.FC<{ children: ReactNode }> = ({
   if (!context)
     throw new Error("DropdownMenuContent must be used within a DropdownMenu");
 
-  return <div className="pixel-dropdown-content">{children}</div>;
+  return <div className={styles.pixelDropdownContent}>{children}</div>;
 };
 
 export const DropdownMenuItem: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   return (
-    <a href="#" className="pixel-dropdown-item">
+    <a href="#" className={styles.pixelDropdownItem}>
       {children}
     </a>
   );
 };
+
+export { styles as DropdownMenuStyles };

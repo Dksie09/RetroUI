@@ -1,4 +1,4 @@
-.pixel-textarea {
+.pixelTextarea {
   width: 100%;
   padding: 8px;
   font-family: "Minecraft", monospace;
@@ -9,7 +9,6 @@
   resize: vertical;
   min-height: 100px;
   outline: none;
-  outline: none;
   border-style: solid;
   border-width: 5px;
   border-image-slice: 3;
@@ -19,14 +18,11 @@
   border-image-outset: 2;
 }
 
-.pixel-textarea:focus {
+.pixelTextarea:focus {
   border-color: none;
-}
-
-.pixel-textarea:focus {
   outline: none;
 }
 
-.plain-input:focus {
+.plainInput:focus {
   outline: none;
 }

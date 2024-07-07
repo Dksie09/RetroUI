@@ -1,5 +1,5 @@
 import React from "react";
-import "./Popup.css";
+import styles from "./Popup.css";
 export interface PopupProps {
     isOpen: boolean;
     onClose: () => void;
@@ -9,4 +9,5 @@ export interface PopupProps {
     closeButtonText?: string;
 }
 export declare const Popup: React.FC<PopupProps>;
+export { styles as PopupStyles };
 export default Popup;

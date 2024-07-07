@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from "react";
-import "./Card.css";
+import styles from "./Card.css";
 
 export interface CardProps {
   children: ReactNode;
@@ -15,9 +15,9 @@ export const Card: FC<CardProps> = ({
   variant = "default",
   ...props
 }) => {
-  const baseClasses = "pixel-card font-minecraft";
+  const baseClasses = `${styles.pixelCard} ${styles.fontMinecraft}`;
   const variantClasses =
-    variant === "outline" ? "pixel-card-outline" : "pixel-card-default";
+    variant === "outline" ? styles.pixelCardOutline : styles.pixelCardDefault;
 
   return (
     <div
@@ -35,7 +35,7 @@ export const CardHeader: FC<CardProps> = ({
   className = "",
   ...props
 }) => (
-  <div className={`pixel-card-header ${className}`} {...props}>
+  <div className={`${styles.pixelCardHeader} ${className}`} {...props}>
     {children}
   </div>
 );
@@ -45,7 +45,7 @@ export const CardTitle: FC<CardProps> = ({
   className = "",
   ...props
 }) => (
-  <h3 className={`pixel-card-title ${className}`} {...props}>
+  <h3 className={`${styles.pixelCardTitle} ${className}`} {...props}>
     {children}
   </h3>
 );
@@ -55,7 +55,7 @@ export const CardDescription: FC<CardProps> = ({
   className = "",
   ...props
 }) => (
-  <p className={`pixel-card-description ${className}`} {...props}>
+  <p className={`${styles.pixelCardDescription} ${className}`} {...props}>
     {children}
   </p>
 );
@@ -65,7 +65,7 @@ export const CardContent: FC<CardProps> = ({
   className = "",
   ...props
 }) => (
-  <div className={`pixel-card-content ${className}`} {...props}>
+  <div className={`${styles.pixelCardContent} ${className}`} {...props}>
     {children}
   </div>
 );
@@ -75,9 +75,11 @@ export const CardFooter: FC<CardProps> = ({
   className = "",
   ...props
 }) => (
-  <div className={`pixel-card-footer ${className}`} {...props}>
+  <div className={`${styles.pixelCardFooter} ${className}`} {...props}>
     {children}
   </div>
 );
 
 export default Card;
+
+export { styles as CardStyles };

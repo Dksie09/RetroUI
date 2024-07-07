@@ -1,11 +1,11 @@
-.pixel-dropdown {
+.pixelDropdown {
   background-color: var(--primary-bg-dropdown);
   position: relative;
   display: inline-block;
   font-family: "Minecraft", sans-serif;
 }
 
-.pixel-dropdown-trigger {
+.pixelDropdownTrigger {
   background-color: var(--primary-bg-dropdown);
   display: flex;
   align-items: center;
@@ -24,14 +24,14 @@
   width: 100%;
 }
 
-.pixel-dropdown-arrow {
+.pixelDropdownArrow {
   width: 20px;
   height: 20px;
   margin-left: 10px;
   transition: transform 0.3s;
 }
 
-.pixel-dropdown-content {
+.pixelDropdownContent {
   display: none;
   position: absolute;
   background-color: var(--primary-bg-dropdown);
@@ -47,7 +47,7 @@
   z-index: 1;
 }
 
-.pixel-dropdown-item {
+.pixelDropdownItem {
   color: var(--outline-text);
   padding: 12px 20px;
   text-decoration: none;
@@ -57,18 +57,18 @@
   transition: filter 0.3s ease;
 }
 
-.pixel-dropdown-item:hover {
+.pixelDropdownItem:hover {
   box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
 }
 
-.pixel-dropdown-item:last-child {
+.pixelDropdownItem:last-child {
   border-bottom: none;
 }
 
-.pixel-dropdown:hover .pixel-dropdown-content {
+.pixelDropdown:hover .pixelDropdownContent {
   display: block;
 }
 
-.pixel-dropdown:hover .pixel-dropdown-arrow {
+.pixelDropdown:hover .pixelDropdownArrow {
   transform: rotate(90deg);
 }

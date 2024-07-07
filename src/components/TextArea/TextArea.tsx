@@ -1,5 +1,5 @@
 import React, { TextareaHTMLAttributes, forwardRef } from "react";
-import "./TextArea.css";
+import styles from "./TextArea.css";
 
 export interface TextAreaProps
   extends TextareaHTMLAttributes<HTMLTextAreaElement> {}
@@ -9,7 +9,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     return (
       <textarea
         ref={ref}
-        className={`pixel-textarea m-2 font-minecraft ${className}`}
+        className={`${styles.pixelTextarea} m-2 font-minecraft ${className}`}
         {...props}
       />
     );
@@ -17,5 +17,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 );
 
 TextArea.displayName = "TextArea";
+
+export { styles as TextAreaStyles };
 
 export default TextArea;

@@ -28,6 +28,9 @@ export default {
             },
             extensions: ['.css'],
             minimize: true,
+            modules: {
+                generateScopedName: '[name]__[local]___[hash:base64:5]',
+            },
             extract: 'index.css',
             use: ['sass'],
         }),

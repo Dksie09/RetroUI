@@ -1,5 +1,5 @@
 import React from "react";
-import "./Input.css";
+import styles from "./Input.css";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -14,13 +14,13 @@ export const Input: React.FC<InputProps> = ({
   ...props
 }) => {
   return (
-    <div className={`mx-1 pixel-container m-2 relative ${className}`}>
+    <div className={`mx-1 ${styles.pixelContainer} m-2 relative ${className}`}>
       <input
-        className="w-full pr-7 plain-input pixel-input font-minecraft"
+        className={`w-full pr-7 ${styles.plainInput} ${styles.pixelInput} font-minecraft`}
         {...props}
       />
       {icon && (
-        <button className="pixel-input-icon-button" onClick={onIconClick}>
+        <button className={styles.pixelInputIconButton} onClick={onIconClick}>
           <img src={icon} alt="Input icon" className="right-0 top-0 absolute" />
         </button>
       )}
@@ -29,3 +29,5 @@ export const Input: React.FC<InputProps> = ({
 };
 
 export default Input;
+
+export { styles as InputStyles };

@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import "./DropdownMenu.css";
+import styles from "./DropdownMenu.css";
 export interface DropdownMenuProps {
     children: ReactNode;
     className?: string;
@@ -14,3 +14,4 @@ export declare const DropdownMenuContent: React.FC<{
 export declare const DropdownMenuItem: React.FC<{
     children: ReactNode;
 }>;
+export { styles as DropdownMenuStyles };

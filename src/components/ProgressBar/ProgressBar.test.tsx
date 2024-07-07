@@ -19,9 +19,9 @@ describe("ProgressBar Component", () => {
   });
 
   test("applies correct color class", () => {
-    render(<ProgressBar progress={50} color="success" />);
+    render(<ProgressBar progress={50} color="secondary" />);
     const progressBar = screen.getByText("50%").previousSibling as HTMLElement;
-    expect(progressBar).toHaveClass("pixel-progressbar-success");
+    expect(progressBar).toHaveClass("pixel-progressbar-secondary");
   });
 
   test("applies correct size class", () => {

@@ -1,4 +1,4 @@
-.pixel-popup-overlay {
+.pixelPopupOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,7 +11,7 @@
   z-index: 1000;
 }
 
-.pixel-popup {
+.pixelPopup {
   position: relative;
   padding: 5px;
   color: var(--secondary-bg);
@@ -30,7 +30,7 @@
   box-sizing: border-box;
 }
 
-.pixel-popup-inner {
+.pixelPopupInner {
   padding: 15px;
   background: var(--secondary-bg);
   border-style: solid;
@@ -48,14 +48,14 @@
   box-sizing: border-box;
 }
 
-.pixel-popup-title {
+.pixelPopupTitle {
   font-family: "Minecraft", sans-serif;
   font-size: 1.5em;
   margin-bottom: 15px;
   text-align: center;
 }
 
-.pixel-popup-close-button {
+.pixelPopupCloseButton {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -67,6 +67,6 @@
   font-family: "Minecraft", sans-serif;
 }
 
-.pixel-popup-content {
+.pixelPopupContent {
   font-family: "Minecraft", sans-serif;
 }

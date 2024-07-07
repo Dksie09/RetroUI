@@ -1,5 +1,5 @@
 import React from "react";
-import "./Button.css";
+import styles from "./Button.css";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -16,10 +16,10 @@ export const Button: React.FC<ButtonProps> = ({
   const baseClasses = "font-minecraft pixel-button px-2 my-2 mx-3";
   const variantClasses =
     variant === "primary"
-      ? "pixel-button-primary"
+      ? styles.pixelButtonPrimary
       : variant === "secondary"
-      ? "pixel-button-secondary"
-      : "pixel-button-outline";
+      ? styles.pixelButtonSecondary
+      : styles.pixelButtonOutline;
 
   return (
     <button
@@ -31,3 +31,5 @@ export const Button: React.FC<ButtonProps> = ({
     </button>
   );
 };
+
+export { styles as ButtonStyles };

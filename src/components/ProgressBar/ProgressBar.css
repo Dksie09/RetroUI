@@ -1,6 +1,5 @@
-.pixel-progressbar-container {
+.pixelProgressbarContainer {
   position: relative;
-  /* width: 100%; */
   height: 30px;
   padding: 2px 2px;
   min-width: 100px;
@@ -10,20 +9,41 @@
   border-image-width: 2;
   border-image-repeat: stretch;
   border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="rgb(0,0,0)"/></svg>');
-  /* box-shadow: 0 0 0 4px #c381b5; */
 }
 
-.pixel-progressbar {
+.pixelProgressbar {
   height: 100%;
   background-color: var(--primary-bg);
   opacity: 50%;
 }
 
-.pixel-progressbar-percentage {
+.pixelProgressbarPercentage {
   position: relative;
-  margin-top: 5px; /* Adjust spacing as needed */
+  margin-top: 5px;
   font-family: "Minecraft", sans-serif;
-  color: var(--outline-text); /* Text color */
-  font-size: 12px; /* Font size */
-  text-align: right; /* Align text to the right */
+  color: var(--outline-text);
+  font-size: 12px;
+  text-align: right;
+}
+
+/* Add these classes for different sizes if needed */
+.pixelProgressbarSm {
+  height: 20px;
+}
+
+.pixelProgressbarMd {
+  height: 30px;
+}
+
+.pixelProgressbarLg {
+  height: 40px;
+}
+
+/* Add these classes for different colors if needed */
+.pixelProgressbarPrimary {
+  background-color: var(--primary-bg);
+}
+
+.pixelProgressbarSecondary {
+  background-color: var(--secondary-bg);
 }

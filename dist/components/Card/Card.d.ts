@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from "react";
-import "./Card.css";
+import styles from "./Card.css";
 export interface CardProps {
     children: ReactNode;
     className?: string;
@@ -13,3 +13,4 @@ export declare const CardDescription: FC<CardProps>;
 export declare const CardContent: FC<CardProps>;
 export declare const CardFooter: FC<CardProps>;
 export default Card;
+export { styles as CardStyles };

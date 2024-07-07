@@ -1,4 +1,4 @@
-.pixel-container {
+.pixelContainer {
   position: relative;
   display: inline-block;
   background-color: var(--primary-bg-dropdown);
@@ -13,10 +13,10 @@
   color: var(--outline-text);
 }
 
-.pixel-input:focus {
+.pixelInput:focus {
   outline: none;
 }
 
-.pixel-input-icon:active {
+.pixelInputIconButton:active {
   @apply top-[2px];
 }
