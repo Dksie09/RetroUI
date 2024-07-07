@@ -1,10 +1,10 @@
 import globalStyles from "./globals.css";
-import { ButtonStyles } from "../components/Button/Button";
-import { CardStyles } from "../components/Card/Card";
-import { DropdownMenuStyles } from "../components/DropdownMenu/DropdownMenu";
-import { InputStyles } from "../components/Input/Input";
-import { ProgressBarStyles } from "../components/ProgressBar/ProgressBar";
-import { TextAreaStyles } from "../components/TextArea/TextArea";
+import ButtonStyles from "../components/Button/Button.module.css";
+import CardStyles from "../components/Card/Card.module.css";
+import DropdownMenuStyles from "../components/DropdownMenu/DropdownMenu.module.css";
+import InputStyles from "../components/Input/Input.module.css";
+import ProgressBarStyles from "../components/ProgressBar/ProgressBar.module.css";
+import TextAreaStyles from "../components/TextArea/TextArea.module.css";
 
 export {
   globalStyles,

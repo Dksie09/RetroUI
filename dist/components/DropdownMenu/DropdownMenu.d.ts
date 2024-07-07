@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import styles from "./DropdownMenu.css";
+import styles from "./DropdownMenu.module.css";
 export interface DropdownMenuProps {
     children: ReactNode;
     className?: string;

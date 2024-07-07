@@ -1,5 +1,5 @@
 import React, { useState, createContext, useContext, ReactNode } from "react";
-import styles from "./DropdownMenu.css";
+import styles from "./DropdownMenu.module.css";
 
 interface DropdownContextType {
   isOpen: boolean;

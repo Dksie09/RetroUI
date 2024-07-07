@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Button.css";
+import styles from "./Button.module.css"; // Change the import to use .module.css
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -15,11 +15,7 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   const baseClasses = `font-minecraft ${styles.pixelButton} px-2 my-2 mx-3`;
   const variantClasses =
-    variant === "primary"
-      ? styles.pixelButtonPrimary
-      : variant === "secondary"
-      ? styles.pixelButtonSecondary
-      : styles.pixelButtonOutline;
+    styles[`pixelButton${variant.charAt(0).toUpperCase() + variant.slice(1)}`];
 
   return (
     <button

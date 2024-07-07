@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./ProgressBar.css";
+import styles from "./ProgressBar.module.css";
 
 export interface ProgressBarProps {
   progress: number;
