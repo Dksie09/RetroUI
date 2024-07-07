@@ -1,4 +1,4 @@
-.pixel-button {
+.pixelButton {
   @apply relative inline-block border-solid border-[5px];
   border-image-slice: 3;
   border-image-width: 2;
@@ -6,12 +6,12 @@
   border-image-outset: 2;
 }
 
-.pixel-button:active {
+.pixelButton:active {
   @apply top-[2px];
 }
 
 /* Specific styles for primary button */
-.pixel-button-primary {
+.pixelButtonPrimary {
   background-color: var(--primary-bg);
   color: var(--primary-text);
   box-shadow: 2px 2px 0 2px var(--primary-shadow),
@@ -19,12 +19,12 @@
   border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="%23000000"/></svg>');
 }
 
-.pixel-button-primary:active {
+.pixelButtonPrimary:active {
   box-shadow: 2px 2px 0 2px var(--primary-bg), -2px -2px 0 2px var(--primary-bg);
 }
 
 /* Specific styles for secondary button */
-.pixel-button-secondary {
+.pixelButtonSecondary {
   background-color: var(--secondary-bg);
   color: var(--secondary-text);
   box-shadow: 2px 2px 0 2px var(--secondary-shadow),
@@ -32,18 +32,18 @@
   border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="%23000000"/></svg>');
 }
 
-.pixel-button-secondary:active {
+.pixelButtonSecondary:active {
   box-shadow: 2px 2px 0 2px var(--secondary-bg),
     -2px -2px 0 2px var(--secondary-bg);
 }
 
-.pixel-button-outline {
+.pixelButtonOutline {
   /* background-color: transparent; */
   color: var(--outline-text);
   box-shadow: 2px 2px 0 2px black, -2px -2px 0 2px transparent;
   border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="%23000000"/></svg>');
 }
 
-.pixel-button-outline:active {
+.pixelButtonOutline:active {
   box-shadow: 2px 2px 0 2px, -2px -2px 0 2px var(--outline-text-);
 }

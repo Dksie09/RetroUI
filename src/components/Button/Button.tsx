@@ -13,7 +13,7 @@ export const Button: React.FC<ButtonProps> = ({
   style,
   ...props
 }) => {
-  const baseClasses = "font-minecraft pixel-button px-2 my-2 mx-3";
+  const baseClasses = `font-minecraft ${styles.pixelButton} px-2 my-2 mx-3`;
   const variantClasses =
     variant === "primary"
       ? styles.pixelButtonPrimary
