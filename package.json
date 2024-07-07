@@ -52,6 +52,7 @@
   "exports": {
     ".": "./dist/index.js",
     "./dist/retroui.css": "./dist/retroui.css",
+    "./dist/index.css": "./dist/index.css",
     "./fonts/Minecraft.otf": "./fonts/Minecraft.otf"
   }
 }
