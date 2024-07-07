@@ -46,6 +46,7 @@
   "files": [
     "dist",
     "src/styles/*.css",
-    "src/components/**/*.css"
+    "src/components/**/*.css",
+    "fonts"
   ]
 }
