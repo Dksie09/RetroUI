@@ -48,5 +48,8 @@
     "src/styles/*.css",
     "src/components/**/*.css",
     "fonts"
-  ]
+  ],
+  "exports": {
+    "./fonts/Minecraft.otf": "./fonts/Minecraft.otf"
+  }
 }
