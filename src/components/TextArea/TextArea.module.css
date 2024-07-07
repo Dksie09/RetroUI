@@ -1,28 +1,13 @@
 .pixelTextarea {
-  width: 100%;
-  padding: 8px;
-  font-family: "Minecraft", monospace;
-  font-size: 16px;
-  border: 3px solid #000000;
-  background-color: #ffffff;
-  color: #000000;
-  resize: vertical;
-  min-height: 100px;
-  outline: none;
-  border-style: solid;
-  border-width: 5px;
+  @apply w-full p-2 m-2 font-minecraft text-base bg-white text-black resize-y min-h-[100px] outline-none border-solid border-[5px];
   border-image-slice: 3;
   border-image-width: 2;
   border-image-repeat: stretch;
-  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="rgb(0,0,0)"/></svg>');
   border-image-outset: 2;
+  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="rgb(0,0,0)"/></svg>');
 }
 
 .pixelTextarea:focus {
-  border-color: none;
-  outline: none;
-}
-
-.plainInput:focus {
-  outline: none;
+  @apply outline-none;
+  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="rgb(59,130,246)"/></svg>');
 }

@@ -1,5 +1,5 @@
 .pixelButton {
-  @apply relative inline-block border-solid border-[5px];
+  @apply relative inline-block border-solid border-[5px] px-2 py-2 mx-3 my-2 font-minecraft;
   border-image-slice: 3;
   border-image-width: 2;
   border-image-repeat: stretch;
@@ -12,38 +12,36 @@
 
 /* Specific styles for primary button */
 .pixelButtonPrimary {
-  background-color: var(--primary-bg);
-  color: var(--primary-text);
-  box-shadow: 2px 2px 0 2px var(--primary-shadow),
-    -2px -2px 0 2px var(--primary-bg);
+  @apply bg-blue-500 text-white;
+  box-shadow: 2px 2px 0 2px theme("colors.blue.700"),
+    -2px -2px 0 2px theme("colors.blue.500");
   border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="%23000000"/></svg>');
 }
 
 .pixelButtonPrimary:active {
-  box-shadow: 2px 2px 0 2px var(--primary-bg), -2px -2px 0 2px var(--primary-bg);
+  box-shadow: 2px 2px 0 2px theme("colors.blue.500"),
+    -2px -2px 0 2px theme("colors.blue.500");
 }
 
 /* Specific styles for secondary button */
 .pixelButtonSecondary {
-  background-color: var(--secondary-bg);
-  color: var(--secondary-text);
-  box-shadow: 2px 2px 0 2px var(--secondary-shadow),
-    -2px -2px 0 2px var(--secondary-bg);
+  @apply bg-gray-500 text-white;
+  box-shadow: 2px 2px 0 2px theme("colors.gray.700"),
+    -2px -2px 0 2px theme("colors.gray.500");
   border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="%23000000"/></svg>');
 }
 
 .pixelButtonSecondary:active {
-  box-shadow: 2px 2px 0 2px var(--secondary-bg),
-    -2px -2px 0 2px var(--secondary-bg);
+  box-shadow: 2px 2px 0 2px theme("colors.gray.500"),
+    -2px -2px 0 2px theme("colors.gray.500");
 }
 
 .pixelButtonOutline {
-  /* background-color: transparent; */
-  color: var(--outline-text);
+  @apply bg-transparent text-blue-500 border-blue-500;
   box-shadow: 2px 2px 0 2px black, -2px -2px 0 2px transparent;
   border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="%23000000"/></svg>');
 }
 
 .pixelButtonOutline:active {
-  box-shadow: 2px 2px 0 2px, -2px -2px 0 2px var(--outline-text-);
+  box-shadow: 2px 2px 0 2px, -2px -2px 0 2px theme("colors.blue.500");
 }

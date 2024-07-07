@@ -9,7 +9,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     return (
       <textarea
         ref={ref}
-        className={`${styles.pixelTextarea} m-2 font-minecraft ${className}`}
+        className={`${styles.pixelTextarea} ${className}`}
         {...props}
       />
     );

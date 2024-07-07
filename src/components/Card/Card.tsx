@@ -4,27 +4,21 @@ import styles from "./Card.module.css";
 export interface CardProps {
   children: ReactNode;
   className?: string;
-  style?: React.CSSProperties;
-  variant?: "default" | "outline";
+  variant?: "primary" | "secondary" | "outline";
 }
 
 export const Card: FC<CardProps> = ({
   children,
   className = "",
-  style,
-  variant = "default",
+  variant = "primary",
   ...props
 }) => {
-  const baseClasses = `${styles.pixelCard} ${styles.fontMinecraft}`;
+  const baseClasses = styles.pixelCard;
   const variantClasses =
-    variant === "outline" ? styles.pixelCardOutline : styles.pixelCardDefault;
+    styles[`pixelCard${variant.charAt(0).toUpperCase() + variant.slice(1)}`];
 
   return (
-    <div
-      className={`${baseClasses} ${variantClasses} ${className}`}
-      style={style}
-      {...props}
-    >
+    <div className={`${baseClasses} ${variantClasses} ${className}`} {...props}>
       {children}
     </div>
   );

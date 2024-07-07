@@ -14,14 +14,17 @@ export const Input: React.FC<InputProps> = ({
   ...props
 }) => {
   return (
-    <div className={`mx-1 ${styles.pixelContainer} m-2 relative ${className}`}>
+    <div className={`${styles.pixelContainer} relative mx-1 my-2 ${className}`}>
       <input
-        className={`w-full pr-7 ${styles.plainInput} ${styles.pixelInput} font-minecraft`}
+        className={`${styles.pixelInput} w-full pr-7 font-minecraft`}
         {...props}
       />
       {icon && (
-        <button className={styles.pixelInputIconButton} onClick={onIconClick}>
-          <img src={icon} alt="Input icon" className="right-0 top-0 absolute" />
+        <button
+          className={`${styles.pixelInputIconButton} absolute right-0 top-0`}
+          onClick={onIconClick}
+        >
+          <img src={icon} alt="Input icon" />
         </button>
       )}
     </div>

@@ -1,58 +1,46 @@
 .pixelCard {
-  margin: 10px;
-
-  border-style: solid;
-  border-width: 5px;
+  @apply m-2 border-solid border-[5px] font-minecraft text-base;
   border-image-slice: 3;
   border-image-width: 2;
   border-image-repeat: stretch;
   border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="rgb(0,0,0)"/></svg>');
   border-image-outset: 2;
-
-  font-size: 16px;
-  color: var(--card-text-color);
 }
 
-.fontMinecraft {
-  font-family: "Minecraft", sans-serif;
+.pixelCardPrimary {
+  @apply bg-blue-100 text-blue-900;
+  box-shadow: 2px 2px 0 2px theme("colors.blue.300"),
+    -2px -2px 0 2px theme("colors.blue.100");
 }
 
-.pixelCardDefault {
-  background-color: var(--primary-shadow);
-  box-shadow: 2px 2px 0 2px var(--primary-bg),
-    -2px -2px 0 2px var(--primary-shadow);
+.pixelCardSecondary {
+  @apply bg-gray-100 text-gray-900;
+  box-shadow: 2px 2px 0 2px theme("colors.gray.300"),
+    -2px -2px 0 2px theme("colors.gray.100");
 }
 
 .pixelCardOutline {
-  background-color: transparent;
-  box-shadow: 2px 2px 0 2px var(--card-text-color), -2px -2px 0 2px transparent;
+  @apply bg-transparent text-gray-900;
+  box-shadow: 2px 2px 0 2px theme("colors.gray.900"),
+    -2px -2px 0 2px transparent;
 }
 
 .pixelCardHeader {
-  padding: 15px 20px;
-  margin-bottom: 15px;
+  @apply p-4 mb-4;
 }
 
 .pixelCardTitle {
-  font-size: 24px;
-  font-weight: bold;
-  color: var(--card-title-color, #000000);
+  @apply text-2xl font-bold text-gray-900;
 }
 
 .pixelCardDescription {
-  font-size: 0.9em;
-  color: var(--card-description-color, #666666);
-  margin: 0;
+  @apply text-sm text-gray-600 m-0;
 }
 
 .pixelCardContent {
-  margin-bottom: 15px;
+  @apply mb-4;
 }
 
 .pixelCardFooter {
-  border-top: 2px solid var(--card-border-color, #000000);
-  padding-top: 10px;
-  margin-top: 15px;
-  padding-left: 20px;
-  padding-right: 20px;
+  @apply border-t-2 border-gray-900 pt-2 mt-4 px-5;
 }

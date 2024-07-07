@@ -1,7 +1,5 @@
 .pixelContainer {
-  position: relative;
-  display: inline-block;
-  background-color: var(--primary-bg-dropdown);
+  @apply inline-block bg-white text-gray-700 text-base;
   border-style: solid;
   border-width: 5px;
   border-image-slice: 3;
@@ -9,14 +7,20 @@
   border-image-repeat: stretch;
   border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="rgb(0,0,0)"/></svg>');
   border-image-outset: 2;
-  font-size: 16px;
-  color: var(--outline-text);
+}
+
+.pixelInput {
+  @apply bg-transparent p-2;
 }
 
 .pixelInput:focus {
-  outline: none;
+  @apply outline-none;
+}
+
+.pixelInputIconButton {
+  @apply p-2;
 }
 
 .pixelInputIconButton:active {
-  @apply top-[2px];
+  @apply translate-y-[2px];
 }

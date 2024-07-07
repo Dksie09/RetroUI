@@ -1,10 +1,5 @@
 .pixelProgressbarContainer {
-  position: relative;
-  height: 30px;
-  padding: 2px 2px;
-  min-width: 100px;
-  border-style: solid;
-  border-width: 5px;
+  @apply relative min-w-[100px] border-solid border-[5px];
   border-image-slice: 3;
   border-image-width: 2;
   border-image-repeat: stretch;
@@ -12,38 +7,32 @@
 }
 
 .pixelProgressbar {
-  height: 100%;
-  background-color: var(--primary-bg);
-  opacity: 50%;
+  @apply h-full opacity-50;
 }
 
 .pixelProgressbarPercentage {
-  position: relative;
-  margin-top: 5px;
-  font-family: "Minecraft", sans-serif;
-  color: var(--outline-text);
-  font-size: 12px;
-  text-align: right;
+  @apply relative mt-1 font-minecraft text-xs text-right;
+  color: theme("colors.gray.800");
 }
 
-/* Add these classes for different sizes if needed */
+/* Size variants */
 .pixelProgressbarSm {
-  height: 20px;
+  @apply h-5 p-0.5;
 }
 
 .pixelProgressbarMd {
-  height: 30px;
+  @apply h-8 p-0.5;
 }
 
 .pixelProgressbarLg {
-  height: 40px;
+  @apply h-10 p-1;
 }
 
-/* Add these classes for different colors if needed */
+/* Color variants */
 .pixelProgressbarPrimary {
-  background-color: var(--primary-bg);
+  @apply bg-blue-500;
 }
 
 .pixelProgressbarSecondary {
-  background-color: var(--secondary-bg);
+  @apply bg-gray-500;
 }
