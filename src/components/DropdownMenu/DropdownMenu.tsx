@@ -1,23 +1,5 @@
-import React, {
-  useState,
-  createContext,
-  useContext,
-  ReactNode,
-  useMemo,
-} from "react";
+import React, { ReactNode, useMemo } from "react";
 import styles from "./DropdownMenu.module.css";
-
-interface DropdownContextType {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  bg?: string;
-  textColor?: string;
-  borderColor?: string;
-}
-
-const DropdownContext = createContext<DropdownContextType | undefined>(
-  undefined
-);
 
 export interface DropdownMenuProps {
   children: ReactNode;
@@ -34,8 +16,6 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   textColor,
   borderColor,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
   const svgString = useMemo(() => {
     const color = borderColor || "currentColor";
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="${color}"/></svg>`;
@@ -50,32 +30,18 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   };
 
   return (
-    <DropdownContext.Provider
-      value={{ isOpen, setIsOpen, bg, textColor, borderColor }}
-    >
-      <div
-        className={`${styles.pixelDropdown} ${className}`}
-        style={customStyle}
-      >
-        {children}
-      </div>
-    </DropdownContext.Provider>
+    <div className={`${styles.pixelDropdown} ${className}`} style={customStyle}>
+      {children}
+    </div>
   );
 };
 
 export const DropdownMenuTrigger: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const context = useContext(DropdownContext);
-  if (!context)
-    throw new Error("DropdownMenuTrigger must be used within a DropdownMenu");
-
-  const { isOpen, setIsOpen } = context;
-
   return (
     <button
       className={`${styles.pixelDropdownTrigger} flex items-center justify-between w-full`}
-      onClick={() => setIsOpen(!isOpen)}
     >
       {children}
       <svg
@@ -84,7 +50,6 @@ export const DropdownMenuTrigger: React.FC<{ children: ReactNode }> = ({
         height="30"
         viewBox="0 0 300 449"
         fill="currentColor"
-        style={{ transform: isOpen ? "rotate(90deg)" : "rotate(0deg)" }}
       >
         <path
           d="M514 2258 l1 -1753 248 -3 247 -2 0 250 0 250 244 0 c185 0 247 3
@@ -102,14 +67,6 @@ export const DropdownMenuTrigger: React.FC<{ children: ReactNode }> = ({
 export const DropdownMenuContent: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const context = useContext(DropdownContext);
-  if (!context)
-    throw new Error("DropdownMenuContent must be used within a DropdownMenu");
-
-  const { isOpen } = context;
-
-  if (!isOpen) return null;
-
   return (
     <div
       className={`${styles.pixelDropdownContent} absolute min-w-[200px] w-[110%] left-[-10px] z-10`}
