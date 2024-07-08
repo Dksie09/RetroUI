@@ -13,7 +13,6 @@ interface DropdownContextType {
   bg?: string;
   textColor?: string;
   borderColor?: string;
-  arrowColor?: string;
 }
 
 const DropdownContext = createContext<DropdownContextType | undefined>(
@@ -26,7 +25,6 @@ export interface DropdownMenuProps {
   bg?: string;
   textColor?: string;
   borderColor?: string;
-  arrowColor?: string;
 }
 
 export const DropdownMenu: React.FC<DropdownMenuProps> = ({
@@ -35,7 +33,6 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   bg,
   textColor,
   borderColor,
-  arrowColor,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -49,13 +46,12 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
     "--dropdown-custom-bg": bg,
     "--dropdown-custom-text": textColor,
     "--dropdown-custom-border": borderColor,
-    "--dropdown-custom-arrow": arrowColor,
     borderImageSource: svgString,
   };
 
   return (
     <DropdownContext.Provider
-      value={{ isOpen, setIsOpen, bg, textColor, borderColor, arrowColor }}
+      value={{ isOpen, setIsOpen, bg, textColor, borderColor }}
     >
       <div
         className={`${styles.pixelDropdown} ${className}`}
@@ -74,17 +70,30 @@ export const DropdownMenuTrigger: React.FC<{ children: ReactNode }> = ({
   if (!context)
     throw new Error("DropdownMenuTrigger must be used within a DropdownMenu");
 
+  const { isOpen, setIsOpen } = context;
+
   return (
     <button
       className={`${styles.pixelDropdownTrigger} flex items-center justify-between w-full`}
+      onClick={() => setIsOpen(!isOpen)}
     >
       {children}
       <svg
         className={`${styles.pixelDropdownArrow} w-5 h-5 ml-2.5 transition-transform duration-300`}
-        viewBox="0 0 20 20"
+        width="20"
+        height="30"
+        viewBox="0 0 300 449"
         fill="currentColor"
+        style={{ transform: isOpen ? "rotate(90deg)" : "rotate(0deg)" }}
       >
-        <path d="M5 7l5 5 5-5z" />
+        <path
+          d="M514 2258 l1 -1753 248 -3 247 -2 0 250 0 250 244 0 c185 0 247 3
+        253 13 4 6 8 118 8 247 l0 235 240 5 c132 3 246 9 253 13 9 6 12 67 12 248 l0
+        239 238 0 c130 0 243 4 250 8 9 7 12 63 10 248 l-3 239 -247 3 -247 2 -3 244
+        c-2 135 -7 248 -11 253 -5 4 -102 7 -215 5 -114 -1 -224 0 -244 3 l-37 7 1
+        239 c1 131 -2 242 -6 247 -4 4 -118 8 -252 10 l-244 3 0 249 0 250 -248 0
+        -248 0 0 -1752z"
+        />
       </svg>
     </button>
   );
@@ -96,6 +105,10 @@ export const DropdownMenuContent: React.FC<{ children: ReactNode }> = ({
   const context = useContext(DropdownContext);
   if (!context)
     throw new Error("DropdownMenuContent must be used within a DropdownMenu");
+
+  const { isOpen } = context;
+
+  if (!isOpen) return null;
 
   return (
     <div
