@@ -1,52 +1,17 @@
 .pixelButton {
   @apply relative inline-block border-solid border-[5px] px-2 py-2 mx-3 my-2 font-minecraft;
+  background-color: var(--button-custom-bg, var(--bg-button, #f0f0f0));
+  color: var(--button-custom-text, var(--text-button, #000000));
+  box-shadow: 2px 2px 0 2px
+      var(--button-custom-shadow, var(--shadow-button, #000000)),
+    -2px -2px 0 2px var(--button-custom-bg, var(--bg-button, #f0f0f0));
   border-image-slice: 3;
   border-image-width: 2;
   border-image-repeat: stretch;
   border-image-outset: 2;
+  border-color: var(--button-custom-border, var(--border-button, #000000));
 }
 
 .pixelButton:active {
   @apply top-[2px];
-}
-
-/* Specific styles for primary button */
-.pixelButtonPrimary {
-  background-color: var(--custom-bg, var(--primary-bg));
-  color: var(--custom-text, var(--primary-text));
-  box-shadow: 2px 2px 0 2px var(--custom-shadow, var(--primary-shadow)),
-    -2px -2px 0 2px var(--custom-bg, var(--primary-bg));
-  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="%23000000"/></svg>');
-}
-
-.pixelButtonPrimary:active {
-  box-shadow: 2px 2px 0 2px var(--custom-bg, var(--primary-bg)),
-    -2px -2px 0 2px var(--custom-bg, var(--primary-bg));
-}
-
-/* Specific styles for secondary button */
-.pixelButtonSecondary {
-  background-color: var(--custom-bg, var(--secondary-bg));
-  color: var(--custom-text, var(--secondary-text));
-  box-shadow: 2px 2px 0 2px var(--custom-shadow, var(--secondary-shadow)),
-    -2px -2px 0 2px var(--custom-bg, var(--secondary-bg));
-  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="%23000000"/></svg>');
-}
-
-.pixelButtonSecondary:active {
-  box-shadow: 2px 2px 0 2px var(--custom-bg, var(--secondary-bg)),
-    -2px -2px 0 2px var(--custom-bg, var(--secondary-bg));
-}
-
-.pixelButtonOutline {
-  background-color: transparent;
-  color: var(--custom-text, var(--outline-text));
-  box-shadow: 2px 2px 0 2px var(--custom-shadow, black),
-    -2px -2px 0 2px transparent;
-  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="%23000000"/></svg>');
-}
-
-.pixelButtonOutline:active {
-  box-shadow: 2px 2px 0 2px var(--custom-shadow, black),
-    -2px -2px 0 2px var(--custom-text, var(--outline-text));
 }

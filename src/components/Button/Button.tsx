@@ -1,38 +1,42 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styles from "./Button.module.css";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "outline";
   bg?: string;
   textColor?: string;
   shadow?: string;
+  borderColor?: string;
 }
 
 export const Button: React.FC<ButtonProps> = ({
   children,
-  variant = "primary",
   className = "",
   bg,
   textColor,
   shadow,
+  borderColor,
   style,
   ...props
 }) => {
-  const baseClasses = styles.pixelButton;
-  const variantClasses =
-    styles[`pixelButton${variant.charAt(0).toUpperCase() + variant.slice(1)}`];
+  const svgString = useMemo(() => {
+    const color = borderColor || "currentColor";
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="${color}"/></svg>`;
+    return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+  }, [borderColor]);
 
   const customStyle = {
     ...style,
-    ...(bg && { "--custom-bg": bg }),
-    ...(textColor && { "--custom-text": textColor }),
-    ...(shadow && { "--custom-shadow": shadow }),
+    "--button-custom-bg": bg,
+    "--button-custom-text": textColor,
+    "--button-custom-shadow": shadow,
+    "--button-custom-border": borderColor,
+    borderImageSource: svgString,
   };
 
   return (
     <button
-      className={`${baseClasses} ${variantClasses} ${className}`}
+      className={`${styles.pixelButton} ${className}`}
       style={customStyle}
       {...props}
     >
