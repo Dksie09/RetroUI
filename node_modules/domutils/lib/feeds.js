@@ -1,11 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getFeed = void 0;
-var stringify_1 = require("./stringify");
-var legacy_1 = require("./legacy");
+var stringify_js_1 = require("./stringify.js");
+var legacy_js_1 = require("./legacy.js");
 /**
  * Get the feed object from the root of a DOM tree.
  *
+ * @category Feeds
  * @param doc - The DOM to to extract the feed from.
  * @returns The feed.
  */
@@ -29,13 +30,13 @@ function getAtomFeed(feedRoot) {
     var childs = feedRoot.children;
     var feed = {
         type: "atom",
-        items: (0, legacy_1.getElementsByTagName)("entry", childs).map(function (item) {
+        items: (0, legacy_js_1.getElementsByTagName)("entry", childs).map(function (item) {
             var _a;
             var children = item.children;
             var entry = { media: getMediaElements(children) };
             addConditionally(entry, "id", "id", children);
             addConditionally(entry, "title", "title", children);
-            var href = (_a = getOneElement("link", children)) === null || _a === void 0 ? void 0 : _a.attribs.href;
+            var href = (_a = getOneElement("link", children)) === null || _a === void 0 ? void 0 : _a.attribs["href"];
             if (href) {
                 entry.link = href;
             }
@@ -52,7 +53,7 @@ function getAtomFeed(feedRoot) {
     };
     addConditionally(feed, "id", "id", childs);
     addConditionally(feed, "title", "title", childs);
-    var href = (_a = getOneElement("link", childs)) === null || _a === void 0 ? void 0 : _a.attribs.href;
+    var href = (_a = getOneElement("link", childs)) === null || _a === void 0 ? void 0 : _a.attribs["href"];
     if (href) {
         feed.link = href;
     }
@@ -76,14 +77,14 @@ function getRssFeed(feedRoot) {
     var feed = {
         type: feedRoot.name.substr(0, 3),
         id: "",
-        items: (0, legacy_1.getElementsByTagName)("item", feedRoot.children).map(function (item) {
+        items: (0, legacy_js_1.getElementsByTagName)("item", feedRoot.children).map(function (item) {
             var children = item.children;
             var entry = { media: getMediaElements(children) };
             addConditionally(entry, "id", "guid", children);
             addConditionally(entry, "title", "title", children);
             addConditionally(entry, "link", "link", children);
             addConditionally(entry, "description", "description", children);
-            var pubDate = fetch("pubDate", children);
+            var pubDate = fetch("pubDate", children) || fetch("dc:date", children);
             if (pubDate)
                 entry.pubDate = new Date(pubDate);
             return entry;
@@ -117,11 +118,11 @@ var MEDIA_KEYS_INT = [
  * @returns Media elements.
  */
 function getMediaElements(where) {
-    return (0, legacy_1.getElementsByTagName)("media:content", where).map(function (elem) {
+    return (0, legacy_js_1.getElementsByTagName)("media:content", where).map(function (elem) {
         var attribs = elem.attribs;
         var media = {
-            medium: attribs.medium,
-            isDefault: !!attribs.isDefault,
+            medium: attribs["medium"],
+            isDefault: !!attribs["isDefault"],
         };
         for (var _i = 0, MEDIA_KEYS_STRING_1 = MEDIA_KEYS_STRING; _i < MEDIA_KEYS_STRING_1.length; _i++) {
             var attrib = MEDIA_KEYS_STRING_1[_i];
@@ -135,9 +136,8 @@ function getMediaElements(where) {
                 media[attrib] = parseInt(attribs[attrib], 10);
             }
         }
-        if (attribs.expression) {
-            media.expression =
-                attribs.expression;
+        if (attribs["expression"]) {
+            media.expression = attribs["expression"];
         }
         return media;
     });
@@ -150,19 +150,19 @@ function getMediaElements(where) {
  * @returns The element or null
  */
 function getOneElement(tagName, node) {
-    return (0, legacy_1.getElementsByTagName)(tagName, node, true, 1)[0];
+    return (0, legacy_js_1.getElementsByTagName)(tagName, node, true, 1)[0];
 }
 /**
  * Get the text content of an element with a certain tag name.
  *
  * @param tagName Tag name to look for.
- * @param where  Node to search in.
+ * @param where Node to search in.
  * @param recurse Whether to recurse into child nodes.
  * @returns The text content of the element.
  */
 function fetch(tagName, where, recurse) {
     if (recurse === void 0) { recurse = false; }
-    return (0, stringify_1.textContent)((0, legacy_1.getElementsByTagName)(tagName, where, recurse, 1)).trim();
+    return (0, stringify_js_1.textContent)((0, legacy_js_1.getElementsByTagName)(tagName, where, recurse, 1)).trim();
 }
 /**
  * Adds a property to an object if it has a value.
@@ -188,3 +188,4 @@ function addConditionally(obj, prop, tagName, where, recurse) {
 function isValidFeed(value) {
     return value === "rss" || value === "feed" || value === "rdf:RDF";
 }
+//# sourceMappingURL=feeds.js.map

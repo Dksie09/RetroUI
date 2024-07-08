@@ -1,12 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.uniqueSort = exports.compareDocumentPosition = exports.removeSubsets = void 0;
+exports.uniqueSort = exports.compareDocumentPosition = exports.DocumentPosition = exports.removeSubsets = void 0;
 var domhandler_1 = require("domhandler");
 /**
- * Given an array of nodes, remove any member that is contained by another.
+ * Given an array of nodes, remove any member that is contained by another
+ * member.
  *
+ * @category Helpers
  * @param nodes Nodes to filter.
- * @returns Remaining nodes that aren't subtrees of each other.
+ * @returns Remaining nodes that aren't contained by other nodes.
  */
 function removeSubsets(nodes) {
     var idx = nodes.length;
@@ -36,8 +38,20 @@ function removeSubsets(nodes) {
 }
 exports.removeSubsets = removeSubsets;
 /**
- * Compare the position of one node against another node in any other document.
- * The return value is a bitmask with the following values:
+ * @category Helpers
+ * @see {@link http://dom.spec.whatwg.org/#dom-node-comparedocumentposition}
+ */
+var DocumentPosition;
+(function (DocumentPosition) {
+    DocumentPosition[DocumentPosition["DISCONNECTED"] = 1] = "DISCONNECTED";
+    DocumentPosition[DocumentPosition["PRECEDING"] = 2] = "PRECEDING";
+    DocumentPosition[DocumentPosition["FOLLOWING"] = 4] = "FOLLOWING";
+    DocumentPosition[DocumentPosition["CONTAINS"] = 8] = "CONTAINS";
+    DocumentPosition[DocumentPosition["CONTAINED_BY"] = 16] = "CONTAINED_BY";
+})(DocumentPosition = exports.DocumentPosition || (exports.DocumentPosition = {}));
+/**
+ * Compare the position of one node against another node in any other document,
+ * returning a bitmask with the values from {@link DocumentPosition}.
  *
  * Document order:
  * > There is an ordering, document order, defined on all the nodes in the
@@ -48,11 +62,12 @@ exports.removeSubsets = removeSubsets;
  * > Thus, document order orders element nodes in order of the occurrence of
  * > their start-tag in the XML (after expansion of entities). The attribute
  * > nodes of an element occur after the element and before its children. The
- * > relative order of attribute nodes is implementation-dependent./
+ * > relative order of attribute nodes is implementation-dependent.
  *
  * Source:
  * http://www.w3.org/TR/DOM-Level-3-Core/glossary.html#dt-document-order
  *
+ * @category Helpers
  * @param nodeA The first node to use in the comparison
  * @param nodeB The second node to use in the comparison
  * @returns A bitmask describing the input nodes' relative position.
@@ -82,7 +97,7 @@ function compareDocumentPosition(nodeA, nodeB) {
         idx++;
     }
     if (idx === 0) {
-        return 1 /* DISCONNECTED */;
+        return DocumentPosition.DISCONNECTED;
     }
     var sharedParent = aParents[idx - 1];
     var siblings = sharedParent.children;
@@ -90,21 +105,22 @@ function compareDocumentPosition(nodeA, nodeB) {
     var bSibling = bParents[idx];
     if (siblings.indexOf(aSibling) > siblings.indexOf(bSibling)) {
         if (sharedParent === nodeB) {
-            return 4 /* FOLLOWING */ | 16 /* CONTAINED_BY */;
+            return DocumentPosition.FOLLOWING | DocumentPosition.CONTAINED_BY;
         }
-        return 4 /* FOLLOWING */;
+        return DocumentPosition.FOLLOWING;
     }
     if (sharedParent === nodeA) {
-        return 2 /* PRECEDING */ | 8 /* CONTAINS */;
+        return DocumentPosition.PRECEDING | DocumentPosition.CONTAINS;
     }
-    return 2 /* PRECEDING */;
+    return DocumentPosition.PRECEDING;
 }
 exports.compareDocumentPosition = compareDocumentPosition;
 /**
- * Sort an array of nodes based on their relative position in the document and
- * remove any duplicate nodes. If the array contains nodes that do not belong
+ * Sort an array of nodes based on their relative position in the document,
+ * removing any duplicate nodes. If the array contains nodes that do not belong
  * to the same document, sort order is unspecified.
  *
+ * @category Helpers
  * @param nodes Array of DOM nodes.
  * @returns Collection of unique nodes, sorted in document order.
  */
@@ -112,10 +128,10 @@ function uniqueSort(nodes) {
     nodes = nodes.filter(function (node, i, arr) { return !arr.includes(node, i + 1); });
     nodes.sort(function (a, b) {
         var relative = compareDocumentPosition(a, b);
-        if (relative & 2 /* PRECEDING */) {
+        if (relative & DocumentPosition.PRECEDING) {
             return -1;
         }
-        else if (relative & 4 /* FOLLOWING */) {
+        else if (relative & DocumentPosition.FOLLOWING) {
             return 1;
         }
         return 0;
@@ -123,3 +139,4 @@ function uniqueSort(nodes) {
     return nodes;
 }
 exports.uniqueSort = uniqueSort;
+//# sourceMappingURL=helpers.js.map

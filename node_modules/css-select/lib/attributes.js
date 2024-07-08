@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.attributeRules = void 0;
-var boolbase_1 = require("boolbase");
+var boolbase_1 = __importDefault(require("boolbase"));
 /**
  * All reserved characters in a regex, used for escaping.
  *
@@ -122,7 +125,7 @@ exports.attributeRules = {
         var adapter = options.adapter;
         var name = data.name, value = data.value;
         if (/\s/.test(value)) {
-            return boolbase_1.falseFunc;
+            return boolbase_1.default.falseFunc;
         }
         var regex = new RegExp("(?:^|\\s)".concat(escapeRegex(value), "(?:$|\\s)"), shouldIgnoreCase(data, options) ? "i" : "");
         return function element(elem) {
@@ -144,7 +147,7 @@ exports.attributeRules = {
         var value = data.value;
         var len = value.length;
         if (len === 0) {
-            return boolbase_1.falseFunc;
+            return boolbase_1.default.falseFunc;
         }
         if (shouldIgnoreCase(data, options)) {
             value = value.toLowerCase();
@@ -168,7 +171,7 @@ exports.attributeRules = {
         var value = data.value;
         var len = -value.length;
         if (len === 0) {
-            return boolbase_1.falseFunc;
+            return boolbase_1.default.falseFunc;
         }
         if (shouldIgnoreCase(data, options)) {
             value = value.toLowerCase();
@@ -188,7 +191,7 @@ exports.attributeRules = {
         var adapter = options.adapter;
         var name = data.name, value = data.value;
         if (value === "") {
-            return boolbase_1.falseFunc;
+            return boolbase_1.default.falseFunc;
         }
         if (shouldIgnoreCase(data, options)) {
             var regex_1 = new RegExp(escapeRegex(value), "i");
@@ -230,3 +233,4 @@ exports.attributeRules = {
         };
     },
 };
+//# sourceMappingURL=attributes.js.map

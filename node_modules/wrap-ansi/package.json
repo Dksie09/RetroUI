@@ -1,6 +1,6 @@
 {
 	"name": "wrap-ansi",
-	"version": "8.1.0",
+	"version": "7.0.0",
 	"description": "Wordwrap a string with ANSI escape codes",
 	"license": "MIT",
 	"repository": "chalk/wrap-ansi",
@@ -10,20 +10,14 @@
 		"email": "sindresorhus@gmail.com",
 		"url": "https://sindresorhus.com"
 	},
-	"type": "module",
-	"exports": {
-		"types": "./index.d.ts",
-		"default": "./index.js"
-	},
 	"engines": {
-		"node": ">=12"
+		"node": ">=10"
 	},
 	"scripts": {
-		"test": "xo && nyc ava && tsd"
+		"test": "xo && nyc ava"
 	},
 	"files": [
-		"index.js",
-		"index.d.ts"
+		"index.js"
 	],
 	"keywords": [
 		"wrap",
@@ -53,17 +47,16 @@
 		"text"
 	],
 	"dependencies": {
-		"ansi-styles": "^6.1.0",
-		"string-width": "^5.0.1",
-		"strip-ansi": "^7.0.1"
+		"ansi-styles": "^4.0.0",
+		"string-width": "^4.1.0",
+		"strip-ansi": "^6.0.0"
 	},
 	"devDependencies": {
-		"ava": "^3.15.0",
-		"chalk": "^4.1.2",
-		"coveralls": "^3.1.1",
-		"has-ansi": "^5.0.1",
-		"nyc": "^15.1.0",
-		"tsd": "^0.25.0",
-		"xo": "^0.44.0"
+		"ava": "^2.1.0",
+		"chalk": "^4.0.0",
+		"coveralls": "^3.0.3",
+		"has-ansi": "^4.0.0",
+		"nyc": "^15.0.1",
+		"xo": "^0.29.1"
 	}
 }

@@ -8,9 +8,10 @@ var domhandler_1 = require("domhandler");
 var dom_serializer_1 = __importDefault(require("dom-serializer"));
 var domelementtype_1 = require("domelementtype");
 /**
+ * @category Stringify
+ * @deprecated Use the `dom-serializer` module directly.
  * @param node Node to get the outer HTML of.
  * @param options Options for serialization.
- * @deprecated Use the `dom-serializer` module directly.
  * @returns `node`'s outer HTML.
  */
 function getOuterHTML(node, options) {
@@ -18,9 +19,10 @@ function getOuterHTML(node, options) {
 }
 exports.getOuterHTML = getOuterHTML;
 /**
+ * @category Stringify
+ * @deprecated Use the `dom-serializer` module directly.
  * @param node Node to get the inner HTML of.
  * @param options Options for serialization.
- * @deprecated Use the `dom-serializer` module directly.
  * @returns `node`'s inner HTML.
  */
 function getInnerHTML(node, options) {
@@ -30,8 +32,9 @@ function getInnerHTML(node, options) {
 }
 exports.getInnerHTML = getInnerHTML;
 /**
- * Get a node's inner text. Same as `textContent`, but inserts newlines for `<br>` tags.
+ * Get a node's inner text. Same as `textContent`, but inserts newlines for `<br>` tags. Ignores comments.
  *
+ * @category Stringify
  * @deprecated Use `textContent` instead.
  * @param node Node to get the inner text of.
  * @returns `node`'s inner text.
@@ -49,8 +52,9 @@ function getText(node) {
 }
 exports.getText = getText;
 /**
- * Get a node's text content.
+ * Get a node's text content. Ignores comments.
  *
+ * @category Stringify
  * @param node Node to get the text content of.
  * @returns `node`'s text content.
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent}
@@ -67,8 +71,9 @@ function textContent(node) {
 }
 exports.textContent = textContent;
 /**
- * Get a node's inner text.
+ * Get a node's inner text, ignoring `<script>` and `<style>` tags. Ignores comments.
  *
+ * @category Stringify
  * @param node Node to get the inner text of.
  * @returns `node`'s inner text.
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/innerText}
@@ -84,3 +89,4 @@ function innerText(node) {
     return "";
 }
 exports.innerText = innerText;
+//# sourceMappingURL=stringify.js.map

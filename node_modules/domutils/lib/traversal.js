@@ -2,23 +2,23 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.prevElementSibling = exports.nextElementSibling = exports.getName = exports.hasAttrib = exports.getAttributeValue = exports.getSiblings = exports.getParent = exports.getChildren = void 0;
 var domhandler_1 = require("domhandler");
-var emptyArray = [];
 /**
  * Get a node's children.
  *
+ * @category Traversal
  * @param elem Node to get the children of.
  * @returns `elem`'s children, or an empty array.
  */
 function getChildren(elem) {
-    var _a;
-    return (_a = elem.children) !== null && _a !== void 0 ? _a : emptyArray;
+    return (0, domhandler_1.hasChildren)(elem) ? elem.children : [];
 }
 exports.getChildren = getChildren;
 /**
  * Get a node's parent.
  *
+ * @category Traversal
  * @param elem Node to get the parent of.
- * @returns `elem`'s parent node.
+ * @returns `elem`'s parent node, or `null` if `elem` is a root node.
  */
 function getParent(elem) {
     return elem.parent || null;
@@ -27,12 +27,13 @@ exports.getParent = getParent;
 /**
  * Gets an elements siblings, including the element itself.
  *
- * Attempts to get the children through the element's parent first.
- * If we don't have a parent (the element is a root node),
- * we walk the element's `prev` & `next` to get all remaining nodes.
+ * Attempts to get the children through the element's parent first. If we don't
+ * have a parent (the element is a root node), we walk the element's `prev` &
+ * `next` to get all remaining nodes.
  *
+ * @category Traversal
  * @param elem Element to get the siblings of.
- * @returns `elem`'s siblings.
+ * @returns `elem`'s siblings, including `elem`.
  */
 function getSiblings(elem) {
     var _a, _b;
@@ -55,6 +56,7 @@ exports.getSiblings = getSiblings;
 /**
  * Gets an attribute from an element.
  *
+ * @category Traversal
  * @param elem Element to check.
  * @param name Attribute name to retrieve.
  * @returns The element's attribute value, or `undefined`.
@@ -67,6 +69,7 @@ exports.getAttributeValue = getAttributeValue;
 /**
  * Checks whether an element has an attribute.
  *
+ * @category Traversal
  * @param elem Element to check.
  * @param name Attribute name to look for.
  * @returns Returns whether `elem` has the attribute `name`.
@@ -80,6 +83,7 @@ exports.hasAttrib = hasAttrib;
 /**
  * Get the tag name of an element.
  *
+ * @category Traversal
  * @param elem The element to get the name for.
  * @returns The tag name of `elem`.
  */
@@ -90,8 +94,10 @@ exports.getName = getName;
 /**
  * Returns the next element sibling of a node.
  *
+ * @category Traversal
  * @param elem The element to get the next sibling of.
- * @returns `elem`'s next sibling that is a tag.
+ * @returns `elem`'s next sibling that is a tag, or `null` if there is no next
+ * sibling.
  */
 function nextElementSibling(elem) {
     var _a;
@@ -104,8 +110,10 @@ exports.nextElementSibling = nextElementSibling;
 /**
  * Returns the previous element sibling of a node.
  *
+ * @category Traversal
  * @param elem The element to get the previous sibling of.
- * @returns `elem`'s previous sibling that is a tag.
+ * @returns `elem`'s previous sibling that is a tag, or `null` if there is no
+ * previous sibling.
  */
 function prevElementSibling(elem) {
     var _a;
@@ -115,3 +123,4 @@ function prevElementSibling(elem) {
     return prev;
 }
 exports.prevElementSibling = prevElementSibling;
+//# sourceMappingURL=traversal.js.map

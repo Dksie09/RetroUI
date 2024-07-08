@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.filters = void 0;
 var nth_check_1 = __importDefault(require("nth-check"));
-var boolbase_1 = require("boolbase");
+var boolbase_1 = __importDefault(require("boolbase"));
 function getChildFunc(next, adapter) {
     return function (elem) {
         var parent = adapter.getParent(elem);
@@ -31,9 +31,9 @@ exports.filters = {
     "nth-child": function (next, rule, _a) {
         var adapter = _a.adapter, equals = _a.equals;
         var func = (0, nth_check_1.default)(rule);
-        if (func === boolbase_1.falseFunc)
-            return boolbase_1.falseFunc;
-        if (func === boolbase_1.trueFunc)
+        if (func === boolbase_1.default.falseFunc)
+            return boolbase_1.default.falseFunc;
+        if (func === boolbase_1.default.trueFunc)
             return getChildFunc(next, adapter);
         return function nthChild(elem) {
             var siblings = adapter.getSiblings(elem);
@@ -51,9 +51,9 @@ exports.filters = {
     "nth-last-child": function (next, rule, _a) {
         var adapter = _a.adapter, equals = _a.equals;
         var func = (0, nth_check_1.default)(rule);
-        if (func === boolbase_1.falseFunc)
-            return boolbase_1.falseFunc;
-        if (func === boolbase_1.trueFunc)
+        if (func === boolbase_1.default.falseFunc)
+            return boolbase_1.default.falseFunc;
+        if (func === boolbase_1.default.trueFunc)
             return getChildFunc(next, adapter);
         return function nthLastChild(elem) {
             var siblings = adapter.getSiblings(elem);
@@ -71,9 +71,9 @@ exports.filters = {
     "nth-of-type": function (next, rule, _a) {
         var adapter = _a.adapter, equals = _a.equals;
         var func = (0, nth_check_1.default)(rule);
-        if (func === boolbase_1.falseFunc)
-            return boolbase_1.falseFunc;
-        if (func === boolbase_1.trueFunc)
+        if (func === boolbase_1.default.falseFunc)
+            return boolbase_1.default.falseFunc;
+        if (func === boolbase_1.default.trueFunc)
             return getChildFunc(next, adapter);
         return function nthOfType(elem) {
             var siblings = adapter.getSiblings(elem);
@@ -93,9 +93,9 @@ exports.filters = {
     "nth-last-of-type": function (next, rule, _a) {
         var adapter = _a.adapter, equals = _a.equals;
         var func = (0, nth_check_1.default)(rule);
-        if (func === boolbase_1.falseFunc)
-            return boolbase_1.falseFunc;
-        if (func === boolbase_1.trueFunc)
+        if (func === boolbase_1.default.falseFunc)
+            return boolbase_1.default.falseFunc;
+        if (func === boolbase_1.default.trueFunc)
             return getChildFunc(next, adapter);
         return function nthLastOfType(elem) {
             var siblings = adapter.getSiblings(elem);
@@ -124,7 +124,7 @@ exports.filters = {
         var equals = options.equals;
         if (!context || context.length === 0) {
             // Equivalent to :root
-            return exports.filters.root(next, rule, options);
+            return exports.filters["root"](next, rule, options);
         }
         if (context.length === 1) {
             // NOTE: can't be unpacked, as :has uses this for side-effects
@@ -147,10 +147,11 @@ function dynamicStatePseudo(name) {
         var adapter = _a.adapter;
         var func = adapter[name];
         if (typeof func !== "function") {
-            return boolbase_1.falseFunc;
+            return boolbase_1.default.falseFunc;
         }
         return function active(elem) {
             return func(elem) && next(elem);
         };
     };
 }
+//# sourceMappingURL=filters.js.map

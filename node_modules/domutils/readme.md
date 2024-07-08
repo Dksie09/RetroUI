@@ -1,4 +1,4 @@
-# domutils [![Build Status](https://travis-ci.com/fb55/domutils.svg?branch=master)](https://travis-ci.com/fb55/domutils)
+# domutils [![Node.js CI](https://github.com/fb55/domutils/actions/workflows/nodejs-test.yml/badge.svg)](https://github.com/fb55/domutils/actions/workflows/nodejs-test.yml)
 
 Utilities for working with [htmlparser2](https://github.com/fb55/htmlparser2)'s DOM.
 

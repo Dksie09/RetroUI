@@ -1,19 +1,16 @@
 {
 	"name": "string-width",
-	"version": "5.1.2",
+	"version": "4.2.3",
 	"description": "Get the visual width of a string - the number of columns required to display it",
 	"license": "MIT",
 	"repository": "sindresorhus/string-width",
-	"funding": "https://github.com/sponsors/sindresorhus",
 	"author": {
 		"name": "Sindre Sorhus",
 		"email": "sindresorhus@gmail.com",
-		"url": "https://sindresorhus.com"
+		"url": "sindresorhus.com"
 	},
-	"type": "module",
-	"exports": "./index.js",
 	"engines": {
-		"node": ">=12"
+		"node": ">=8"
 	},
 	"scripts": {
 		"test": "xo && ava && tsd"
@@ -47,13 +44,13 @@
 		"fixed-width"
 	],
 	"dependencies": {
-		"eastasianwidth": "^0.2.0",
-		"emoji-regex": "^9.2.2",
-		"strip-ansi": "^7.0.1"
+		"emoji-regex": "^8.0.0",
+		"is-fullwidth-code-point": "^3.0.0",
+		"strip-ansi": "^6.0.1"
 	},
 	"devDependencies": {
-		"ava": "^3.15.0",
-		"tsd": "^0.14.0",
-		"xo": "^0.38.2"
+		"ava": "^1.4.1",
+		"tsd": "^0.7.1",
+		"xo": "^0.24.0"
 	}
 }

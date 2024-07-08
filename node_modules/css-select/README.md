@@ -22,19 +22,21 @@ below.
 -   🧪 Partial implementation of jQuery/Sizzle extensions (see
     [cheerio-select](https://github.com/cheeriojs/cheerio-select) for the
     remaining selectors)
--   🧑‍🔬 High test coverage, including the full test suites from Sizzle, Qwery and
-    NWMatcher.
+-   🧑‍🔬 High test coverage, including the full test suites from
+    [`Sizzle`](https://github.com/jquery/sizzle),
+    [`Qwery`](https://github.com/ded/qwery) and
+    [`NWMatcher`](https://github.com/dperini/nwmatcher/) and .
 -   🥼 Reliably great performance
 
 ## Why?
 
 Most CSS engines written in JavaScript execute selectors left-to-right. That
-means thet execute every component of the selector in order, from left to right
-_(duh)_. As an example: For the selector `a b`, these engines will first query
-for `a` elements, then search these for `b` elements. (That's the approach of
-eg. [`Sizzle`](https://github.com/jquery/sizzle),
-[`nwmatcher`](https://github.com/dperini/nwmatcher/) and
-[`qwery`](https://github.com/ded/qwery).)
+means thet execute every component of the selector in order, from left to right.
+As an example: For the selector `a b`, these engines will first query for `a`
+elements, then search these for `b` elements. (That's the approach of eg.
+[`Sizzle`](https://github.com/jquery/sizzle),
+[`Qwery`](https://github.com/ded/qwery) and
+[`NWMatcher`](https://github.com/dperini/nwmatcher/).)
 
 While this works, it has some downsides: Children of `a`s will be checked
 multiple times; first, to check if they are also `a`s, then, for every superior
@@ -100,7 +102,7 @@ _//TODO: More in-depth description. Implementation details. Build a spaceship._
 const CSSselect = require("css-select");
 ```
 
-**Note:** css-select throws errors when invalid selectors are passed to it.This
+**Note:** css-select throws errors when invalid selectors are passed to it. This
 is done to aid with writing css selectors, but can be unexpected when processing
 arbitrary strings.
 
@@ -139,11 +141,18 @@ All options are optional.
 -   `adapter`: The adapter to use when interacting with the backing DOM
     structure. By default it uses the `domutils` module.
 -   `context`: The context of the current query. Used to limit the scope of
-    searches. Can be matched directly using the `:scope` pseudo-selector.
+    searches. Can be matched directly using the `:scope` pseudo-class.
+-   `relativeSelector`: By default, selectors are relative to the `context`,
+    which means that no parent elements of the context will be matched. (Eg.
+    `a b c` with context `b` will never give any results.) If `relativeSelector`
+    is set to `false`, selectors won't be
+    [absolutized](http://www.w3.org/TR/selectors4/#absolutizing) and selectors
+    can test for parent elements outside of the `context`.
 -   `cacheResults`: Allow css-select to cache results for some selectors,
     sometimes greatly improving querying performance. Disable this if your
     document can change in between queries with the same compiled selector.
     Default: `true`.
+-   `pseudos`: A map of pseudo-class names to functions or strings.
 
 #### Custom Adapters
 
