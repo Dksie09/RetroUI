@@ -13,6 +13,7 @@ interface DropdownContextType {
   bg?: string;
   textColor?: string;
   borderColor?: string;
+  svgString: string;
 }
 
 const DropdownContext = createContext<DropdownContextType | undefined>(
@@ -46,12 +47,11 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
     "--dropdown-custom-bg": bg,
     "--dropdown-custom-text": textColor,
     "--dropdown-custom-border": borderColor,
-    borderImageSource: svgString,
-  };
+  } as React.CSSProperties;
 
   return (
     <DropdownContext.Provider
-      value={{ isOpen, setIsOpen, bg, textColor, borderColor }}
+      value={{ isOpen, setIsOpen, bg, textColor, borderColor, svgString }}
     >
       <div
         className={`${styles.pixelDropdown} ${className}`}
@@ -70,16 +70,22 @@ export const DropdownMenuTrigger: React.FC<{ children: ReactNode }> = ({
   if (!context)
     throw new Error("DropdownMenuTrigger must be used within a DropdownMenu");
 
+  const { setIsOpen, isOpen, svgString } = context;
+
   return (
     <button
       className={`${styles.pixelDropdownTrigger} flex items-center justify-between w-full`}
+      onClick={() => setIsOpen(!isOpen)}
+      style={{ borderImageSource: svgString }}
     >
       {children}
-      <img
-        src="/icons/new_play.png"
-        alt="Toggle Dropdown"
-        className={`${styles.pixelDropdownArrow} w-5 h-5 ml-2.5 transition-transform duration-300`}
-      />
+      <span
+        className={`${styles.pixelDropdownArrow} ${
+          isOpen ? styles.pixelDropdownArrowOpen : ""
+        }`}
+      >
+        ▼
+      </span>
     </button>
   );
 };
@@ -91,9 +97,14 @@ export const DropdownMenuContent: React.FC<{ children: ReactNode }> = ({
   if (!context)
     throw new Error("DropdownMenuContent must be used within a DropdownMenu");
 
+  const { isOpen, svgString } = context;
+
   return (
     <div
-      className={`${styles.pixelDropdownContent} absolute min-w-[200px] w-[110%] left-[-10px] z-10`}
+      className={`${styles.pixelDropdownContent} ${
+        isOpen ? styles.pixelDropdownContentOpen : ""
+      }`}
+      style={{ borderImageSource: svgString }}
     >
       {children}
     </div>
