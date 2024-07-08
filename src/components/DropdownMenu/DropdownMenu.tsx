@@ -3,7 +3,7 @@ import React, {
   createContext,
   useContext,
   ReactNode,
-  CSSProperties,
+  useMemo,
 } from "react";
 import styles from "./DropdownMenu.module.css";
 
@@ -12,6 +12,7 @@ interface DropdownContextType {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   bg?: string;
   textColor?: string;
+  borderColor?: string;
 }
 
 const DropdownContext = createContext<DropdownContextType | undefined>(
@@ -23,6 +24,7 @@ export interface DropdownMenuProps {
   className?: string;
   bg?: string;
   textColor?: string;
+  borderColor?: string;
 }
 
 export const DropdownMenu: React.FC<DropdownMenuProps> = ({
@@ -30,16 +32,27 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   className = "",
   bg,
   textColor,
+  borderColor,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const customStyle: CSSProperties = {
-    ...(bg && { "--custom-bg": bg }),
-    ...(textColor && { "--custom-text": textColor }),
-  } as CSSProperties;
+  const svgString = useMemo(() => {
+    const color = borderColor || "currentColor";
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="${color}"/></svg>`;
+    return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+  }, [borderColor]);
+
+  const customStyle = {
+    "--dropdown-custom-bg": bg,
+    "--dropdown-custom-text": textColor,
+    "--dropdown-custom-border": borderColor,
+    borderImageSource: svgString,
+  };
 
   return (
-    <DropdownContext.Provider value={{ isOpen, setIsOpen, bg, textColor }}>
+    <DropdownContext.Provider
+      value={{ isOpen, setIsOpen, bg, textColor, borderColor }}
+    >
       <div
         className={`${styles.pixelDropdown} ${className}`}
         style={customStyle}
@@ -62,11 +75,18 @@ export const DropdownMenuTrigger: React.FC<{ children: ReactNode }> = ({
       className={`${styles.pixelDropdownTrigger} flex items-center justify-between w-full`}
     >
       {children}
-      <img
-        src="/icons/new_play.png"
-        alt="Toggle Dropdown"
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
         className={`${styles.pixelDropdownArrow} w-5 h-5 ml-2.5 transition-transform duration-300`}
-      />
+      >
+        <path
+          fillRule="evenodd"
+          d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+          clipRule="evenodd"
+        />
+      </svg>
     </button>
   );
 };
