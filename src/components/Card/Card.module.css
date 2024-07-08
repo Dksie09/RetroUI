@@ -2,6 +2,7 @@
   @apply m-2 border-solid border-[5px] font-minecraft text-base p-4;
   background-color: var(--card-custom-bg, var(--bg-card, white));
   color: var(--card-custom-text, var(--text-card, black));
+  padding: 1px;
   border-image-slice: 3;
   border-image-width: 2;
   border-image-repeat: stretch;
