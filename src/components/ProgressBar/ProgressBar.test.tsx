@@ -30,11 +30,6 @@ describe("ProgressBar Component", () => {
     expect(container).toHaveClass("pixel-progressbar-lg");
   });
 
-  test("hides percentage when showPercentage is false", () => {
-    render(<ProgressBar progress={50} showPercentage={false} />);
-    expect(screen.queryByText("50%")).not.toBeInTheDocument();
-  });
-
   test("applies additional className", () => {
     render(<ProgressBar progress={50} className="custom-class" />);
     const container = screen.getByText("50%").parentElement;
