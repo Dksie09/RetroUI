@@ -20,9 +20,15 @@
   --primary-bg-dropdown: white;
   --primary-bg-dropdown: #ffffff;
   --outline-text: #000000;
+
+  /* textarea */
   --bg-textarea: #f0f0f0;
   --text-textarea: #000000;
   --border-textarea-rgb: 0, 0, 0;
+
+  /* progressbar */
+  --color-progressbar: #000000;
+  --border-progressbar: #000000;
 }
 
 body {

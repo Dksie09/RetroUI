@@ -1,63 +1,45 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styles from "./ProgressBar.module.css";
-
-// Define a custom type for our style object
-type CustomCSSProperties = React.CSSProperties & {
-  "--custom-bg"?: string;
-  "--custom-bar-color"?: string;
-  "--custom-text-color"?: string;
-};
 
 export interface ProgressBarProps {
   progress: number;
   className?: string;
-  showPercentage?: boolean;
-  showText?: boolean;
-  color?: "primary" | "secondary";
   size?: "sm" | "md" | "lg";
-  bg?: string;
-  barColor?: string;
-  textColor?: string;
+  color?: string;
+  borderColor?: string;
 }
 
 export const ProgressBar: React.FC<ProgressBarProps> = ({
   progress,
   className = "",
-  showPercentage = true,
-  showText = true,
-  color = "primary",
   size = "md",
-  bg,
-  barColor,
-  textColor,
+  color,
+  borderColor,
 }) => {
   const clampedProgress = Math.min(Math.max(progress, 0), 100);
+
+  const svgString = useMemo(() => {
+    const svgColor = borderColor || "currentColor";
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="${svgColor}"/></svg>`;
+    return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+  }, [borderColor]);
 
   const containerClasses = `${styles.pixelProgressbarContainer} ${
     styles[`pixelProgressbar${size.charAt(0).toUpperCase() + size.slice(1)}`]
   } ${className}`.trim();
-  const barClasses = `${styles.pixelProgressbar} ${
-    styles[`pixelProgressbar${color.charAt(0).toUpperCase() + color.slice(1)}`]
-  }`;
 
-  const customStyle: CustomCSSProperties = {
-    ...(bg && { "--custom-bg": bg }),
-    ...(barColor && { "--custom-bar-color": barColor }),
-    ...(textColor && { "--custom-text-color": textColor }),
+  const customStyle = {
+    "--progressbar-custom-color": color,
+    "--progressbar-custom-border-color": borderColor,
+    borderImageSource: svgString,
   };
 
   return (
     <div className={containerClasses} style={customStyle}>
       <div
-        className={barClasses}
+        className={styles.pixelProgressbar}
         style={{ width: `${clampedProgress}%` }}
       ></div>
-      {(showPercentage || showText) && (
-        <div className={styles.pixelProgressbarPercentage}>
-          {showText && clampedProgress}
-          {showPercentage && "%"}
-        </div>
-      )}
     </div>
   );
 };
