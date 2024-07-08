@@ -6,7 +6,7 @@
 .pixelDropdownTrigger {
   @apply flex items-center justify-between w-full cursor-pointer text-base;
   background-color: var(--custom-bg, var(--bg-dropdown));
-  color: var(--custom-text, var(--text-dropdown));
+  color: var(--custom-text, var(--text-dropdown), #000);
   border-style: solid;
   border-width: 5px;
   border-image-slice: 3;
@@ -18,11 +18,12 @@
 
 .pixelDropdownArrow {
   @apply w-5 h-5 ml-2.5 transition-transform duration-300;
+  color: var(--custom-text, var(--text-dropdown, --text-dropdown), #000);
 }
 
 .pixelDropdownContent {
   @apply hidden absolute min-w-[200px] w-[110%] left-[-10px] z-10;
-  background-color: var(--custom-bg, var(--bg-dropdown));
+  background-color: var(--custom-bg, var(--bg-dropdown), transparent);
   border-style: solid;
   border-width: 5px;
   border-image-slice: 3;
