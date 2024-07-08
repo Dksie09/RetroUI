@@ -29,6 +29,11 @@
   /* progressbar */
   --color-progressbar: #000000;
   --border-progressbar: #000000;
+
+  /* input */
+  --bg-input: white;
+  --text-input: black;
+  --border-input: black;
 }
 
 body {
