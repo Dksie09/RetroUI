@@ -13,6 +13,7 @@ interface DropdownContextType {
   bg?: string;
   textColor?: string;
   borderColor?: string;
+  arrowColor?: string;
 }
 
 const DropdownContext = createContext<DropdownContextType | undefined>(
@@ -25,6 +26,7 @@ export interface DropdownMenuProps {
   bg?: string;
   textColor?: string;
   borderColor?: string;
+  arrowColor?: string;
 }
 
 export const DropdownMenu: React.FC<DropdownMenuProps> = ({
@@ -33,6 +35,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   bg,
   textColor,
   borderColor,
+  arrowColor,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -46,12 +49,13 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
     "--dropdown-custom-bg": bg,
     "--dropdown-custom-text": textColor,
     "--dropdown-custom-border": borderColor,
+    "--dropdown-custom-arrow": arrowColor,
     borderImageSource: svgString,
   };
 
   return (
     <DropdownContext.Provider
-      value={{ isOpen, setIsOpen, bg, textColor, borderColor }}
+      value={{ isOpen, setIsOpen, bg, textColor, borderColor, arrowColor }}
     >
       <div
         className={`${styles.pixelDropdown} ${className}`}
@@ -76,16 +80,11 @@ export const DropdownMenuTrigger: React.FC<{ children: ReactNode }> = ({
     >
       {children}
       <svg
-        xmlns="http://www.w3.org/2000/svg"
+        className={`${styles.pixelDropdownArrow} w-5 h-5 ml-2.5 transition-transform duration-300`}
         viewBox="0 0 20 20"
         fill="currentColor"
-        className={`${styles.pixelDropdownArrow} w-5 h-5 ml-2.5 transition-transform duration-300`}
       >
-        <path
-          fillRule="evenodd"
-          d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-          clipRule="evenodd"
-        />
+        <path d="M5 7l5 5 5-5z" />
       </svg>
     </button>
   );

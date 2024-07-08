@@ -18,6 +18,7 @@
 
 .pixelDropdownArrow {
   @apply w-5 h-5 ml-2.5 transition-transform duration-300;
+  fill: var(--dropdown-custom-arrow, var(--arrow-dropdown, #000000));
 }
 
 .pixelDropdownContent {
@@ -52,5 +53,5 @@
 }
 
 .pixelDropdown:hover .pixelDropdownArrow {
-  transform: rotate(90deg);
+  transform: rotate(180deg);
 }
