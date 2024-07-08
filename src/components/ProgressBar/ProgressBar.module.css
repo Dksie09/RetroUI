@@ -1,5 +1,5 @@
 .pixelProgressbarContainer {
-  @apply relative min-w-[100px];
+  @apply relative w-full;
   height: 30px;
   padding: 2px;
   border-style: solid;
@@ -7,8 +7,8 @@
   border-image-slice: 3;
   border-image-width: 2;
   border-image-repeat: stretch;
-  border-image-outset: 2;
   background-color: transparent;
+
   border-color: var(
     --progressbar-custom-border-color,
     var(--border-progressbar, #000000)
@@ -17,6 +17,7 @@
 
 .pixelProgressbar {
   @apply h-full;
+  opacity: 50%;
   background-color: var(
     --progressbar-custom-color,
     var(--color-progressbar, #000000)
