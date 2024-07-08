@@ -1,4 +1,4 @@
-import React, { TextareaHTMLAttributes, forwardRef } from "react";
+import React, { TextareaHTMLAttributes, forwardRef, useMemo } from "react";
 import styles from "./TextArea.module.css";
 
 export interface TextAreaProps
@@ -10,6 +10,13 @@ export interface TextAreaProps
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   ({ className = "", bg, textColor, borderColor, style, ...props }, ref) => {
+    const svgString = useMemo(() => {
+      const color = borderColor || "rgb(var(--border-textarea-rgb, 0,0,0))";
+      return `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z' fill='${encodeURIComponent(
+        color
+      )}'/%3E%3C/svg%3E")`;
+    }, [borderColor]);
+
     const customStyle = {
       ...style,
       ...(bg && { "--custom-bg": bg }),
@@ -22,6 +29,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
             )},${parseInt(borderColor.slice(5, 7), 16)}`
           : borderColor,
       }),
+      "--border-image-source": svgString,
     };
 
     return (
