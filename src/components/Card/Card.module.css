@@ -1,54 +1,13 @@
 .pixelCard {
-  @apply m-2 border-solid border-[5px] font-minecraft text-base;
+  @apply m-2 border-solid border-[5px] font-minecraft text-base p-4;
+  background-color: var(--card-custom-bg, var(--bg-card, white));
+  color: var(--card-custom-text, var(--text-card, black));
   border-image-slice: 3;
   border-image-width: 2;
   border-image-repeat: stretch;
-  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="rgb(0,0,0)"/></svg>');
   border-image-outset: 2;
-}
-
-.pixelCardPrimary {
-  background-color: var(--custom-bg, theme("colors.blue.100"));
-  color: var(--custom-text, theme("colors.blue.900"));
-  box-shadow: 2px 2px 0 2px var(--custom-shadow, theme("colors.blue.300")),
-    -2px -2px 0 2px var(--custom-bg, theme("colors.blue.100"));
-}
-
-.pixelCardSecondary {
-  background-color: var(--custom-bg, theme("colors.gray.100"));
-  color: var(--custom-text, theme("colors.gray.900"));
-  box-shadow: 2px 2px 0 2px var(--custom-shadow, theme("colors.gray.300")),
-    -2px -2px 0 2px var(--custom-bg, theme("colors.gray.100"));
-}
-
-.pixelCardOutline {
-  background-color: var(--custom-bg, transparent);
-  color: var(--custom-text, theme("colors.gray.900"));
-  box-shadow: 2px 2px 0 2px var(--custom-shadow, theme("colors.gray.900")),
-    -2px -2px 0 2px transparent;
-}
-
-.pixelCardHeader {
-  @apply p-4 mb-4;
-  color: var(--custom-text, inherit);
-}
-
-.pixelCardTitle {
-  @apply text-2xl font-bold;
-  color: var(--custom-text, theme("colors.gray.900"));
-}
-
-.pixelCardDescription {
-  @apply text-sm m-0;
-  color: var(--custom-text, theme("colors.gray.600"));
-}
-
-.pixelCardContent {
-  @apply mb-4;
-}
-
-.pixelCardFooter {
-  @apply border-t-2 pt-2 mt-4 px-5;
-  border-color: var(--custom-text, theme("colors.gray.900"));
-  color: var(--custom-text, inherit);
+  box-shadow: 2px 2px 0 2px
+      var(--card-custom-shadow, var(--shadow-card, #000000)),
+    -2px -2px 0 2px var(--card-custom-bg, var(--bg-card, white));
+  border-color: var(--card-custom-border, var(--border-card, #000000));
 }

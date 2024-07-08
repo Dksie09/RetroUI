@@ -1,142 +1,44 @@
-import React, { FC, ReactNode } from "react";
+import React, { FC, ReactNode, useMemo } from "react";
 import styles from "./Card.module.css";
 
 export interface CardProps {
   children: ReactNode;
   className?: string;
-  variant?: "primary" | "secondary" | "outline";
   bg?: string;
   textColor?: string;
-  shadow?: string;
+  borderColor?: string;
+  shadowColor?: string;
   style?: React.CSSProperties;
 }
 
 export const Card: FC<CardProps> = ({
   children,
   className = "",
-  variant = "primary",
   bg,
   textColor,
-  shadow,
+  borderColor,
+  shadowColor,
   style,
   ...props
 }) => {
-  const baseClasses = styles.pixelCard;
-  const variantClasses =
-    styles[`pixelCard${variant.charAt(0).toUpperCase() + variant.slice(1)}`];
+  const svgString = useMemo(() => {
+    const color = borderColor || "currentColor";
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="${color}"/></svg>`;
+    return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+  }, [borderColor]);
 
   const customStyle = {
     ...style,
-    ...(bg && { "--custom-bg": bg }),
-    ...(textColor && { "--custom-text": textColor }),
-    ...(shadow && { "--custom-shadow": shadow }),
+    "--card-custom-bg": bg,
+    "--card-custom-text": textColor,
+    "--card-custom-border": borderColor,
+    "--card-custom-shadow": shadowColor,
+    borderImageSource: svgString,
   };
 
   return (
     <div
-      className={`${baseClasses} ${variantClasses} ${className}`}
-      style={customStyle}
-      {...props}
-    >
-      {children}
-    </div>
-  );
-};
-
-export const CardHeader: FC<CardProps> = ({
-  children,
-  className = "",
-  textColor,
-  style,
-  ...props
-}) => {
-  const customStyle = {
-    ...style,
-    ...(textColor && { "--custom-text": textColor }),
-  };
-
-  return (
-    <div
-      className={`${styles.pixelCardHeader} ${className}`}
-      style={customStyle}
-      {...props}
-    >
-      {children}
-    </div>
-  );
-};
-
-export const CardTitle: FC<CardProps> = ({
-  children,
-  className = "",
-  textColor,
-  style,
-  ...props
-}) => {
-  const customStyle = {
-    ...style,
-    ...(textColor && { "--custom-text": textColor }),
-  };
-
-  return (
-    <h3
-      className={`${styles.pixelCardTitle} ${className}`}
-      style={customStyle}
-      {...props}
-    >
-      {children}
-    </h3>
-  );
-};
-
-export const CardDescription: FC<CardProps> = ({
-  children,
-  className = "",
-  textColor,
-  style,
-  ...props
-}) => {
-  const customStyle = {
-    ...style,
-    ...(textColor && { "--custom-text": textColor }),
-  };
-
-  return (
-    <p
-      className={`${styles.pixelCardDescription} ${className}`}
-      style={customStyle}
-      {...props}
-    >
-      {children}
-    </p>
-  );
-};
-
-export const CardContent: FC<CardProps> = ({
-  children,
-  className = "",
-  ...props
-}) => (
-  <div className={`${styles.pixelCardContent} ${className}`} {...props}>
-    {children}
-  </div>
-);
-
-export const CardFooter: FC<CardProps> = ({
-  children,
-  className = "",
-  textColor,
-  style,
-  ...props
-}) => {
-  const customStyle = {
-    ...style,
-    ...(textColor && { "--custom-text": textColor }),
-  };
-
-  return (
-    <div
-      className={`${styles.pixelCardFooter} ${className}`}
+      className={`${styles.pixelCard} ${className}`}
       style={customStyle}
       {...props}
     >

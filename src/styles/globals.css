@@ -34,6 +34,12 @@
   --bg-input: white;
   --text-input: black;
   --border-input: black;
+
+  /* card */
+  --bg-card: white;
+  --text-card: black;
+  --border-card: #000000;
+  --shadow-card: #767676;
 }
 
 body {
