@@ -40,6 +40,11 @@
   --text-card: black;
   --border-card: #000000;
   --shadow-card: #767676;
+
+  /* dropdown */
+  --bg-dropdown: transparent;
+  --text-dropdown: #000000;
+  --border-dropdown: #000000;
 }
 
 body {
