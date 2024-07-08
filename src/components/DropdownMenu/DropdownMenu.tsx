@@ -62,10 +62,7 @@ export const DropdownMenuTrigger: React.FC<{ children: ReactNode }> = ({
       className={`${styles.pixelDropdownTrigger} flex items-center justify-between w-full`}
     >
       {children}
-      <p
-        className={`${styles.pixelDropdownArrow} w-5 h-5 ml-2.5 transition-transform duration-300`}
-      />
-      ▶
+      <span className={`${styles.pixelDropdownArrow} ml-2.5`}>✦</span>
     </button>
   );
 };
