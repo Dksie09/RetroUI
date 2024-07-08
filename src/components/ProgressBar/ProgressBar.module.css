@@ -1,38 +1,50 @@
 .pixelProgressbarContainer {
-  @apply relative min-w-[100px] border-solid border-[5px];
+  position: relative;
+  height: 30px;
+  padding: 2px 2px;
+  min-width: 100px;
+  border-style: solid;
+  border-width: 5px;
   border-image-slice: 3;
   border-image-width: 2;
   border-image-repeat: stretch;
   border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="rgb(0,0,0)"/></svg>');
+  background-color: var(--custom-bg, var(--primary-bg-dropdown, white));
 }
 
 .pixelProgressbar {
-  @apply h-full opacity-50;
+  height: 100%;
+  opacity: 50%;
+  background-color: var(--custom-bar-color, var(--primary-bg));
 }
 
 .pixelProgressbarPercentage {
-  @apply relative mt-1 font-minecraft text-xs text-right;
-  color: theme("colors.gray.800");
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  font-family: "Minecraft", sans-serif;
+  color: var(--custom-text-color, var(--outline-text, black));
+  font-size: 12px;
+  text-align: right;
 }
 
-/* Size variants */
+/* Sizes */
 .pixelProgressbarSm {
-  @apply h-5 p-0.5;
+  height: 20px;
 }
 
 .pixelProgressbarMd {
-  @apply h-8 p-0.5;
+  height: 30px;
 }
 
 .pixelProgressbarLg {
-  @apply h-10 p-1;
+  height: 40px;
 }
 
-/* Color variants */
 .pixelProgressbarPrimary {
-  @apply bg-blue-500;
+  background-color: var(--custom-bar-color, var(--primary-bg));
 }
 
 .pixelProgressbarSecondary {
-  @apply bg-gray-500;
+  background-color: var(--custom-bar-color, var(--secondary-bg));
 }

@@ -7,6 +7,10 @@ export interface PopupProps {
     children: React.ReactNode;
     title?: string;
     closeButtonText?: string;
+    outerBg?: string;
+    innerBg?: string;
+    textColor?: string;
+    borderColor?: string;
 }
 export declare const Popup: React.FC<PopupProps>;
 export { styles as PopupStyles };

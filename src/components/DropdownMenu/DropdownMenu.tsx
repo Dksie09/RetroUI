@@ -1,9 +1,17 @@
-import React, { useState, createContext, useContext, ReactNode } from "react";
+import React, {
+  useState,
+  createContext,
+  useContext,
+  ReactNode,
+  CSSProperties,
+} from "react";
 import styles from "./DropdownMenu.module.css";
 
 interface DropdownContextType {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  bg?: string;
+  textColor?: string;
 }
 
 const DropdownContext = createContext<DropdownContextType | undefined>(
@@ -13,17 +21,31 @@ const DropdownContext = createContext<DropdownContextType | undefined>(
 export interface DropdownMenuProps {
   children: ReactNode;
   className?: string;
+  bg?: string;
+  textColor?: string;
 }
 
 export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   children,
   className = "",
+  bg,
+  textColor,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const customStyle: CSSProperties = {
+    ...(bg && { "--custom-bg": bg }),
+    ...(textColor && { "--custom-text": textColor }),
+  } as CSSProperties;
+
   return (
-    <DropdownContext.Provider value={{ isOpen, setIsOpen }}>
-      <div className={`${styles.pixelDropdown} ${className}`}>{children}</div>
+    <DropdownContext.Provider value={{ isOpen, setIsOpen, bg, textColor }}>
+      <div
+        className={`${styles.pixelDropdown} ${className}`}
+        style={customStyle}
+      >
+        {children}
+      </div>
     </DropdownContext.Provider>
   );
 };

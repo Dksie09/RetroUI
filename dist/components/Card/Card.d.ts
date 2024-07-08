@@ -3,8 +3,11 @@ import styles from "./Card.module.css";
 export interface CardProps {
     children: ReactNode;
     className?: string;
+    variant?: "primary" | "secondary" | "outline";
+    bg?: string;
+    textColor?: string;
+    shadow?: string;
     style?: React.CSSProperties;
-    variant?: "default" | "outline";
 }
 export declare const Card: FC<CardProps>;
 export declare const CardHeader: FC<CardProps>;

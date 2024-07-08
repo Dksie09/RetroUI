@@ -8,6 +8,10 @@ export interface PopupProps {
   children: React.ReactNode;
   title?: string;
   closeButtonText?: string;
+  outerBg?: string;
+  innerBg?: string;
+  textColor?: string;
+  borderColor?: string;
 }
 
 export const Popup: React.FC<PopupProps> = ({
@@ -17,13 +21,25 @@ export const Popup: React.FC<PopupProps> = ({
   children,
   title,
   closeButtonText = "X",
+  outerBg,
+  innerBg,
+  textColor,
+  borderColor,
 }) => {
   if (!isOpen) return null;
+
+  const customStyle = {
+    "--custom-outer-bg": outerBg,
+    "--custom-inner-bg": innerBg,
+    "--custom-text": textColor,
+    "--custom-border": borderColor,
+  };
 
   return (
     <div
       className={`${styles.pixelPopupOverlay} ${className}`}
       onClick={onClose}
+      style={customStyle as React.CSSProperties}
     >
       <div className={styles.pixelPopup} onClick={(e) => e.stopPropagation()}>
         <div className={styles.pixelPopupInner}>

@@ -1,10 +1,16 @@
 .pixelDropdown {
-  @apply relative inline-block font-minecraft;
-  background-color: theme("colors.gray.200");
+  background-color: var(--custom-bg, var(--primary-bg-dropdown));
+  position: relative;
+  display: inline-block;
+  font-family: "Minecraft", sans-serif;
 }
 
 .pixelDropdownTrigger {
-  @apply bg-gray-200 text-gray-800 text-base cursor-pointer;
+  background-color: var(--custom-bg, var(--primary-bg-dropdown));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   border-style: solid;
   border-width: 5px;
   border-image-slice: 3;
@@ -12,39 +18,57 @@
   border-image-repeat: stretch;
   border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="rgb(0,0,0)"/></svg>');
   border-image-outset: 2;
+  font-size: 16px;
+  color: var(--custom-text, var(--outline-text));
+  cursor: pointer;
+  width: 100%;
 }
 
 .pixelDropdownArrow {
-  @apply transition-transform duration-300;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  transition: transform 0.3s;
 }
 
 .pixelDropdownContent {
-  @apply hidden bg-gray-200;
+  display: none;
+  position: absolute;
+  background-color: var(--custom-bg, var(--primary-bg-dropdown));
+  min-width: 200px;
+  width: 110%;
+  left: -10px;
   border-style: solid;
   border-width: 5px;
   border-image-slice: 3;
   border-image-width: 2;
   border-image-repeat: stretch;
   border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="rgb(0,0,0)"/></svg>');
+  z-index: 1;
 }
 
 .pixelDropdownItem {
-  @apply text-gray-800 no-underline border-b-3 border-gray-800 transition-all duration-300 ease-in-out;
+  color: var(--custom-text, var(--outline-text));
+  padding: 12px 20px;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+  border-bottom: 3px solid var(--custom-text, var(--outline-text));
+  transition: filter 0.3s ease;
 }
 
 .pixelDropdownItem:hover {
-  @apply shadow-inner;
   box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
 }
 
 .pixelDropdownItem:last-child {
-  @apply border-b-0;
+  border-bottom: none;
 }
 
 .pixelDropdown:hover .pixelDropdownContent {
-  @apply block;
+  display: block;
 }
 
 .pixelDropdown:hover .pixelDropdownArrow {
-  @apply rotate-90;
+  transform: rotate(90deg);
 }

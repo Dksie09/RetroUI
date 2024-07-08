@@ -1,16 +1,18 @@
 .pixelContainer {
-  @apply inline-block bg-white text-gray-700 text-base;
-  border-style: solid;
-  border-width: 5px;
+  @apply relative inline-block border-solid border-[5px];
+  background-color: var(--custom-bg, var(--primary-bg-dropdown, white));
+  color: var(--custom-text, var(--outline-text, black));
   border-image-slice: 3;
   border-image-width: 2;
   border-image-repeat: stretch;
-  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="rgb(0,0,0)"/></svg>');
   border-image-outset: 2;
+  font-size: 16px;
+  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="%23000000"/></svg>');
 }
 
 .pixelInput {
-  @apply bg-transparent p-2;
+  @apply bg-transparent px-2 py-1;
+  color: inherit;
 }
 
 .pixelInput:focus {
@@ -18,9 +20,9 @@
 }
 
 .pixelInputIconButton {
-  @apply p-2;
+  @apply p-1 mr-1;
 }
 
 .pixelInputIconButton:active {
-  @apply translate-y-[2px];
+  @apply top-[2px];
 }

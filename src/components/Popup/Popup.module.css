@@ -4,35 +4,42 @@
 }
 
 .pixelPopup {
-  @apply relative p-1 bg-white text-gray-800 border-solid border-5;
+  @apply relative p-1;
+  background-color: var(--custom-outer-bg, var(--primary-bg));
+  color: var(--custom-text, var(--secondary-bg));
+  border-style: solid;
+  border-width: 5px;
   border-image-slice: 3;
   border-image-width: 2;
   border-image-repeat: stretch;
-  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="rgb(0,0,0)"/></svg>');
+  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="%23000000"/></svg>');
   border-image-outset: 2;
-  box-shadow: 2px 2px 0 2px theme("colors.white"),
-    -2px -2px 0 2px theme("colors.white");
-  @apply font-minecraft text-center box-border;
+  box-shadow: 2px 2px 0 2px var(--custom-outer-bg, var(--primary-bg)),
+    -2px -2px 0 2px var(--custom-outer-bg, var(--primary-bg));
 }
 
 .pixelPopupInner {
-  @apply p-4 bg-gray-100 border-solid border-5;
+  @apply p-4;
+  background-color: var(--custom-inner-bg, var(--secondary-bg));
+  color: var(--custom-text, var(--card-text));
+  border-style: solid;
+  border-width: 5px;
   border-image-slice: 3;
   border-image-width: 2;
   border-image-repeat: stretch;
-  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="rgb(0,0,0)"/></svg>');
+  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="%23000000"/></svg>');
   border-image-outset: 2;
-  box-shadow: 2px 2px 0 2px theme("colors.gray.100"),
-    -2px -2px 0 2px theme("colors.gray.100");
-  @apply font-minecraft text-gray-800 text-center box-border;
+  box-shadow: 2px 2px 0 2px var(--custom-inner-bg, var(--secondary-bg)),
+    -2px -2px 0 2px var(--custom-inner-bg, var(--secondary-bg));
 }
 
 .pixelPopupTitle {
-  @apply font-minecraft text-2xl mb-4 text-center;
+  @apply text-2xl mb-4 text-center font-minecraft;
 }
 
 .pixelPopupCloseButton {
-  @apply absolute top-2 right-2 bg-transparent border-none text-black text-lg cursor-pointer font-minecraft;
+  @apply absolute top-2 right-2 bg-transparent border-none cursor-pointer text-lg font-minecraft;
+  color: var(--custom-text, black);
 }
 
 .pixelPopupContent {

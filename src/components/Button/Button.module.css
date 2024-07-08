@@ -12,36 +12,41 @@
 
 /* Specific styles for primary button */
 .pixelButtonPrimary {
-  @apply bg-blue-500 text-white;
-  box-shadow: 2px 2px 0 2px theme("colors.blue.700"),
-    -2px -2px 0 2px theme("colors.blue.500");
+  background-color: var(--custom-bg, var(--primary-bg));
+  color: var(--custom-text, var(--primary-text));
+  box-shadow: 2px 2px 0 2px var(--custom-shadow, var(--primary-shadow)),
+    -2px -2px 0 2px var(--custom-bg, var(--primary-bg));
   border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="%23000000"/></svg>');
 }
 
 .pixelButtonPrimary:active {
-  box-shadow: 2px 2px 0 2px theme("colors.blue.500"),
-    -2px -2px 0 2px theme("colors.blue.500");
+  box-shadow: 2px 2px 0 2px var(--custom-bg, var(--primary-bg)),
+    -2px -2px 0 2px var(--custom-bg, var(--primary-bg));
 }
 
 /* Specific styles for secondary button */
 .pixelButtonSecondary {
-  @apply bg-gray-500 text-white;
-  box-shadow: 2px 2px 0 2px theme("colors.gray.700"),
-    -2px -2px 0 2px theme("colors.gray.500");
+  background-color: var(--custom-bg, var(--secondary-bg));
+  color: var(--custom-text, var(--secondary-text));
+  box-shadow: 2px 2px 0 2px var(--custom-shadow, var(--secondary-shadow)),
+    -2px -2px 0 2px var(--custom-bg, var(--secondary-bg));
   border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="%23000000"/></svg>');
 }
 
 .pixelButtonSecondary:active {
-  box-shadow: 2px 2px 0 2px theme("colors.gray.500"),
-    -2px -2px 0 2px theme("colors.gray.500");
+  box-shadow: 2px 2px 0 2px var(--custom-bg, var(--secondary-bg)),
+    -2px -2px 0 2px var(--custom-bg, var(--secondary-bg));
 }
 
 .pixelButtonOutline {
-  @apply bg-transparent text-blue-500 border-blue-500;
-  box-shadow: 2px 2px 0 2px black, -2px -2px 0 2px transparent;
+  background-color: transparent;
+  color: var(--custom-text, var(--outline-text));
+  box-shadow: 2px 2px 0 2px var(--custom-shadow, black),
+    -2px -2px 0 2px transparent;
   border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="%23000000"/></svg>');
 }
 
 .pixelButtonOutline:active {
-  box-shadow: 2px 2px 0 2px, -2px -2px 0 2px theme("colors.blue.500");
+  box-shadow: 2px 2px 0 2px var(--custom-shadow, black),
+    -2px -2px 0 2px var(--custom-text, var(--outline-text));
 }
