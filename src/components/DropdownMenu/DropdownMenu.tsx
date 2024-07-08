@@ -62,27 +62,10 @@ export const DropdownMenuTrigger: React.FC<{ children: ReactNode }> = ({
       className={`${styles.pixelDropdownTrigger} flex items-center justify-between w-full`}
     >
       {children}
-      <svg
-        version="1.0"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 382.000000 572.000000"
-        preserveAspectRatio="xMidYMid meet"
-      >
-        <g
-          transform="translate(0.000000,572.000000) scale(0.100000,-0.100000)"
-          fill="#000000"
-          stroke="none"
-        >
-          <path
-            d="M655 2880 c0 -1972 2 -2232 15 -2240 23 -15 593 -13 608 2 9 9 12 94
-12 319 l0 308 308 3 c169 2 313 7 319 11 10 6 13 81 13 317 l0 309 310 3 c263
-3 312 5 320 18 6 9 10 145 10 318 l0 302 308 0 c226 0 311 3 320 12 17 17 17
-599 0 616 -9 9 -94 12 -320 12 l-307 0 -3 309 c-2 170 -7 313 -11 318 -5 4
--148 9 -318 11 l-309 3 0 302 c0 173 -4 308 -10 317 -8 13 -57 15 -319 18
-l-311 3 -2 317 -3 317 -315 3 -315 2 0 -2230z"
-          />
-        </g>
-      </svg>
+      <p
+        className={`${styles.pixelDropdownArrow} w-5 h-5 ml-2.5 transition-transform duration-300`}
+      />
+      ▶
     </button>
   );
 };
