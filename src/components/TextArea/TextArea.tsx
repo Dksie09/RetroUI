@@ -14,7 +14,14 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       ...style,
       ...(bg && { "--custom-bg": bg }),
       ...(textColor && { "--custom-text": textColor }),
-      ...(borderColor && { "--custom-border": borderColor }),
+      ...(borderColor && {
+        "--custom-border-rgb": borderColor.startsWith("#")
+          ? `${parseInt(borderColor.slice(1, 3), 16)},${parseInt(
+              borderColor.slice(3, 5),
+              16
+            )},${parseInt(borderColor.slice(5, 7), 16)}`
+          : borderColor,
+      }),
     };
 
     return (

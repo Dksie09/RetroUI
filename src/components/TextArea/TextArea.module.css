@@ -1,14 +1,17 @@
 .pixelTextarea {
   @apply w-full p-2 text-base min-h-[100px] resize outline-none;
-  background-color: var(--custom-bg, var(--textarea-bg, white));
-  color: var(--custom-text, var(--textarea-text, black));
+  background-color: var(--custom-bg, var(--textarea-bg, var(--bg-textarea)));
+  color: var(--custom-text, var(--textarea-text, var(--text-textarea)));
   border-style: solid;
+  box-shadow: 2px 2px 0 2px
+      var(--custom-bg, var(--textarea-bg, var(--bg-textarea))),
+    -2px -2px 0 2px var(--custom-bg, var(--textarea-bg, var(--bg-textarea)));
   border-width: 5px;
   border-image-slice: 3;
   border-image-width: 2;
   border-image-repeat: stretch;
   border-image-outset: 2;
-  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="%23000000"/></svg>');
+  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="rgb(var(--custom-border-rgb, var(--border-textarea-rgb, 0,0,0)))"/></svg>');
 }
 
 .pixelTextarea:focus {
