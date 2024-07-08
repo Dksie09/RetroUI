@@ -22,7 +22,7 @@
   --outline-text: #000000;
   --bg-textarea: #f0f0f0;
   --text-textarea: #000000;
-  --border-textarea-rgb: 255, 255, 255;
+  --border-textarea-rgb: 0, 0, 0;
 }
 
 body {
