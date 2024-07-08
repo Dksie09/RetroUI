@@ -1,50 +1,40 @@
 .pixelDropdown {
   @apply relative inline-block font-minecraft;
-  background-color: var(--dropdown-custom-bg, var(--bg-dropdown, transparent));
+  background-color: var(--custom-bg, var(--bg-dropdown, transparent));
 }
 
 .pixelDropdownTrigger {
-  @apply flex items-center justify-between w-full cursor-pointer text-base p-2;
-  background-color: var(--dropdown-custom-bg, var(--bg-dropdown, transparent));
-  color: var(--dropdown-custom-text, var(--text-dropdown, black));
+  @apply flex items-center justify-between w-full cursor-pointer text-base;
+  background-color: var(--custom-bg, var(--bg-dropdown));
+  color: var(--custom-text, var(--text-dropdown));
   border-style: solid;
   border-width: 5px;
   border-image-slice: 3;
   border-image-width: 2;
   border-image-repeat: stretch;
+  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="rgb(0,0,0)"/></svg>');
   border-image-outset: 2;
-  border-color: var(--dropdown-custom-border, var(--border-dropdown, #000000));
 }
 
 .pixelDropdownArrow {
-  @apply ml-2.5 transition-transform duration-300;
-}
-
-.pixelDropdownArrowOpen {
-  @apply transform rotate-180;
+  @apply w-5 h-5 ml-2.5 transition-transform duration-300;
 }
 
 .pixelDropdownContent {
-  @apply hidden absolute min-w-[200px] w-[110%] left-[-10px] z-10 mt-1;
-  background-color: var(--dropdown-custom-bg, var(--bg-dropdown, transparent));
+  @apply hidden absolute min-w-[200px] w-[110%] left-[-10px] z-10;
+  background-color: var(--custom-bg, var(--bg-dropdown));
   border-style: solid;
   border-width: 5px;
   border-image-slice: 3;
   border-image-width: 2;
   border-image-repeat: stretch;
-  border-image-outset: 2;
-  border-color: var(--dropdown-custom-border, var(--border-dropdown, #000000));
-}
-
-.pixelDropdownContentOpen {
-  @apply block;
+  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="rgb(0,0,0)"/></svg>');
 }
 
 .pixelDropdownItem {
   @apply block py-3 px-5 text-base transition-all duration-300 ease-in-out;
-  color: var(--dropdown-custom-text, var(--text-dropdown, black));
-  border-bottom: 3px solid
-    var(--dropdown-custom-border, var(--border-dropdown, #000000));
+  color: var(--custom-text, var(--text-dropdown));
+  border-bottom: 3px solid var(--custom-text, var(--text-dropdown));
 }
 
 .pixelDropdownItem:hover {
@@ -53,4 +43,12 @@
 
 .pixelDropdownItem:last-child {
   border-bottom: none;
+}
+
+.pixelDropdown:hover .pixelDropdownContent {
+  @apply block;
+}
+
+.pixelDropdown:hover .pixelDropdownArrow {
+  @apply rotate-90;
 }
