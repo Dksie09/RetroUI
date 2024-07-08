@@ -1,20 +1,22 @@
-import stringWidth from 'string-width';
-import stripAnsi from 'strip-ansi';
-import ansiStyles from 'ansi-styles';
+'use strict';
+const stringWidth = require('string-width');
+const stripAnsi = require('strip-ansi');
+const ansiStyles = require('ansi-styles');
 
 const ESCAPES = new Set([
 	'\u001B',
-	'\u009B',
+	'\u009B'
 ]);
 
 const END_CODE = 39;
+
 const ANSI_ESCAPE_BELL = '\u0007';
 const ANSI_CSI = '[';
 const ANSI_OSC = ']';
 const ANSI_SGR_TERMINATOR = 'm';
 const ANSI_ESCAPE_LINK = `${ANSI_OSC}8;;`;
 
-const wrapAnsiCode = code => `${ESCAPES.values().next().value}${ANSI_CSI}${code}${ANSI_SGR_TERMINATOR}`;
+const wrapAnsi = code => `${ESCAPES.values().next().value}${ANSI_CSI}${code}${ANSI_SGR_TERMINATOR}`;
 const wrapAnsiHyperlink = uri => `${ESCAPES.values().next().value}${ANSI_ESCAPE_LINK}${uri}${ANSI_ESCAPE_BELL}`;
 
 // Calculate the length of words split on ' ', ignoring
@@ -161,7 +163,7 @@ const exec = (string, columns, options = {}) => {
 	}
 
 	if (options.trim !== false) {
-		rows = rows.map(row => stringVisibleTrimSpacesRight(row));
+		rows = rows.map(stringVisibleTrimSpacesRight);
 	}
 
 	const pre = [...rows.join('\n')];
@@ -187,11 +189,11 @@ const exec = (string, columns, options = {}) => {
 			}
 
 			if (escapeCode && code) {
-				returnValue += wrapAnsiCode(code);
+				returnValue += wrapAnsi(code);
 			}
 		} else if (character === '\n') {
 			if (escapeCode && code) {
-				returnValue += wrapAnsiCode(escapeCode);
+				returnValue += wrapAnsi(escapeCode);
 			}
 
 			if (escapeUrl) {
@@ -204,11 +206,11 @@ const exec = (string, columns, options = {}) => {
 };
 
 // For each newline, invoke the method separately
-export default function wrapAnsi(string, columns, options) {
+module.exports = (string, columns, options) => {
 	return String(string)
 		.normalize()
 		.replace(/\r\n/g, '\n')
 		.split('\n')
 		.map(line => exec(line, columns, options))
 		.join('\n');
-}
+};

@@ -31,11 +31,23 @@ Can be thought of as the equivalent of the `outerHTML` of the passed node(s).
 
 ## Options
 
+### `encodeEntities`
+
+• `Optional` **decodeEntities**: _boolean | "utf8"_
+
+Encode characters that are either reserved in HTML or XML.
+
+If `xmlMode` is `true` or the value not `'utf8'`, characters outside of the utf8 range will be encoded as well.
+
+**`default`** `decodeEntities`
+
+---
+
 ### `decodeEntities`
 
 • `Optional` **decodeEntities**: _boolean_
 
-Encode characters that are either reserved in HTML or XML, or are outside of the ASCII range.
+Option inherited from parsing; will be used as the default value for `encodeEntities`.
 
 **`default`** true
 

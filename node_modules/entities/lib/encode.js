@@ -3,134 +3,75 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.escapeUTF8 = exports.escape = exports.encodeNonAsciiHTML = exports.encodeHTML = exports.encodeXML = void 0;
-var xml_json_1 = __importDefault(require("./maps/xml.json"));
-var inverseXML = getInverseObj(xml_json_1.default);
-var xmlReplacer = getInverseReplacer(inverseXML);
+exports.encodeNonAsciiHTML = exports.encodeHTML = void 0;
+var encode_html_js_1 = __importDefault(require("./generated/encode-html.js"));
+var escape_js_1 = require("./escape.js");
+var htmlReplacer = /[\t\n!-,./:-@[-`\f{-}$\x80-\uFFFF]/g;
 /**
- * Encodes all non-ASCII characters, as well as characters not valid in XML
- * documents using XML entities.
+ * Encodes all characters in the input using HTML entities. This includes
+ * characters that are valid ASCII characters in HTML documents, such as `#`.
  *
- * If a character has no equivalent entity, a
- * numeric hexadecimal reference (eg. `&#xfc;`) will be used.
+ * To get a more compact output, consider using the `encodeNonAsciiHTML`
+ * function, which will only encode characters that are not valid in HTML
+ * documents, as well as non-ASCII characters.
+ *
+ * If a character has no equivalent entity, a numeric hexadecimal reference
+ * (eg. `&#xfc;`) will be used.
  */
-exports.encodeXML = getASCIIEncoder(inverseXML);
-var entities_json_1 = __importDefault(require("./maps/entities.json"));
-var inverseHTML = getInverseObj(entities_json_1.default);
-var htmlReplacer = getInverseReplacer(inverseHTML);
-/**
- * Encodes all entities and non-ASCII characters in the input.
- *
- * This includes characters that are valid ASCII characters in HTML documents.
- * For example `#` will be encoded as `&num;`. To get a more compact output,
- * consider using the `encodeNonAsciiHTML` function.
- *
- * If a character has no equivalent entity, a
- * numeric hexadecimal reference (eg. `&#xfc;`) will be used.
- */
-exports.encodeHTML = getInverse(inverseHTML, htmlReplacer);
+function encodeHTML(data) {
+    return encodeHTMLTrieRe(htmlReplacer, data);
+}
+exports.encodeHTML = encodeHTML;
 /**
  * Encodes all non-ASCII characters, as well as characters not valid in HTML
- * documents using HTML entities.
+ * documents using HTML entities. This function will not encode characters that
+ * are valid in HTML documents, such as `#`.
  *
- * If a character has no equivalent entity, a
- * numeric hexadecimal reference (eg. `&#xfc;`) will be used.
+ * If a character has no equivalent entity, a numeric hexadecimal reference
+ * (eg. `&#xfc;`) will be used.
  */
-exports.encodeNonAsciiHTML = getASCIIEncoder(inverseHTML);
-function getInverseObj(obj) {
-    return Object.keys(obj)
-        .sort()
-        .reduce(function (inverse, name) {
-        inverse[obj[name]] = "&" + name + ";";
-        return inverse;
-    }, {});
+function encodeNonAsciiHTML(data) {
+    return encodeHTMLTrieRe(escape_js_1.xmlReplacer, data);
 }
-function getInverseReplacer(inverse) {
-    var single = [];
-    var multiple = [];
-    for (var _i = 0, _a = Object.keys(inverse); _i < _a.length; _i++) {
-        var k = _a[_i];
-        if (k.length === 1) {
-            // Add value to single array
-            single.push("\\" + k);
+exports.encodeNonAsciiHTML = encodeNonAsciiHTML;
+function encodeHTMLTrieRe(regExp, str) {
+    var ret = "";
+    var lastIdx = 0;
+    var match;
+    while ((match = regExp.exec(str)) !== null) {
+        var i = match.index;
+        ret += str.substring(lastIdx, i);
+        var char = str.charCodeAt(i);
+        var next = encode_html_js_1.default.get(char);
+        if (typeof next === "object") {
+            // We are in a branch. Try to match the next char.
+            if (i + 1 < str.length) {
+                var nextChar = str.charCodeAt(i + 1);
+                var value = typeof next.n === "number"
+                    ? next.n === nextChar
+                        ? next.o
+                        : undefined
+                    : next.n.get(nextChar);
+                if (value !== undefined) {
+                    ret += value;
+                    lastIdx = regExp.lastIndex += 1;
+                    continue;
+                }
+            }
+            next = next.v;
+        }
+        // We might have a tree node without a value; skip and use a numeric entity.
+        if (next !== undefined) {
+            ret += next;
+            lastIdx = i + 1;
         }
         else {
-            // Add value to multiple array
-            multiple.push(k);
+            var cp = (0, escape_js_1.getCodePoint)(str, i);
+            ret += "&#x".concat(cp.toString(16), ";");
+            // Increase by 1 if we have a surrogate pair
+            lastIdx = regExp.lastIndex += Number(cp !== char);
         }
     }
-    // Add ranges to single characters.
-    single.sort();
-    for (var start = 0; start < single.length - 1; start++) {
-        // Find the end of a run of characters
-        var end = start;
-        while (end < single.length - 1 &&
-            single[end].charCodeAt(1) + 1 === single[end + 1].charCodeAt(1)) {
-            end += 1;
-        }
-        var count = 1 + end - start;
-        // We want to replace at least three characters
-        if (count < 3)
-            continue;
-        single.splice(start, count, single[start] + "-" + single[end]);
-    }
-    multiple.unshift("[" + single.join("") + "]");
-    return new RegExp(multiple.join("|"), "g");
+    return ret + str.substr(lastIdx);
 }
-// /[^\0-\x7F]/gu
-var reNonASCII = /(?:[\x80-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])/g;
-var getCodePoint = 
-// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-String.prototype.codePointAt != null
-    ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        function (str) { return str.codePointAt(0); }
-    : // http://mathiasbynens.be/notes/javascript-encoding#surrogate-formulae
-        function (c) {
-            return (c.charCodeAt(0) - 0xd800) * 0x400 +
-                c.charCodeAt(1) -
-                0xdc00 +
-                0x10000;
-        };
-function singleCharReplacer(c) {
-    return "&#x" + (c.length > 1 ? getCodePoint(c) : c.charCodeAt(0))
-        .toString(16)
-        .toUpperCase() + ";";
-}
-function getInverse(inverse, re) {
-    return function (data) {
-        return data
-            .replace(re, function (name) { return inverse[name]; })
-            .replace(reNonASCII, singleCharReplacer);
-    };
-}
-var reEscapeChars = new RegExp(xmlReplacer.source + "|" + reNonASCII.source, "g");
-/**
- * Encodes all non-ASCII characters, as well as characters not valid in XML
- * documents using numeric hexadecimal reference (eg. `&#xfc;`).
- *
- * Have a look at `escapeUTF8` if you want a more concise output at the expense
- * of reduced transportability.
- *
- * @param data String to escape.
- */
-function escape(data) {
-    return data.replace(reEscapeChars, singleCharReplacer);
-}
-exports.escape = escape;
-/**
- * Encodes all characters not valid in XML documents using numeric hexadecimal
- * reference (eg. `&#xfc;`).
- *
- * Note that the output will be character-set dependent.
- *
- * @param data String to escape.
- */
-function escapeUTF8(data) {
-    return data.replace(xmlReplacer, singleCharReplacer);
-}
-exports.escapeUTF8 = escapeUTF8;
-function getASCIIEncoder(obj) {
-    return function (data) {
-        return data.replace(reEscapeChars, function (c) { return obj[c] || singleCharReplacer(c); });
-    };
-}
+//# sourceMappingURL=encode.js.map

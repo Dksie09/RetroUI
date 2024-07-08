@@ -12,7 +12,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -30,6 +34,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.render = void 0;
 /*
  * Module dependencies
  */
@@ -41,7 +46,7 @@ var entities_1 = require("entities");
  *
  * @see https://html.spec.whatwg.org/multipage/parsing.html#parsing-main-inforeign
  */
-var foreignNames_1 = require("./foreignNames");
+var foreignNames_js_1 = require("./foreignNames.js");
 var unencodedElements = new Set([
     "style",
     "script",
@@ -52,26 +57,33 @@ var unencodedElements = new Set([
     "plaintext",
     "noscript",
 ]);
+function replaceQuotes(value) {
+    return value.replace(/"/g, "&quot;");
+}
 /**
  * Format attributes
  */
 function formatAttributes(attributes, opts) {
+    var _a;
     if (!attributes)
         return;
+    var encode = ((_a = opts.encodeEntities) !== null && _a !== void 0 ? _a : opts.decodeEntities) === false
+        ? replaceQuotes
+        : opts.xmlMode || opts.encodeEntities !== "utf8"
+            ? entities_1.encodeXML
+            : entities_1.escapeAttribute;
     return Object.keys(attributes)
         .map(function (key) {
         var _a, _b;
         var value = (_a = attributes[key]) !== null && _a !== void 0 ? _a : "";
         if (opts.xmlMode === "foreign") {
             /* Fix up mixed-case attribute names */
-            key = (_b = foreignNames_1.attributeNames.get(key)) !== null && _b !== void 0 ? _b : key;
+            key = (_b = foreignNames_js_1.attributeNames.get(key)) !== null && _b !== void 0 ? _b : key;
         }
         if (!opts.emptyAttrs && !opts.xmlMode && value === "") {
             return key;
         }
-        return key + "=\"" + (opts.decodeEntities !== false
-            ? entities_1.encodeXML(value)
-            : value.replace(/"/g, "&quot;")) + "\"";
+        return "".concat(key, "=\"").concat(encode(value), "\"");
     })
         .join(" ");
 }
@@ -116,13 +128,15 @@ function render(node, options) {
     }
     return output;
 }
+exports.render = render;
 exports.default = render;
 function renderNode(node, options) {
     switch (node.type) {
         case ElementType.Root:
             return render(node.children, options);
-        case ElementType.Directive:
+        // @ts-expect-error We don't use `Doctype` yet
         case ElementType.Doctype:
+        case ElementType.Directive:
             return renderDirective(node);
         case ElementType.Comment:
             return renderComment(node);
@@ -153,7 +167,7 @@ function renderTag(elem, opts) {
     // Handle SVG / MathML in HTML
     if (opts.xmlMode === "foreign") {
         /* Fix up mixed-case element names */
-        elem.name = (_a = foreignNames_1.elementNames.get(elem.name)) !== null && _a !== void 0 ? _a : elem.name;
+        elem.name = (_a = foreignNames_js_1.elementNames.get(elem.name)) !== null && _a !== void 0 ? _a : elem.name;
         /* Exit foreign mode at integration points */
         if (elem.parent &&
             foreignModeIntegrationPoints.has(elem.parent.name)) {
@@ -163,10 +177,10 @@ function renderTag(elem, opts) {
     if (!opts.xmlMode && foreignElements.has(elem.name)) {
         opts = __assign(__assign({}, opts), { xmlMode: "foreign" });
     }
-    var tag = "<" + elem.name;
+    var tag = "<".concat(elem.name);
     var attribs = formatAttributes(elem.attribs, opts);
     if (attribs) {
-        tag += " " + attribs;
+        tag += " ".concat(attribs);
     }
     if (elem.children.length === 0 &&
         (opts.xmlMode
@@ -184,28 +198,32 @@ function renderTag(elem, opts) {
             tag += render(elem.children, opts);
         }
         if (opts.xmlMode || !singleTag.has(elem.name)) {
-            tag += "</" + elem.name + ">";
+            tag += "</".concat(elem.name, ">");
         }
     }
     return tag;
 }
 function renderDirective(elem) {
-    return "<" + elem.data + ">";
+    return "<".concat(elem.data, ">");
 }
 function renderText(elem, opts) {
+    var _a;
     var data = elem.data || "";
     // If entities weren't decoded, no need to encode them back
-    if (opts.decodeEntities !== false &&
+    if (((_a = opts.encodeEntities) !== null && _a !== void 0 ? _a : opts.decodeEntities) !== false &&
         !(!opts.xmlMode &&
             elem.parent &&
             unencodedElements.has(elem.parent.name))) {
-        data = entities_1.encodeXML(data);
+        data =
+            opts.xmlMode || opts.encodeEntities !== "utf8"
+                ? (0, entities_1.encodeXML)(data)
+                : (0, entities_1.escapeText)(data);
     }
     return data;
 }
 function renderCdata(elem) {
-    return "<![CDATA[" + elem.children[0].data + "]]>";
+    return "<![CDATA[".concat(elem.children[0].data, "]]>");
 }
 function renderComment(elem) {
-    return "<!--" + elem.data + "-->";
+    return "<!--".concat(elem.data, "-->");
 }

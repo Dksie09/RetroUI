@@ -22,12 +22,15 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.aliases = exports.pseudos = exports.filters = exports.is = exports.selectOne = exports.selectAll = exports.prepareContext = exports._compileToken = exports._compileUnsafe = exports.compile = void 0;
 var DomUtils = __importStar(require("domutils"));
-var boolbase_1 = require("boolbase");
-var compile_1 = require("./compile");
-var subselects_1 = require("./pseudo-selectors/subselects");
+var boolbase_1 = __importDefault(require("boolbase"));
+var compile_js_1 = require("./compile.js");
+var subselects_js_1 = require("./pseudo-selectors/subselects.js");
 var defaultEquals = function (a, b) { return a === b; };
 var defaultOptions = {
     adapter: DomUtils,
@@ -55,14 +58,14 @@ function wrapCompile(func) {
 /**
  * Compiles the query, returns a function.
  */
-exports.compile = wrapCompile(compile_1.compile);
-exports._compileUnsafe = wrapCompile(compile_1.compileUnsafe);
-exports._compileToken = wrapCompile(compile_1.compileToken);
+exports.compile = wrapCompile(compile_js_1.compile);
+exports._compileUnsafe = wrapCompile(compile_js_1.compileUnsafe);
+exports._compileToken = wrapCompile(compile_js_1.compileToken);
 function getSelectorFunc(searchFunc) {
     return function select(query, elements, options) {
         var opts = convertOptionFormats(options);
         if (typeof query !== "function") {
-            query = (0, compile_1.compileUnsafe)(query, opts, elements);
+            query = (0, compile_js_1.compileUnsafe)(query, opts, elements);
         }
         var filteredElements = prepareContext(elements, opts.adapter, query.shouldTestNextSiblings);
         return searchFunc(query, filteredElements, opts);
@@ -87,7 +90,7 @@ function appendNextSiblings(elem, adapter) {
     var elems = Array.isArray(elem) ? elem.slice(0) : [elem];
     var elemsLength = elems.length;
     for (var i = 0; i < elemsLength; i++) {
-        var nextSiblings = (0, subselects_1.getNextSiblings)(elems[i], adapter);
+        var nextSiblings = (0, subselects_js_1.getNextSiblings)(elems[i], adapter);
         elems.push.apply(elems, nextSiblings);
     }
     return elems;
@@ -103,7 +106,7 @@ function appendNextSiblings(elem, adapter) {
  *
  */
 exports.selectAll = getSelectorFunc(function (query, elems, options) {
-    return query === boolbase_1.falseFunc || !elems || elems.length === 0
+    return query === boolbase_1.default.falseFunc || !elems || elems.length === 0
         ? []
         : options.adapter.findAll(query, elems);
 });
@@ -117,7 +120,7 @@ exports.selectAll = getSelectorFunc(function (query, elems, options) {
  * @returns the first match, or null if there was no match.
  */
 exports.selectOne = getSelectorFunc(function (query, elems, options) {
-    return query === boolbase_1.falseFunc || !elems || elems.length === 0
+    return query === boolbase_1.default.falseFunc || !elems || elems.length === 0
         ? null
         : options.adapter.findOne(query, elems);
 });
@@ -134,7 +137,7 @@ exports.selectOne = getSelectorFunc(function (query, elems, options) {
  */
 function is(elem, query, options) {
     var opts = convertOptionFormats(options);
-    return (typeof query === "function" ? query : (0, compile_1.compile)(query, opts))(elem);
+    return (typeof query === "function" ? query : (0, compile_js_1.compile)(query, opts))(elem);
 }
 exports.is = is;
 /**
@@ -143,7 +146,9 @@ exports.is = is;
  */
 exports.default = exports.selectAll;
 // Export filters, pseudos and aliases to allow users to supply their own.
-var pseudo_selectors_1 = require("./pseudo-selectors");
-Object.defineProperty(exports, "filters", { enumerable: true, get: function () { return pseudo_selectors_1.filters; } });
-Object.defineProperty(exports, "pseudos", { enumerable: true, get: function () { return pseudo_selectors_1.pseudos; } });
-Object.defineProperty(exports, "aliases", { enumerable: true, get: function () { return pseudo_selectors_1.aliases; } });
+/** @deprecated Use the `pseudos` option instead. */
+var index_js_1 = require("./pseudo-selectors/index.js");
+Object.defineProperty(exports, "filters", { enumerable: true, get: function () { return index_js_1.filters; } });
+Object.defineProperty(exports, "pseudos", { enumerable: true, get: function () { return index_js_1.pseudos; } });
+Object.defineProperty(exports, "aliases", { enumerable: true, get: function () { return index_js_1.aliases; } });
+//# sourceMappingURL=index.js.map

@@ -26,29 +26,14 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.cloneNode = exports.hasChildren = exports.isDocument = exports.isDirective = exports.isComment = exports.isText = exports.isCDATA = exports.isTag = exports.Element = exports.Document = exports.NodeWithChildren = exports.ProcessingInstruction = exports.Comment = exports.Text = exports.DataNode = exports.Node = void 0;
+exports.cloneNode = exports.hasChildren = exports.isDocument = exports.isDirective = exports.isComment = exports.isText = exports.isCDATA = exports.isTag = exports.Element = exports.Document = exports.CDATA = exports.NodeWithChildren = exports.ProcessingInstruction = exports.Comment = exports.Text = exports.DataNode = exports.Node = void 0;
 var domelementtype_1 = require("domelementtype");
-var nodeTypes = new Map([
-    [domelementtype_1.ElementType.Tag, 1],
-    [domelementtype_1.ElementType.Script, 1],
-    [domelementtype_1.ElementType.Style, 1],
-    [domelementtype_1.ElementType.Directive, 1],
-    [domelementtype_1.ElementType.Text, 3],
-    [domelementtype_1.ElementType.CDATA, 4],
-    [domelementtype_1.ElementType.Comment, 8],
-    [domelementtype_1.ElementType.Root, 9],
-]);
 /**
  * This object will be used as the prototype for Nodes when creating a
  * DOM-Level-1-compliant structure.
  */
 var Node = /** @class */ (function () {
-    /**
-     *
-     * @param type The type of the node.
-     */
-    function Node(type) {
-        this.type = type;
+    function Node() {
         /** Parent of the node */
         this.parent = null;
         /** Previous sibling */
@@ -60,19 +45,6 @@ var Node = /** @class */ (function () {
         /** The end index of the node. Requires `withEndIndices` on the handler to be `true. */
         this.endIndex = null;
     }
-    Object.defineProperty(Node.prototype, "nodeType", {
-        // Read-only aliases
-        /**
-         * [DOM spec](https://dom.spec.whatwg.org/#dom-node-nodetype)-compatible
-         * node {@link type}.
-         */
-        get: function () {
-            var _a;
-            return (_a = nodeTypes.get(this.type)) !== null && _a !== void 0 ? _a : 1;
-        },
-        enumerable: false,
-        configurable: true
-    });
     Object.defineProperty(Node.prototype, "parentNode", {
         // Read-write aliases for properties
         /**
@@ -135,11 +107,10 @@ exports.Node = Node;
 var DataNode = /** @class */ (function (_super) {
     __extends(DataNode, _super);
     /**
-     * @param type The type of the node
      * @param data The content of the data node
      */
-    function DataNode(type, data) {
-        var _this = _super.call(this, type) || this;
+    function DataNode(data) {
+        var _this = _super.call(this) || this;
         _this.data = data;
         return _this;
     }
@@ -165,9 +136,18 @@ exports.DataNode = DataNode;
  */
 var Text = /** @class */ (function (_super) {
     __extends(Text, _super);
-    function Text(data) {
-        return _super.call(this, domelementtype_1.ElementType.Text, data) || this;
+    function Text() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.type = domelementtype_1.ElementType.Text;
+        return _this;
     }
+    Object.defineProperty(Text.prototype, "nodeType", {
+        get: function () {
+            return 3;
+        },
+        enumerable: false,
+        configurable: true
+    });
     return Text;
 }(DataNode));
 exports.Text = Text;
@@ -176,9 +156,18 @@ exports.Text = Text;
  */
 var Comment = /** @class */ (function (_super) {
     __extends(Comment, _super);
-    function Comment(data) {
-        return _super.call(this, domelementtype_1.ElementType.Comment, data) || this;
+    function Comment() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.type = domelementtype_1.ElementType.Comment;
+        return _this;
     }
+    Object.defineProperty(Comment.prototype, "nodeType", {
+        get: function () {
+            return 8;
+        },
+        enumerable: false,
+        configurable: true
+    });
     return Comment;
 }(DataNode));
 exports.Comment = Comment;
@@ -188,10 +177,18 @@ exports.Comment = Comment;
 var ProcessingInstruction = /** @class */ (function (_super) {
     __extends(ProcessingInstruction, _super);
     function ProcessingInstruction(name, data) {
-        var _this = _super.call(this, domelementtype_1.ElementType.Directive, data) || this;
+        var _this = _super.call(this, data) || this;
         _this.name = name;
+        _this.type = domelementtype_1.ElementType.Directive;
         return _this;
     }
+    Object.defineProperty(ProcessingInstruction.prototype, "nodeType", {
+        get: function () {
+            return 1;
+        },
+        enumerable: false,
+        configurable: true
+    });
     return ProcessingInstruction;
 }(DataNode));
 exports.ProcessingInstruction = ProcessingInstruction;
@@ -201,11 +198,10 @@ exports.ProcessingInstruction = ProcessingInstruction;
 var NodeWithChildren = /** @class */ (function (_super) {
     __extends(NodeWithChildren, _super);
     /**
-     * @param type Type of the node.
      * @param children Children of the node. Only certain node types can have children.
      */
-    function NodeWithChildren(type, children) {
-        var _this = _super.call(this, type) || this;
+    function NodeWithChildren(children) {
+        var _this = _super.call(this) || this;
         _this.children = children;
         return _this;
     }
@@ -246,14 +242,40 @@ var NodeWithChildren = /** @class */ (function (_super) {
     return NodeWithChildren;
 }(Node));
 exports.NodeWithChildren = NodeWithChildren;
+var CDATA = /** @class */ (function (_super) {
+    __extends(CDATA, _super);
+    function CDATA() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.type = domelementtype_1.ElementType.CDATA;
+        return _this;
+    }
+    Object.defineProperty(CDATA.prototype, "nodeType", {
+        get: function () {
+            return 4;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    return CDATA;
+}(NodeWithChildren));
+exports.CDATA = CDATA;
 /**
  * The root node of the document.
  */
 var Document = /** @class */ (function (_super) {
     __extends(Document, _super);
-    function Document(children) {
-        return _super.call(this, domelementtype_1.ElementType.Root, children) || this;
+    function Document() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.type = domelementtype_1.ElementType.Root;
+        return _this;
     }
+    Object.defineProperty(Document.prototype, "nodeType", {
+        get: function () {
+            return 9;
+        },
+        enumerable: false,
+        configurable: true
+    });
     return Document;
 }(NodeWithChildren));
 exports.Document = Document;
@@ -274,11 +296,19 @@ var Element = /** @class */ (function (_super) {
             : name === "style"
                 ? domelementtype_1.ElementType.Style
                 : domelementtype_1.ElementType.Tag; }
-        var _this = _super.call(this, type, children) || this;
+        var _this = _super.call(this, children) || this;
         _this.name = name;
         _this.attribs = attribs;
+        _this.type = type;
         return _this;
     }
+    Object.defineProperty(Element.prototype, "nodeType", {
+        get: function () {
+            return 1;
+        },
+        enumerable: false,
+        configurable: true
+    });
     Object.defineProperty(Element.prototype, "tagName", {
         // DOM Level 1 aliases
         /**
@@ -363,7 +393,7 @@ function isDocument(node) {
 exports.isDocument = isDocument;
 /**
  * @param node Node to check.
- * @returns `true` if the node is a `NodeWithChildren` (has children), `false` otherwise.
+ * @returns `true` if the node has children, `false` otherwise.
  */
 function hasChildren(node) {
     return Object.prototype.hasOwnProperty.call(node, "children");
@@ -401,7 +431,7 @@ function cloneNode(node, recursive) {
     }
     else if (isCDATA(node)) {
         var children = recursive ? cloneChildren(node.children) : [];
-        var clone_2 = new NodeWithChildren(domelementtype_1.ElementType.CDATA, children);
+        var clone_2 = new CDATA(children);
         children.forEach(function (child) { return (child.parent = clone_2); });
         result = clone_2;
     }

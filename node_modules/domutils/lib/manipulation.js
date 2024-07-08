@@ -4,6 +4,7 @@ exports.prepend = exports.prependChild = exports.append = exports.appendChild = 
 /**
  * Remove an element from the dom
  *
+ * @category Manipulation
  * @param elem The element to be removed
  */
 function removeElement(elem) {
@@ -13,13 +14,20 @@ function removeElement(elem) {
         elem.next.prev = elem.prev;
     if (elem.parent) {
         var childs = elem.parent.children;
-        childs.splice(childs.lastIndexOf(elem), 1);
+        var childsIndex = childs.lastIndexOf(elem);
+        if (childsIndex >= 0) {
+            childs.splice(childsIndex, 1);
+        }
     }
+    elem.next = null;
+    elem.prev = null;
+    elem.parent = null;
 }
 exports.removeElement = removeElement;
 /**
  * Replace an element in the dom
  *
+ * @category Manipulation
  * @param elem The element to be replaced
  * @param replacement The element to be added
  */
@@ -36,21 +44,23 @@ function replaceElement(elem, replacement) {
     if (parent) {
         var childs = parent.children;
         childs[childs.lastIndexOf(elem)] = replacement;
+        elem.parent = null;
     }
 }
 exports.replaceElement = replaceElement;
 /**
  * Append a child to an element.
  *
- * @param elem The element to append to.
+ * @category Manipulation
+ * @param parent The element to append to.
  * @param child The element to be added as a child.
  */
-function appendChild(elem, child) {
+function appendChild(parent, child) {
     removeElement(child);
     child.next = null;
-    child.parent = elem;
-    if (elem.children.push(child) > 1) {
-        var sibling = elem.children[elem.children.length - 2];
+    child.parent = parent;
+    if (parent.children.push(child) > 1) {
+        var sibling = parent.children[parent.children.length - 2];
         sibling.next = child;
         child.prev = sibling;
     }
@@ -62,6 +72,7 @@ exports.appendChild = appendChild;
 /**
  * Append an element after another.
  *
+ * @category Manipulation
  * @param elem The element to append after.
  * @param next The element be added.
  */
@@ -88,15 +99,16 @@ exports.append = append;
 /**
  * Prepend a child to an element.
  *
- * @param elem The element to prepend before.
+ * @category Manipulation
+ * @param parent The element to prepend before.
  * @param child The element to be added as a child.
  */
-function prependChild(elem, child) {
+function prependChild(parent, child) {
     removeElement(child);
-    child.parent = elem;
+    child.parent = parent;
     child.prev = null;
-    if (elem.children.unshift(child) !== 1) {
-        var sibling = elem.children[1];
+    if (parent.children.unshift(child) !== 1) {
+        var sibling = parent.children[1];
         sibling.prev = child;
         child.next = sibling;
     }
@@ -108,6 +120,7 @@ exports.prependChild = prependChild;
 /**
  * Prepend an element before another.
  *
+ * @category Manipulation
  * @param elem The element to prepend before.
  * @param prev The element be added.
  */
@@ -127,3 +140,4 @@ function prepend(elem, prev) {
     elem.prev = prev;
 }
 exports.prepend = prepend;
+//# sourceMappingURL=manipulation.js.map

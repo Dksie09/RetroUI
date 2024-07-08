@@ -1,9 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.compileGeneralSelector = void 0;
-var attributes_1 = require("./attributes");
-var pseudo_selectors_1 = require("./pseudo-selectors");
+var attributes_js_1 = require("./attributes.js");
+var index_js_1 = require("./pseudo-selectors/index.js");
 var css_what_1 = require("css-what");
+function getElementParent(node, adapter) {
+    var parent = adapter.getParent(node);
+    if (parent && adapter.isTag(parent)) {
+        return parent;
+    }
+    return null;
+}
 /*
  * All available rules
  */
@@ -23,10 +30,10 @@ function compileGeneralSelector(next, selector, options, context, compileToken) 
             if (!options.xmlMode || options.lowerCaseAttributeNames) {
                 selector.name = selector.name.toLowerCase();
             }
-            return attributes_1.attributeRules[selector.action](next, selector, options);
+            return attributes_js_1.attributeRules[selector.action](next, selector, options);
         }
         case css_what_1.SelectorType.Pseudo: {
-            return (0, pseudo_selectors_1.compilePseudoSelector)(next, selector, options, context, compileToken);
+            return (0, index_js_1.compilePseudoSelector)(next, selector, options, context, compileToken);
         }
         // Tags
         case css_what_1.SelectorType.Tag: {
@@ -47,8 +54,8 @@ function compileGeneralSelector(next, selector, options, context, compileToken) 
                 typeof WeakSet === "undefined") {
                 return function descendant(elem) {
                     var current = elem;
-                    while ((current = adapter.getParent(current))) {
-                        if (adapter.isTag(current) && next(current)) {
+                    while ((current = getElementParent(current, adapter))) {
+                        if (next(current)) {
                             return true;
                         }
                     }
@@ -59,7 +66,7 @@ function compileGeneralSelector(next, selector, options, context, compileToken) 
             var isFalseCache_1 = new WeakSet();
             return function cachedDescendant(elem) {
                 var current = elem;
-                while ((current = adapter.getParent(current))) {
+                while ((current = getElementParent(current, adapter))) {
                     if (!isFalseCache_1.has(current)) {
                         if (adapter.isTag(current) && next(current)) {
                             return true;
@@ -75,9 +82,9 @@ function compileGeneralSelector(next, selector, options, context, compileToken) 
             return function flexibleDescendant(elem) {
                 var current = elem;
                 do {
-                    if (adapter.isTag(current) && next(current))
+                    if (next(current))
                         return true;
-                } while ((current = adapter.getParent(current)));
+                } while ((current = getElementParent(current, adapter)));
                 return false;
             };
         }
@@ -138,3 +145,4 @@ function compileGeneralSelector(next, selector, options, context, compileToken) 
     }
 }
 exports.compileGeneralSelector = compileGeneralSelector;
+//# sourceMappingURL=general.js.map

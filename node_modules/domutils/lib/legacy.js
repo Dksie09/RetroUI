@@ -2,7 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getElementsByTagType = exports.getElementsByTagName = exports.getElementById = exports.getElements = exports.testElement = void 0;
 var domhandler_1 = require("domhandler");
-var querying_1 = require("./querying");
+var querying_js_1 = require("./querying.js");
+/**
+ * A map of functions to check nodes against.
+ */
 var Checks = {
     tag_name: function (name) {
         if (typeof name === "function") {
@@ -27,9 +30,13 @@ var Checks = {
     },
 };
 /**
+ * Returns a function to check whether a node has an attribute with a particular
+ * value.
+ *
  * @param attrib Attribute to check.
  * @param value Attribute value to look for.
- * @returns A function to check whether the a node has an attribute with a particular value.
+ * @returns A function to check whether the a node has an attribute with a
+ *   particular value.
  */
 function getAttribCheck(attrib, value) {
     if (typeof value === "function") {
@@ -38,18 +45,24 @@ function getAttribCheck(attrib, value) {
     return function (elem) { return (0, domhandler_1.isTag)(elem) && elem.attribs[attrib] === value; };
 }
 /**
+ * Returns a function that returns `true` if either of the input functions
+ * returns `true` for a node.
+ *
  * @param a First function to combine.
  * @param b Second function to combine.
- * @returns A function taking a node and returning `true` if either
- * of the input functions returns `true` for the node.
+ * @returns A function taking a node and returning `true` if either of the input
+ *   functions returns `true` for the node.
  */
 function combineFuncs(a, b) {
     return function (elem) { return a(elem) || b(elem); };
 }
 /**
- * @param options An object describing nodes to look for.
- * @returns A function executing all checks in `options` and returning `true`
+ * Returns a function that executes all checks in `options` and returns `true`
  * if any of them match a node.
+ *
+ * @param options An object describing nodes to look for.
+ * @returns A function that executes all checks in `options` and returns `true`
+ *   if any of them match a node.
  */
 function compileTest(options) {
     var funcs = Object.keys(options).map(function (key) {
@@ -61,6 +74,9 @@ function compileTest(options) {
     return funcs.length === 0 ? null : funcs.reduce(combineFuncs);
 }
 /**
+ * Checks whether a node matches the description in `options`.
+ *
+ * @category Legacy Query Functions
  * @param options An object describing nodes to look for.
  * @param node The element to test.
  * @returns Whether the element matches the description in `options`.
@@ -71,6 +87,9 @@ function testElement(options, node) {
 }
 exports.testElement = testElement;
 /**
+ * Returns all nodes that match `options`.
+ *
+ * @category Legacy Query Functions
  * @param options An object describing nodes to look for.
  * @param nodes Nodes to search through.
  * @param recurse Also consider child nodes.
@@ -80,10 +99,13 @@ exports.testElement = testElement;
 function getElements(options, nodes, recurse, limit) {
     if (limit === void 0) { limit = Infinity; }
     var test = compileTest(options);
-    return test ? (0, querying_1.filter)(test, nodes, recurse, limit) : [];
+    return test ? (0, querying_js_1.filter)(test, nodes, recurse, limit) : [];
 }
 exports.getElements = getElements;
 /**
+ * Returns the node with the supplied ID.
+ *
+ * @category Legacy Query Functions
  * @param id The unique ID attribute value to look for.
  * @param nodes Nodes to search through.
  * @param recurse Also consider child nodes.
@@ -93,10 +115,13 @@ function getElementById(id, nodes, recurse) {
     if (recurse === void 0) { recurse = true; }
     if (!Array.isArray(nodes))
         nodes = [nodes];
-    return (0, querying_1.findOne)(getAttribCheck("id", id), nodes, recurse);
+    return (0, querying_js_1.findOne)(getAttribCheck("id", id), nodes, recurse);
 }
 exports.getElementById = getElementById;
 /**
+ * Returns all nodes with the supplied `tagName`.
+ *
+ * @category Legacy Query Functions
  * @param tagName Tag name to search for.
  * @param nodes Nodes to search through.
  * @param recurse Also consider child nodes.
@@ -106,10 +131,13 @@ exports.getElementById = getElementById;
 function getElementsByTagName(tagName, nodes, recurse, limit) {
     if (recurse === void 0) { recurse = true; }
     if (limit === void 0) { limit = Infinity; }
-    return (0, querying_1.filter)(Checks.tag_name(tagName), nodes, recurse, limit);
+    return (0, querying_js_1.filter)(Checks["tag_name"](tagName), nodes, recurse, limit);
 }
 exports.getElementsByTagName = getElementsByTagName;
 /**
+ * Returns all nodes with the supplied `type`.
+ *
+ * @category Legacy Query Functions
  * @param type Element type to look for.
  * @param nodes Nodes to search through.
  * @param recurse Also consider child nodes.
@@ -119,6 +147,7 @@ exports.getElementsByTagName = getElementsByTagName;
 function getElementsByTagType(type, nodes, recurse, limit) {
     if (recurse === void 0) { recurse = true; }
     if (limit === void 0) { limit = Infinity; }
-    return (0, querying_1.filter)(Checks.tag_type(type), nodes, recurse, limit);
+    return (0, querying_js_1.filter)(Checks["tag_type"](type), nodes, recurse, limit);
 }
 exports.getElementsByTagType = getElementsByTagType;
+//# sourceMappingURL=legacy.js.map

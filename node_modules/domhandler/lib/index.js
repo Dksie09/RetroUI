@@ -16,12 +16,10 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DomHandler = void 0;
 var domelementtype_1 = require("domelementtype");
-var node_1 = require("./node");
-__exportStar(require("./node"), exports);
-var reWhitespace = /\s+/g;
+var node_js_1 = require("./node.js");
+__exportStar(require("./node.js"), exports);
 // Default options
 var defaultOpts = {
-    normalizeWhitespace: false,
     withStartIndices: false,
     withEndIndices: false,
     xmlMode: false,
@@ -36,7 +34,7 @@ var DomHandler = /** @class */ (function () {
         /** The elements of the DOM */
         this.dom = [];
         /** The root element for the DOM */
-        this.root = new node_1.Document(this.dom);
+        this.root = new node_js_1.Document(this.dom);
         /** Indicated whether parsing has been completed. */
         this.done = false;
         /** Stack of open tags. */
@@ -64,7 +62,7 @@ var DomHandler = /** @class */ (function () {
     // Resets the handler back to starting state
     DomHandler.prototype.onreset = function () {
         this.dom = [];
-        this.root = new node_1.Document(this.dom);
+        this.root = new node_js_1.Document(this.dom);
         this.done = false;
         this.tagStack = [this.root];
         this.lastNode = null;
@@ -92,29 +90,20 @@ var DomHandler = /** @class */ (function () {
     };
     DomHandler.prototype.onopentag = function (name, attribs) {
         var type = this.options.xmlMode ? domelementtype_1.ElementType.Tag : undefined;
-        var element = new node_1.Element(name, attribs, undefined, type);
+        var element = new node_js_1.Element(name, attribs, undefined, type);
         this.addNode(element);
         this.tagStack.push(element);
     };
     DomHandler.prototype.ontext = function (data) {
-        var normalizeWhitespace = this.options.normalizeWhitespace;
         var lastNode = this.lastNode;
         if (lastNode && lastNode.type === domelementtype_1.ElementType.Text) {
-            if (normalizeWhitespace) {
-                lastNode.data = (lastNode.data + data).replace(reWhitespace, " ");
-            }
-            else {
-                lastNode.data += data;
-            }
+            lastNode.data += data;
             if (this.options.withEndIndices) {
                 lastNode.endIndex = this.parser.endIndex;
             }
         }
         else {
-            if (normalizeWhitespace) {
-                data = data.replace(reWhitespace, " ");
-            }
-            var node = new node_1.Text(data);
+            var node = new node_js_1.Text(data);
             this.addNode(node);
             this.lastNode = node;
         }
@@ -124,7 +113,7 @@ var DomHandler = /** @class */ (function () {
             this.lastNode.data += data;
             return;
         }
-        var node = new node_1.Comment(data);
+        var node = new node_js_1.Comment(data);
         this.addNode(node);
         this.lastNode = node;
     };
@@ -132,8 +121,8 @@ var DomHandler = /** @class */ (function () {
         this.lastNode = null;
     };
     DomHandler.prototype.oncdatastart = function () {
-        var text = new node_1.Text("");
-        var node = new node_1.NodeWithChildren(domelementtype_1.ElementType.CDATA, [text]);
+        var text = new node_js_1.Text("");
+        var node = new node_js_1.CDATA([text]);
         this.addNode(node);
         text.parent = node;
         this.lastNode = text;
@@ -142,7 +131,7 @@ var DomHandler = /** @class */ (function () {
         this.lastNode = null;
     };
     DomHandler.prototype.onprocessinginstruction = function (name, data) {
-        var node = new node_1.ProcessingInstruction(name, data);
+        var node = new node_js_1.ProcessingInstruction(name, data);
         this.addNode(node);
     };
     DomHandler.prototype.handleCallback = function (error) {
