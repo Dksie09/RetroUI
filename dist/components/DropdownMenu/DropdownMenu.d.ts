@@ -6,7 +6,6 @@ export interface DropdownMenuProps {
     bg?: string;
     textColor?: string;
     borderColor?: string;
-    arrowColor?: string;
 }
 export declare const DropdownMenu: React.FC<DropdownMenuProps>;
 export declare const DropdownMenuTrigger: React.FC<{
