@@ -36,7 +36,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      className={`${styles.pixelButton} ${className}`}
+      className={`${styles.pixelButton} ${className} p-0`}
       style={customStyle}
       {...props}
     >
