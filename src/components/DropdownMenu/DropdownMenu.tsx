@@ -87,27 +87,24 @@ export const DropdownMenuContent: React.FC<{ children: ReactNode }> = ({
 
 export interface DropdownMenuItemProps {
   children: ReactNode;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }
 
 export const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({
   children,
   onClick,
 }) => {
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    if (onClick) {
-      onClick();
-    }
-  };
-
   return (
-    <button
-      className={`${styles.pixelDropdownItem} block w-full text-left py-3 px-5 text-base transition-all duration-300 ease-in-out`}
-      onClick={handleClick}
+    <a
+      href="#"
+      className={`${styles.pixelDropdownItem} block py-3 px-5 text-base transition-all duration-300 ease-in-out`}
+      onClick={(e) => {
+        e.preventDefault();
+        if (onClick) onClick(e);
+      }}
     >
       {children}
-    </button>
+    </a>
   );
 };
 

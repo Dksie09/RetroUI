@@ -15,7 +15,7 @@ export declare const DropdownMenuContent: React.FC<{
 }>;
 export interface DropdownMenuItemProps {
     children: ReactNode;
-    onClick?: () => void;
+    onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }
 export declare const DropdownMenuItem: React.FC<DropdownMenuItemProps>;
 export { styles as DropdownMenuStyles };
