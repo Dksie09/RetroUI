@@ -14,9 +14,8 @@ export declare const DropdownMenuTrigger: React.FC<{
 export declare const DropdownMenuContent: React.FC<{
     children: ReactNode;
 }>;
-interface DropdownMenuItemProps {
+export declare const DropdownMenuItem: React.FC<{
     children: ReactNode;
     onClick?: () => void;
-}
-export declare const DropdownMenuItem: React.FC<DropdownMenuItemProps>;
+}>;
 export { styles as DropdownMenuStyles };
