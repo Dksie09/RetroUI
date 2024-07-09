@@ -22,6 +22,15 @@
   @apply p-4;
   background-color: var(--popup-bg, var(--bg-popup, #f0f0f0));
   color: var(--popup-text, var(--text-popup, black));
+  border-style: solid;
+  border-width: 5px;
+  border-image-slice: 3;
+  border-image-width: 2;
+  border-image-repeat: stretch;
+  border-image-source: var(--popup-border-svg);
+  border-image-outset: 2;
+  box-shadow: 2px 2px 0 2px var(--popup-bg, var(--bg-popup, #f0f0f0)),
+    -2px -2px 0 2px var(--popup-bg, var(--bg-popup, #f0f0f0));
 }
 
 .pixelPopupTitle {
@@ -29,7 +38,7 @@
 }
 
 .pixelPopupCloseButton {
-  @apply absolute top-2 right-2 bg-transparent border-none cursor-pointer text-lg font-minecraft;
+  @apply absolute top-1 right-2 bg-transparent border-none cursor-pointer text-lg font-minecraft;
   color: var(--popup-text, var(--text-popup, black));
 }
 
