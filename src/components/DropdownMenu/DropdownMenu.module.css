@@ -1,6 +1,5 @@
 .pixelDropdown {
   @apply relative inline-block font-minecraft;
-  background-color: var(--dropdown-custom-bg, var(--bg-dropdown, transparent));
 }
 
 .pixelDropdownTrigger {

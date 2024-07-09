@@ -5,6 +5,7 @@ interface DropdownContextType {
   bg?: string;
   textColor?: string;
   borderColor?: string;
+  svgString?: string;
 }
 
 const DropdownContext = createContext<DropdownContextType | undefined>(
@@ -32,21 +33,14 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
     return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
   }, [borderColor]);
 
-  const customStyle = {
-    "--dropdown-custom-bg": bg,
-    "--dropdown-custom-text": textColor,
-    "--dropdown-custom-border": borderColor,
-    borderImageSource: svgString,
-  };
+  const contextValue = useMemo(
+    () => ({ bg, textColor, borderColor, svgString }),
+    [bg, textColor, borderColor, svgString]
+  );
 
   return (
-    <DropdownContext.Provider value={{ bg, textColor, borderColor }}>
-      <div
-        className={`${styles.pixelDropdown} ${className}`}
-        style={customStyle}
-      >
-        {children}
-      </div>
+    <DropdownContext.Provider value={contextValue}>
+      <div className={`${styles.pixelDropdown} ${className}`}>{children}</div>
     </DropdownContext.Provider>
   );
 };
@@ -54,8 +48,16 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
 export const DropdownMenuTrigger: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
+  const context = useContext(DropdownContext);
+  const customStyle = {
+    "--dropdown-custom-bg": context?.bg,
+    "--dropdown-custom-text": context?.textColor,
+    "--dropdown-custom-border": context?.borderColor,
+    borderImageSource: context?.svgString,
+  };
+
   return (
-    <div className={styles.pixelDropdownTrigger}>
+    <div className={styles.pixelDropdownTrigger} style={customStyle}>
       {children}
       <span className={styles.pixelDropdownArrow}>&gt;</span>
     </div>
@@ -65,7 +67,19 @@ export const DropdownMenuTrigger: React.FC<{ children: ReactNode }> = ({
 export const DropdownMenuContent: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  return <div className={styles.pixelDropdownContent}>{children}</div>;
+  const context = useContext(DropdownContext);
+  const customStyle = {
+    "--dropdown-custom-bg": context?.bg,
+    "--dropdown-custom-text": context?.textColor,
+    "--dropdown-custom-border": context?.borderColor,
+    borderImageSource: context?.svgString,
+  };
+
+  return (
+    <div className={styles.pixelDropdownContent} style={customStyle}>
+      {children}
+    </div>
+  );
 };
 
 interface DropdownMenuItemProps {
