@@ -45,6 +45,11 @@
   --bg-dropdown: transparent;
   --text-dropdown: #000000;
   --border-dropdown: #000000;
+
+  /* popup */
+  --bg-popup-base: white;
+  --bg-popup: #f0f0f0;
+  --text-popup: black;
 }
 
 body {
