@@ -1,6 +1,6 @@
 {
   "name": "pixel-retroui",
-  "version": "1.0.57",
+  "version": "1.0.58",
   "description": "A retro-styled UI component library",
   "main": "dist/index.js",
   "module": "dist/index.js",
