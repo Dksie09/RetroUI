@@ -1,36 +1,27 @@
 .pixelPopupOverlay {
   @apply fixed inset-0 flex justify-center items-center z-50;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--popup-overlay-bg, rgba(0, 0, 0, 0.5));
 }
 
 .pixelPopup {
   @apply relative p-1;
-  background-color: var(--custom-outer-bg, var(--primary-bg));
-  color: var(--custom-text, var(--secondary-bg));
+  background-color: var(--popup-base-bg, var(--bg-popup-base, white));
+  color: var(--popup-text, var(--text-popup, black));
   border-style: solid;
   border-width: 5px;
   border-image-slice: 3;
   border-image-width: 2;
   border-image-repeat: stretch;
-  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="%23000000"/></svg>');
+  border-image-source: var(--popup-border-svg);
   border-image-outset: 2;
-  box-shadow: 2px 2px 0 2px var(--custom-outer-bg, var(--primary-bg)),
-    -2px -2px 0 2px var(--custom-outer-bg, var(--primary-bg));
+  box-shadow: 2px 2px 0 2px var(--popup-base-bg, var(--bg-popup-base, white)),
+    -2px -2px 0 2px var(--popup-base-bg, var(--bg-popup-base, white));
 }
 
 .pixelPopupInner {
   @apply p-4;
-  background-color: var(--custom-inner-bg, var(--secondary-bg));
-  color: var(--custom-text, var(--card-text));
-  border-style: solid;
-  border-width: 5px;
-  border-image-slice: 3;
-  border-image-width: 2;
-  border-image-repeat: stretch;
-  border-image-source: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="%23000000"/></svg>');
-  border-image-outset: 2;
-  box-shadow: 2px 2px 0 2px var(--custom-inner-bg, var(--secondary-bg)),
-    -2px -2px 0 2px var(--custom-inner-bg, var(--secondary-bg));
+  background-color: var(--popup-bg, var(--bg-popup, #f0f0f0));
+  color: var(--popup-text, var(--text-popup, black));
 }
 
 .pixelPopupTitle {
@@ -39,7 +30,7 @@
 
 .pixelPopupCloseButton {
   @apply absolute top-2 right-2 bg-transparent border-none cursor-pointer text-lg font-minecraft;
-  color: var(--custom-text, black);
+  color: var(--popup-text, var(--text-popup, black));
 }
 
 .pixelPopupContent {
