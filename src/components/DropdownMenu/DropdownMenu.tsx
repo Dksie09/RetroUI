@@ -57,12 +57,9 @@ export const DropdownMenuTrigger: React.FC<{ children: ReactNode }> = ({
   if (!context)
     throw new Error("DropdownMenuTrigger must be used within a DropdownMenu");
 
-  const { setIsOpen } = context;
-
   return (
     <button
       className={`${styles.pixelDropdownTrigger} flex items-center justify-between w-full`}
-      onClick={() => setIsOpen((prev) => !prev)}
     >
       {children}
       <span className={`${styles.pixelDropdownArrow} ml-2.5 font-minecraft`}>
@@ -79,10 +76,6 @@ export const DropdownMenuContent: React.FC<{ children: ReactNode }> = ({
   if (!context)
     throw new Error("DropdownMenuContent must be used within a DropdownMenu");
 
-  const { isOpen } = context;
-
-  if (!isOpen) return null;
-
   return (
     <div
       className={`${styles.pixelDropdownContent} absolute min-w-[200px] w-[110%] left-[-10px] z-10`}
@@ -92,39 +85,27 @@ export const DropdownMenuContent: React.FC<{ children: ReactNode }> = ({
   );
 };
 
-interface DropdownMenuItemProps {
+export interface DropdownMenuItemProps {
   children: ReactNode;
   onClick?: () => void;
-  href?: string;
 }
 
 export const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({
   children,
   onClick,
-  href,
 }) => {
-  const context = useContext(DropdownContext);
-  if (!context)
-    throw new Error("DropdownMenuItem must be used within a DropdownMenu");
-
-  const { setIsOpen } = context;
-
-  const handleClick = () => {
-    if (onClick) onClick();
-    setIsOpen(false);
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (onClick) {
+      onClick();
+    }
   };
 
-  const commonProps = {
-    className: `${styles.pixelDropdownItem} block py-3 px-5 text-base transition-all duration-300 ease-in-out`,
-    onClick: handleClick,
-  };
-
-  return href ? (
-    <a href={href} {...commonProps}>
-      {children}
-    </a>
-  ) : (
-    <button type="button" {...commonProps}>
+  return (
+    <button
+      className={`${styles.pixelDropdownItem} block w-full text-left py-3 px-5 text-base transition-all duration-300 ease-in-out`}
+      onClick={handleClick}
+    >
       {children}
     </button>
   );
