@@ -7,8 +7,9 @@ export interface PopupProps {
     children: React.ReactNode;
     title?: string;
     closeButtonText?: string;
-    outerBg?: string;
-    innerBg?: string;
+    bg?: string;
+    baseBg?: string;
+    overlayBg?: string;
     textColor?: string;
     borderColor?: string;
 }
