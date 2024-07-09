@@ -5,6 +5,7 @@ export interface DropdownMenuProps {
     className?: string;
     bg?: string;
     textColor?: string;
+    borderColor?: string;
 }
 export declare const DropdownMenu: React.FC<DropdownMenuProps>;
 export declare const DropdownMenuTrigger: React.FC<{
@@ -13,9 +14,9 @@ export declare const DropdownMenuTrigger: React.FC<{
 export declare const DropdownMenuContent: React.FC<{
     children: ReactNode;
 }>;
-export interface DropdownMenuItemProps {
+interface DropdownMenuItemProps {
     children: ReactNode;
-    onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+    onClick?: () => void;
 }
 export declare const DropdownMenuItem: React.FC<DropdownMenuItemProps>;
 export { styles as DropdownMenuStyles };
