@@ -18,20 +18,20 @@ Retro UI is easy to set up with your Next.js or React projects using TypeScript 
 
 ## Explore Components
 
-Retro UI comes packed with a variety of components to bring your application to life. Check out the components at [Retro UI Components](https://retroui.io/components).
+Retro UI comes packed with a variety of components to bring your application to life. Check out the components at [Retro UI Components](https://www.retroui.io/components).
 
 ### List of Components
 
 #### Basic Components
-- [Button](https://retroui.io/components/button)
-- [Card](https://retroui.io/components/card)
+- [Button](https://www.retroui.io/Button)
+- [Card](https://www.retroui.io/Card)
 
 #### Form Components
-- [Input](https://retroui.io/components/input)
-- [TextArea](https://retroui.io/components/textarea)
+- [Input](https://www.retroui.io/Input)
+- [TextArea](https://www.retroui.io/TextArea)
 
 #### UI Elements
-- [Progress Bar](https://retroui.io/components/progressbar)
-- [Popup](https://retroui.io/components/popup)
+- [Progress Bar](https://www.retroui.io/ProgressBar)
+- [Popup](https://www.retroui.io/Popup)
 
 more to come...
