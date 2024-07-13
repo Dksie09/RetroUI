@@ -14,6 +14,6 @@
 
 .pixelButton:active {
   transform: translateY(2px);
-  box-shadow: 0 0 0 2px
-    var(--button-custom-shadow, var(--shadow-button, #000000));
+  box-shadow: 2px 2px 0 2px var(--button-custom-bg, var(--bg-button, #f0f0f0)),
+    -2px -2px 0 2px var(--button-custom-bg, var(--bg-button, #f0f0f0));
 }
