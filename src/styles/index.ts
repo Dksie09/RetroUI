@@ -5,6 +5,7 @@ import DropdownMenuStyles from "../components/DropdownMenu/DropdownMenu.module.c
 import InputStyles from "../components/Input/Input.module.css";
 import ProgressBarStyles from "../components/ProgressBar/ProgressBar.module.css";
 import TextAreaStyles from "../components/TextArea/TextArea.module.css";
+import AccordianStyles from "../components/Accordion/Accordion.module.css";
 
 export {
   globalStyles,
@@ -14,4 +15,5 @@ export {
   InputStyles,
   ProgressBarStyles,
   TextAreaStyles,
+  AccordianStyles,
 };

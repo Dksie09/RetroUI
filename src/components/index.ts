@@ -5,3 +5,4 @@ export * from "./ProgressBar/ProgressBar";
 export * from "./Popup/Popup";
 export * from "./Input/Input";
 export * from "./TextArea/TextArea";
+export * from "./Accordion/Accordion";
