@@ -55,5 +55,5 @@
     "./dist/index.css": "./dist/index.css",
     "./fonts/Minecraft.otf": "./fonts/Minecraft.otf"
   },
-  "license": "MIT"
+  "license": "BSD-3-Clause"
 }
