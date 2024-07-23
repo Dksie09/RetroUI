@@ -95,4 +95,68 @@ describe("Accordion", () => {
     fireEvent.click(trigger1);
     expect(arrow).toHaveStyle("transform: rotate(90deg)");
   });
+
+  it("allows all items to be collapsed when collapsible is true", () => {
+    renderAccordion({ collapsible: true });
+
+    const trigger1 = screen.getByText("Trigger 1");
+    const trigger2 = screen.getByText("Trigger 2");
+    const content1 = screen.getByText("Content 1");
+    const content2 = screen.getByText("Content 2");
+
+    fireEvent.click(trigger1);
+    expect(content1).toBeVisible();
+    expect(content2).not.toBeVisible();
+
+    fireEvent.click(trigger1);
+    expect(content1).not.toBeVisible();
+    expect(content2).not.toBeVisible();
+
+    fireEvent.click(trigger2);
+    expect(content1).not.toBeVisible();
+    expect(content2).toBeVisible();
+
+    fireEvent.click(trigger2);
+    expect(content1).not.toBeVisible();
+    expect(content2).not.toBeVisible();
+  });
+
+  it("keeps at least one item expanded when collapsible is false", () => {
+    renderAccordion({ collapsible: false });
+
+    const trigger1 = screen.getByText("Trigger 1");
+    const trigger2 = screen.getByText("Trigger 2");
+    const content1 = screen.getByText("Content 1");
+    const content2 = screen.getByText("Content 2");
+
+    fireEvent.click(trigger1);
+    expect(content1).toBeVisible();
+    expect(content2).not.toBeVisible();
+
+    fireEvent.click(trigger1);
+    expect(content1).toBeVisible();
+    expect(content2).not.toBeVisible();
+
+    fireEvent.click(trigger2);
+    expect(content1).not.toBeVisible();
+    expect(content2).toBeVisible();
+  });
+
+  it("sets aria-expanded attribute correctly", () => {
+    renderAccordion();
+
+    const trigger1 = screen.getByText("Trigger 1");
+    const trigger2 = screen.getByText("Trigger 2");
+
+    expect(trigger1).toHaveAttribute("aria-expanded", "false");
+    expect(trigger2).toHaveAttribute("aria-expanded", "false");
+
+    fireEvent.click(trigger1);
+    expect(trigger1).toHaveAttribute("aria-expanded", "true");
+    expect(trigger2).toHaveAttribute("aria-expanded", "false");
+
+    fireEvent.click(trigger2);
+    expect(trigger1).toHaveAttribute("aria-expanded", "false");
+    expect(trigger2).toHaveAttribute("aria-expanded", "true");
+  });
 });

@@ -10,6 +10,7 @@ import styles from "./Accordion.module.css";
 interface AccordionContextType {
   activeItem: string | null;
   setActiveItem: (value: string | null) => void;
+  collapsible: boolean;
   bg?: string;
   textColor?: string;
   borderColor?: string;
@@ -55,6 +56,7 @@ export const Accordion: React.FC<AccordionProps> = ({
       value={{
         activeItem,
         setActiveItem,
+        collapsible,
         bg,
         textColor,
         borderColor,
@@ -132,9 +134,15 @@ export const AccordionTrigger: React.FC<AccordionTriggerProps> = ({
 
   const handleClick = () => {
     if (context) {
-      context.setActiveItem(
-        context.activeItem === item.value ? null : item.value
-      );
+      if (context.collapsible) {
+        context.setActiveItem(
+          context.activeItem === item.value ? null : item.value
+        );
+      } else {
+        context.setActiveItem(
+          context.activeItem === item.value ? item.value : item.value
+        );
+      }
     }
   };
 
