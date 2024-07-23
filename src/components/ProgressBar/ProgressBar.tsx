@@ -32,10 +32,17 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
     "--progressbar-custom-color": color,
     "--progressbar-custom-border-color": borderColor,
     borderImageSource: svgString,
-  };
+  } as React.CSSProperties;
 
   return (
-    <div className={containerClasses} style={customStyle}>
+    <div
+      className={containerClasses}
+      style={customStyle}
+      role="progressbar"
+      aria-valuenow={clampedProgress}
+      aria-valuemin={0}
+      aria-valuemax={100}
+    >
       <div
         className={styles.pixelProgressbar}
         style={{ width: `${clampedProgress}%` }}

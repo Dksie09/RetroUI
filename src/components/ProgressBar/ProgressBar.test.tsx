@@ -3,36 +3,66 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { ProgressBar } from "./ProgressBar";
 
-describe("ProgressBar Component", () => {
-  test("renders progress bar with correct progress", () => {
+describe("ProgressBar", () => {
+  it("renders without crashing", () => {
     render(<ProgressBar progress={50} />);
-    const progressBar = screen.getByText("50%").previousSibling as HTMLElement;
-    expect(progressBar).toHaveStyle("width: 50%");
+    expect(screen.getByRole("progressbar")).toBeInTheDocument();
   });
 
-  test("clamps progress value between 0 and 100", () => {
-    render(<ProgressBar progress={150} />);
-    expect(screen.getByText("100%")).toBeInTheDocument();
-
-    render(<ProgressBar progress={-10} />);
-    expect(screen.getByText("0%")).toBeInTheDocument();
+  it("displays the correct progress", () => {
+    render(<ProgressBar progress={75} />);
+    const progressBar = screen.getByRole("progressbar");
+    expect(progressBar).toHaveAttribute("aria-valuenow", "75");
   });
 
-  test("applies correct color class", () => {
-    render(<ProgressBar progress={50} color="secondary" />);
-    const progressBar = screen.getByText("50%").previousSibling as HTMLElement;
-    expect(progressBar).toHaveClass("pixel-progressbar-secondary");
+  it("clamps progress between 0 and 100", () => {
+    const { rerender } = render(<ProgressBar progress={-10} />);
+    expect(screen.getByRole("progressbar")).toHaveAttribute(
+      "aria-valuenow",
+      "0"
+    );
+
+    rerender(<ProgressBar progress={110} />);
+    expect(screen.getByRole("progressbar")).toHaveAttribute(
+      "aria-valuenow",
+      "100"
+    );
   });
 
-  test("applies correct size class", () => {
-    render(<ProgressBar progress={50} size="lg" />);
-    const container = screen.getByText("50%").parentElement;
-    expect(container).toHaveClass("pixel-progressbar-lg");
-  });
-
-  test("applies additional className", () => {
+  it("applies custom className", () => {
     render(<ProgressBar progress={50} className="custom-class" />);
-    const container = screen.getByText("50%").parentElement;
-    expect(container).toHaveClass("custom-class");
+    expect(screen.getByRole("progressbar")).toHaveClass("custom-class");
+  });
+
+  it("applies different sizes", () => {
+    const { rerender } = render(<ProgressBar progress={50} size="sm" />);
+    expect(screen.getByRole("progressbar")).toHaveClass("pixelProgressbarSm");
+
+    rerender(<ProgressBar progress={50} size="md" />);
+    expect(screen.getByRole("progressbar")).toHaveClass("pixelProgressbarMd");
+
+    rerender(<ProgressBar progress={50} size="lg" />);
+    expect(screen.getByRole("progressbar")).toHaveClass("pixelProgressbarLg");
+  });
+
+  it("applies custom color", () => {
+    render(<ProgressBar progress={50} color="red" />);
+    const progressBar = screen.getByRole("progressbar");
+    expect(progressBar).toHaveStyle("--progressbar-custom-color: red");
+  });
+
+  it("applies custom border color", () => {
+    render(<ProgressBar progress={50} borderColor="blue" />);
+    const progressBar = screen.getByRole("progressbar");
+    expect(progressBar).toHaveStyle("--progressbar-custom-border-color: blue");
+  });
+
+  it("generates correct SVG string for border", () => {
+    render(<ProgressBar progress={50} borderColor="blue" />);
+    const progressBar = screen.getByRole("progressbar");
+    const style = window.getComputedStyle(progressBar);
+    const borderImageSource = style.getPropertyValue("border-image-source");
+    expect(borderImageSource).toContain("data:image/svg+xml,");
+    expect(borderImageSource).toContain("fill%3D%22blue%22");
   });
 });
