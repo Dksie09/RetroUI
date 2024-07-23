@@ -6,3 +6,4 @@ export * from "./Popup/Popup";
 export * from "./Input/Input";
 export * from "./TextArea/TextArea";
 export * from "./Accordion/Accordion";
+export * from "./Bubble/Bubble";

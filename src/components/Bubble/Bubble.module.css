@@ -1,0 +1,89 @@
+.balloon {
+  border-radius: 4px;
+  position: relative;
+  display: inline-block;
+  padding: 1rem 1.5rem;
+  margin: 8px;
+  margin-bottom: 30px;
+  background-color: var(--bubble-bg-color, #ffffff);
+  color: var(--bubble-text-color, #000000);
+  cursor: pointer;
+}
+
+.balloon > :last-child {
+  margin-bottom: 0;
+}
+
+.balloon::before,
+.balloon::after {
+  position: absolute;
+  content: "";
+}
+
+.balloon.from-left::before,
+.balloon.from-left::after {
+  left: 2rem;
+}
+
+.balloon.from-left::before {
+  bottom: -14px;
+  width: 26px;
+  height: 10px;
+  background-color: var(--bubble-bg-color, #ffffff);
+  border-right: 4px solid var(--bubble-border-color, #000000);
+  border-left: 4px solid var(--bubble-border-color, #000000);
+}
+
+.balloon.from-left::after {
+  bottom: -18px;
+  width: 18px;
+  height: 4px;
+  margin-right: 8px;
+  background-color: var(--bubble-bg-color, #ffffff);
+  box-shadow: -4px 0 var(--bubble-border-color, #000000),
+    4px 0 var(--bubble-border-color, #000000),
+    -4px 4px var(--bubble-bg-color, #ffffff),
+    0 4px var(--bubble-border-color, #000000),
+    -8px 4px var(--bubble-border-color, #000000),
+    -4px 8px var(--bubble-border-color, #000000),
+    -8px 8px var(--bubble-border-color, #000000);
+}
+
+.balloon.from-right::before,
+.balloon.from-right::after {
+  right: 2rem;
+}
+
+.balloon.from-right::before {
+  bottom: -14px;
+  width: 26px;
+  height: 10px;
+  background-color: var(--bubble-bg-color, #ffffff);
+  border-right: 4px solid var(--bubble-border-color, #000000);
+  border-left: 4px solid var(--bubble-border-color, #000000);
+}
+
+.balloon.from-right::after {
+  bottom: -18px;
+  width: 18px;
+  height: 4px;
+  margin-left: 8px;
+  background-color: var(--bubble-bg-color, #ffffff);
+  box-shadow: -4px 0 var(--bubble-border-color, #000000),
+    4px 0 var(--bubble-border-color, #000000),
+    4px 4px var(--bubble-bg-color, #ffffff),
+    0 4px var(--bubble-border-color, #000000),
+    8px 4px var(--bubble-border-color, #000000),
+    4px 8px var(--bubble-border-color, #000000),
+    8px 8px var(--bubble-border-color, #000000);
+}
+
+.roundedCorners {
+  border-style: solid;
+  border-width: 4px;
+  border-image-slice: 3;
+  border-image-width: 3;
+  border-image-repeat: stretch;
+  border-image-source: var(--bubble-border-image);
+  border-image-outset: 2;
+}
