@@ -9,12 +9,12 @@ import styles from "./Accordion.module.css";
 
 interface AccordionContextType {
   activeItem: string | null;
-  setActiveItem: (value: string | null) => void;
-  collapsible: boolean;
+  setActiveItem: React.Dispatch<React.SetStateAction<string | null>>;
   bg?: string;
   textColor?: string;
   borderColor?: string;
   shadowColor?: string;
+  collapsible: boolean;
 }
 
 const AccordionContext = createContext<AccordionContextType | null>(null);
@@ -56,11 +56,11 @@ export const Accordion: React.FC<AccordionProps> = ({
       value={{
         activeItem,
         setActiveItem,
-        collapsible,
         bg,
         textColor,
         borderColor,
         shadowColor,
+        collapsible,
       }}
     >
       <div
@@ -134,15 +134,12 @@ export const AccordionTrigger: React.FC<AccordionTriggerProps> = ({
 
   const handleClick = () => {
     if (context) {
-      if (context.collapsible) {
-        context.setActiveItem(
-          context.activeItem === item.value ? null : item.value
-        );
-      } else {
-        context.setActiveItem(
-          context.activeItem === item.value ? item.value : item.value
-        );
-      }
+      context.setActiveItem((prevActiveItem) => {
+        if (context.collapsible && prevActiveItem === item.value) {
+          return null;
+        }
+        return prevActiveItem === item.value ? null : item.value;
+      });
     }
   };
 
@@ -154,11 +151,7 @@ export const AccordionTrigger: React.FC<AccordionTriggerProps> = ({
   }, []);
 
   return (
-    <button
-      className={styles.accordionTrigger}
-      onClick={handleClick}
-      aria-expanded={isActive}
-    >
+    <button className={styles.accordionTrigger} onClick={handleClick}>
       <div
         className={styles.accordionArrow}
         style={{
