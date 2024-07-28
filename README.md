@@ -74,7 +74,7 @@ Retro UI comes packed with a variety of components to bring your application to 
 
 - [Progress Bar](https://www.retroui.io/progressbar): Visualize progress with a retro flair
 - [Popup](https://www.retroui.io/popup): Modal dialog for important messages or actions
-- [Accordion] (https://www.retroui.io/accordion): Collapsible content sections for organizing information
+- [Accordion](https://www.retroui.io/accordion): Collapsible content sections for organizing information
 
 Explore all our components and their usage in our [Component Gallery](https://www.retroui.io/components).
 
