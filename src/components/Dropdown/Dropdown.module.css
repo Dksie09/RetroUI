@@ -1,0 +1,111 @@
+.dropdownMenu {
+  @apply relative inline-block font-minecraft text-base;
+}
+
+.pixelButton {
+  @apply relative inline-block border-solid border-[5px] font-minecraft;
+  background-color: var(
+    --button-custom-bg,
+    var(--dropdown-custom-bg, var(--bg-button, #f0f0f0))
+  );
+  color: var(
+    --button-custom-text,
+    var(--dropdown-custom-text, var(--text-button, #000000))
+  );
+  box-shadow: 2px 2px 0 2px
+      var(
+        --button-custom-shadow,
+        var(--dropdown-custom-shadow, var(--shadow-button, #000000))
+      ),
+    -2px -2px 0 2px
+      var(
+        --button-custom-bg,
+        var(--dropdown-custom-bg, var(--bg-button, #f0f0f0))
+      );
+  border-image-slice: 3;
+  border-image-width: 2;
+  border-image-repeat: stretch;
+  border-image-outset: 2;
+  border-color: var(
+    --button-custom-border,
+    var(--dropdown-custom-border, var(--border-button, #000000))
+  );
+}
+
+.pixelButton:active {
+  transform: translateY(2px);
+  box-shadow: 2px 2px 0 2px
+      var(
+        --button-custom-bg,
+        var(--dropdown-custom-bg, var(--bg-button, #f0f0f0))
+      ),
+    -2px -2px 0 2px
+      var(
+        --button-custom-bg,
+        var(--dropdown-custom-bg, var(--bg-button, #f0f0f0))
+      );
+}
+
+.dropdownMenuTrigger {
+  @apply flex items-center justify-between;
+}
+
+.dropdownArrow {
+  @apply w-4 h-4 transition-transform duration-300 ease-in-out ml-2;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+}
+
+.dropdownMenuContent {
+  @apply absolute z-10 border-solid border-[5px] left-0;
+  top: calc(100% + 16px); /* Fixed 8px spacing */
+  background-color: var(
+    --dropdown-content-custom-bg,
+    var(--dropdown-custom-bg, var(--bg-dropdown, white))
+  );
+  color: var(
+    --dropdown-content-custom-text,
+    var(--dropdown-custom-text, var(--text-dropdown, black))
+  );
+  border-image-slice: 3;
+  border-image-width: 2;
+  border-image-repeat: stretch;
+  border-image-outset: 2;
+  box-shadow: 2px 2px 0 2px
+      var(
+        --dropdown-content-custom-shadow,
+        var(--dropdown-custom-shadow, var(--shadow-dropdown, #000000))
+      ),
+    -2px -2px 0 2px
+      var(
+        --dropdown-content-custom-bg,
+        var(--dropdown-custom-bg, var(--bg-dropdown, white))
+      );
+  border-color: var(
+    --dropdown-content-custom-border,
+    var(--dropdown-custom-border, var(--border-dropdown, #000000))
+  );
+}
+
+.dropdownMenuLabel {
+  @apply font-bold;
+}
+
+.dropdownMenuItem {
+  @apply cursor-pointer hover:bg-gray-100;
+}
+
+.dropdownMenuItem:hover {
+  background-color: var(
+    --dropdown-content-custom-bg,
+    var(--dropdown-custom-bg, var(--bg-dropdown-hover, #e0e0e0))
+  );
+}
+
+.dropdownMenuSeparator {
+  @apply h-px bg-gray-200 my-1;
+}
