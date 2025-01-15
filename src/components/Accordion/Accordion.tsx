@@ -151,7 +151,11 @@ export const AccordionTrigger: React.FC<AccordionTriggerProps> = ({
   }, []);
 
   return (
-    <button className={styles.accordionTrigger} onClick={handleClick}>
+    <button
+      className={styles.accordionTrigger}
+      onClick={handleClick}
+      aria-expanded={isActive}
+    >
       <div
         className={styles.accordionArrow}
         style={{
