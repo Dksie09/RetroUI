@@ -138,7 +138,7 @@ export const AccordionTrigger: React.FC<AccordionTriggerProps> = ({
         if (context.collapsible && prevActiveItem === item.value) {
           return null;
         }
-        return prevActiveItem === item.value ? null : item.value;
+        return prevActiveItem === item.value ? prevActiveItem : item.value;
       });
     }
   };
