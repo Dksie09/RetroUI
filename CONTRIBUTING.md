@@ -43,18 +43,80 @@ We use GitHub issues to track public bugs. Report a bug by [opening a new issue]
 - What actually happens
 - Notes (possibly including why you think this might be happening, or stuff you tried that didn't work)
 
+## Local Development
+
+To set up for local development:
+
+1. Fork the repository and clone your fork:
+
+   ```bash
+   git clone https://github.com/your-username/RetroUI.git
+   cd RetroUI
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start the Storybook development environment:
+
+   ```bash
+   npm run dev
+   ```
+
+   This will launch Storybook at http://localhost:6006, where you can preview and interact with all components.
+
+4. Make your changes to components in the `/src/components` directory.
+
+   - Components will automatically update in Storybook as you save changes
+   - Use the watch mode for continuous builds during development: `npm run watch`
+
+5. Test your changes:
+
+   ```bash
+   npm test
+   ```
+
+6. Build the library to verify your changes work in the final bundle:
+
+   ```bash
+   npm run build
+   ```
+
+7. To test your changes in another project:
+
+   ```bash
+   # In your RetroUI directory
+   npm link
+
+   # In your test project directory
+   npm link pixel-retroui
+   ```
+
+## Project Structure
+
+- `/src/components/` - All UI components with their styles, tests and stories
+- `/src/styles/` - Global styles and theme variables
+- `/.storybook/` - Storybook configuration files
+- `/dist/` - Built package (generated when you run `npm run build`)
+- `/fonts/` - Font files used by the library
+- `/bin/` - Installation scripts
+
 ## Use a Consistent Coding Style
 
 - 2 spaces for indentation rather than tabs
-- You can try running `npm run lint` for style unification
+- Follow the project's TypeScript coding conventions
 
-## License
+## Scripts
 
-By contributing, you agree that your contributions will be licensed under its BSD 3-Clause License.
+The project includes several useful npm scripts:
 
-## References
-
-This document was adapted from the open-source contribution guidelines for [Facebook's Draft](https://github.com/facebook/draft-js/blob/main/CONTRIBUTING.md)
+- `npm run dev` - Start Storybook development environment
+- `npm run build` - Build the library for production
+- `npm test` - Run the test suite
+- `npm run watch` - Watch mode for development (continuously rebuilds on changes)
 
 ## Running Tests
 
@@ -65,3 +127,7 @@ npm test
 ```
 
 This will run all the tests and ensure that your changes haven't introduced any regressions.
+
+## License
+
+By contributing, you agree that your contributions will be licensed under its BSD 3-Clause License.
