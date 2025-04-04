@@ -29,7 +29,7 @@ export interface DropdownMenuProps {
   style?: CSSProperties;
 }
 
-export const DropdownMenu: React.FC<DropdownMenuProps> = ({
+export const DropdownMenu = ({
   children,
   className = "",
   bg,
@@ -38,7 +38,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   shadowColor,
   style,
   ...props
-}) => {
+}: DropdownMenuProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const [triggerWidth, setTriggerWidth] = useState(0);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -102,7 +102,7 @@ export interface DropdownMenuTriggerProps
   borderColor?: string;
 }
 
-export const DropdownMenuTrigger: React.FC<DropdownMenuTriggerProps> = ({
+export const DropdownMenuTrigger = ({
   children,
   className = "",
   bg,
@@ -111,7 +111,7 @@ export const DropdownMenuTrigger: React.FC<DropdownMenuTriggerProps> = ({
   borderColor,
   style,
   ...props
-}) => {
+}: DropdownMenuTriggerProps): JSX.Element => {
   const context = useContext(DropdownContext);
 
   const handleClick = () => {
@@ -172,7 +172,7 @@ export interface DropdownMenuContentProps {
   style?: CSSProperties;
 }
 
-export const DropdownMenuContent: React.FC<DropdownMenuContentProps> = ({
+export const DropdownMenuContent = ({
   children,
   className = "",
   bg,
@@ -181,7 +181,7 @@ export const DropdownMenuContent: React.FC<DropdownMenuContentProps> = ({
   shadowColor,
   style,
   ...props
-}) => {
+}: DropdownMenuContentProps): JSX.Element | null => {
   const context = useContext(DropdownContext);
 
   const borderSvg = useMemo(() => {
@@ -213,22 +213,32 @@ export const DropdownMenuContent: React.FC<DropdownMenuContentProps> = ({
   );
 };
 
-export const DropdownMenuLabel: React.FC<{
+export const DropdownMenuLabel = ({
+  children,
+  className = "",
+}: {
   children: React.ReactNode;
   className?: string;
-}> = ({ children, className = "" }) => (
+}): JSX.Element => (
   <div className={`${styles.dropdownMenuLabel} ${className}`}>{children}</div>
 );
 
-export const DropdownMenuItem: React.FC<{
+export const DropdownMenuItem = ({
+  children,
+  className = "",
+}: {
   children: React.ReactNode;
   className?: string;
-}> = ({ children, className = "" }) => (
+}): JSX.Element => (
   <div className={`${styles.dropdownMenuItem} ${className}`}>{children}</div>
 );
 
-export const DropdownMenuSeparator: React.FC<{ className?: string }> = ({
+export const DropdownMenuSeparator = ({
   className = "",
-}) => <div className={`${styles.dropdownMenuSeparator} ${className}`} />;
+}: {
+  className?: string;
+}): JSX.Element => (
+  <div className={`${styles.dropdownMenuSeparator} ${className}`} />
+);
 
 export default DropdownMenu;

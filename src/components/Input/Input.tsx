@@ -15,7 +15,7 @@ export interface InputProps
   };
 }
 
-export const Input: React.FC<InputProps> = ({
+export const Input = ({
   className = "",
   icon,
   onIconClick,
@@ -24,7 +24,7 @@ export const Input: React.FC<InputProps> = ({
   borderColor,
   style,
   ...props
-}) => {
+}: InputProps): JSX.Element => {
   const svgString = useMemo(() => {
     const color = borderColor || "currentColor";
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z" fill="${color}"/></svg>`;

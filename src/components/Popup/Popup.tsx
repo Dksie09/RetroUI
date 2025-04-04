@@ -15,7 +15,7 @@ export interface PopupProps {
   borderColor?: string;
 }
 
-export const Popup: React.FC<PopupProps> = ({
+export const Popup = ({
   isOpen,
   onClose,
   className = "",
@@ -27,7 +27,7 @@ export const Popup: React.FC<PopupProps> = ({
   overlayBg,
   textColor,
   borderColor,
-}) => {
+}: PopupProps): JSX.Element | null => {
   if (!isOpen) return null;
 
   const svgString = useMemo(() => {

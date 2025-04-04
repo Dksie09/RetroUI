@@ -9,13 +9,13 @@ export interface ProgressBarProps {
   borderColor?: string;
 }
 
-export const ProgressBar: React.FC<ProgressBarProps> = ({
+export const ProgressBar = ({
   progress,
   className = "",
   size = "md",
   color,
   borderColor,
-}) => {
+}: ProgressBarProps): JSX.Element => {
   const clampedProgress = Math.min(Math.max(progress, 0), 100);
 
   const svgString = useMemo(() => {

@@ -2,13 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: "Minecraft";
-  src: url("../fonts/Minecraft.otf") format("opentype");
-  font-weight: normal;
-  font-style: normal;
-}
-
 :root {
   --primary-bg: theme("colors.primary.bg");
   --primary-text: theme("colors.primary.text");

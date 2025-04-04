@@ -6,46 +6,71 @@ import terser from '@rollup/plugin-terser';
 import copy from 'rollup-plugin-copy';
 import url from '@rollup/plugin-url';
 
-export default {
-    input: 'src/index.ts',
-    output: [
-        {
-            file: 'dist/index.js',
+export default [
+    // Main bundle
+    {
+        input: 'src/index.ts',
+        output: [
+            {
+                file: 'dist/index.js',
+                format: 'esm',
+                sourcemap: true,
+            },
+        ],
+        external: ['react', 'react-dom'],
+        plugins: [
+            typescript({
+                tsconfig: './tsconfig.json',
+                declaration: true,
+                declarationDir: 'dist',
+                exclude: ["**/*.test.tsx", "**/*.test.ts"],
+            }),
+            postcss({
+                config: {
+                    path: './postcss.config.js',
+                },
+                extensions: ['.css'],
+                minimize: true,
+                modules: {
+                    generateScopedName: '[name]__[local]___[hash:base64:5]',
+                },
+                extract: 'index.css',
+                use: ['sass'],
+            }),
+            url({
+                include: ['**/*.otf'],
+                limit: Infinity,
+                fileName: '[dirname][name][extname]',
+            }),
+            resolve(),
+            commonjs(),
+            terser(),
+            copy({
+                targets: [
+                    { src: 'fonts/*', dest: 'dist/fonts' }
+                ]
+            })
+        ],
+    },
+
+    // Font-only CSS bundle
+    {
+        input: 'src/fonts-entry.js', // We'll create this file
+        output: {
+            file: 'dist/fonts.js',
             format: 'esm',
-            sourcemap: true,
         },
-    ],
-    external: ['react', 'react-dom'],
-    plugins: [
-        typescript({
-            tsconfig: './tsconfig.json',
-            declaration: true,
-            declarationDir: 'dist',
-        }),
-        postcss({
-            config: {
-                path: './postcss.config.js',
-            },
-            extensions: ['.css'],
-            minimize: true,
-            modules: {
-                generateScopedName: '[name]__[local]___[hash:base64:5]',
-            },
-            extract: 'index.css',
-            use: ['sass'],
-        }),
-        url({
-            include: ['**/*.otf'],
-            limit: Infinity,
-            fileName: '[dirname][name][extname]',
-        }),
-        resolve(),
-        commonjs(),
-        terser(),
-        copy({
-            targets: [
-                { src: 'fonts/*', dest: 'dist/fonts' }
-            ]
-        })
-    ],
-};
+        plugins: [
+            postcss({
+                include: ['src/fonts.css'],
+                extract: 'fonts.css',
+                minimize: true,
+            }),
+            copy({
+                targets: [
+                    { src: 'fonts/*', dest: 'dist/fonts' }
+                ]
+            })
+        ]
+    }
+];

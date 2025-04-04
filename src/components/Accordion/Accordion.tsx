@@ -30,7 +30,7 @@ export interface AccordionProps {
   style?: CSSProperties;
 }
 
-export const Accordion: React.FC<AccordionProps> = ({
+export const Accordion = ({
   children,
   collapsible = false,
   className = "",
@@ -40,7 +40,7 @@ export const Accordion: React.FC<AccordionProps> = ({
   shadowColor,
   style,
   ...props
-}) => {
+}: AccordionProps): JSX.Element => {
   const [activeItem, setActiveItem] = useState<string | null>(null);
 
   const customStyle = {
