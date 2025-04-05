@@ -1,0 +1,90 @@
+/* Dropdown styles for Storybook */
+.dropdownMenu {
+  position: relative;
+  display: inline-block;
+  font-family: "Press Start 2P", cursive;
+  font-size: 10px;
+}
+
+.pixelButton {
+  border: 0;
+  border-style: solid;
+  border-width: 4px;
+  border-image-slice: 2;
+  border-image-width: 2;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-source: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8'><path d='M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z' fill='black'/></svg>");
+  padding: 12px 16px;
+  margin: 0;
+  background-color: var(--button-custom-bg, #ffffff);
+  color: var(--button-custom-text, #000000);
+  box-shadow: var(--button-custom-shadow, 4px 4px 0 0 rgba(0, 0, 0, 1));
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 100px;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.pixelButton:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+.dropdownMenuTrigger {
+  gap: 10px;
+}
+
+.dropdownArrow {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  transition: transform 0.2s ease;
+}
+
+.dropdownMenuContent {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  background-color: var(--dropdown-content-custom-bg, #ffffff);
+  color: var(--dropdown-content-custom-text, #000000);
+  border: 0;
+  border-style: solid;
+  border-width: 4px;
+  border-image-slice: 2;
+  border-image-width: 2;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-source: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8'><path d='M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z' fill='black'/></svg>");
+  padding: 8px;
+  z-index: 10;
+  box-shadow: var(
+    --dropdown-content-custom-shadow,
+    4px 4px 0 0 rgba(0, 0, 0, 1)
+  );
+}
+
+.dropdownMenuLabel {
+  padding: 4px 8px;
+  margin-bottom: 4px;
+  color: #666;
+  font-size: 10px;
+}
+
+.dropdownMenuItem {
+  padding: 8px;
+  cursor: pointer;
+  transition: background-color 0.1s;
+}
+
+.dropdownMenuItem:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.dropdownMenuSeparator {
+  height: 2px;
+  background-color: #000;
+  margin: 6px 0;
+}

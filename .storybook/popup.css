@@ -1,0 +1,65 @@
+/* Popup styles for Storybook */
+
+.pixelPopupOverlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  background-color: var(--popup-overlay-bg, rgba(0, 0, 0, 0.5));
+}
+
+.pixelPopup {
+  position: relative;
+  padding: 4px;
+  background-color: var(--popup-base-bg, var(--bg-popup-base, white));
+  color: var(--popup-text, var(--text-popup, black));
+  border-style: solid;
+  border-width: 5px;
+  border-image-slice: 3;
+  border-image-width: 2;
+  border-image-repeat: stretch;
+  border-image-source: var(--popup-border-svg);
+  border-image-outset: 2;
+  box-shadow: 2px 2px 0 2px var(--popup-base-bg, var(--bg-popup-base, white)),
+    -2px -2px 0 2px var(--popup-base-bg, var(--bg-popup-base, white));
+}
+
+.pixelPopupInner {
+  padding: 1rem;
+  background-color: var(--popup-bg, var(--bg-popup, #f0f0f0));
+  color: var(--popup-text, var(--text-popup, black));
+  border-style: solid;
+  border-width: 5px;
+  border-image-slice: 3;
+  border-image-width: 2;
+  border-image-repeat: stretch;
+  border-image-source: var(--popup-border-svg);
+  border-image-outset: 2;
+  box-shadow: 2px 2px 0 2px var(--popup-bg, var(--bg-popup, #f0f0f0)),
+    -2px -2px 0 2px var(--popup-bg, var(--bg-popup, #f0f0f0));
+}
+
+.pixelPopupTitle {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-family: "Minecraft", sans-serif;
+}
+
+.pixelPopupCloseButton {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+  font-family: "Minecraft", sans-serif;
+  color: var(--popup-text, var(--text-popup, black));
+}
+
+.pixelPopupContent {
+  font-family: "Minecraft", sans-serif;
+}

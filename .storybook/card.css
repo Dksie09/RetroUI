@@ -1,0 +1,19 @@
+/* Card styles for Storybook */
+.pixelCard {
+  margin: 0.5rem;
+  border-style: solid;
+  border-width: 5px;
+  font-family: "Minecraft", sans-serif;
+  font-size: 1rem;
+  padding: 1rem;
+  background-color: var(--card-custom-bg, var(--bg-card, white));
+  color: var(--card-custom-text, var(--text-card, black));
+  border-image-slice: 3;
+  border-image-width: 2;
+  border-image-repeat: stretch;
+  border-image-outset: 2;
+  box-shadow: 2px 2px 0 2px
+      var(--card-custom-shadow, var(--shadow-card, #000000)),
+    -2px -2px 0 2px var(--card-custom-bg, var(--bg-card, white));
+  border-color: var(--card-custom-border, var(--border-card, #000000));
+}

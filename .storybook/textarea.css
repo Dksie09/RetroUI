@@ -1,0 +1,26 @@
+/* TextArea styles for Storybook */
+.pixelTextarea {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  min-height: 100px;
+  resize: vertical;
+  outline: none;
+  font-family: "Minecraft", sans-serif;
+  background-color: var(--textarea-custom-bg, var(--bg-textarea, #f0f0f0));
+  color: var(--textarea-custom-text, var(--text-textarea, #000000));
+  border-style: solid;
+  box-shadow: 2px 2px 0 2px
+      var(--textarea-custom-bg, var(--bg-textarea, #f0f0f0)),
+    -2px -2px 0 2px var(--textarea-custom-bg, var(--bg-textarea, #f0f0f0));
+  border-width: 5px;
+  border-image-slice: 3;
+  border-image-width: 2;
+  border-image-repeat: stretch;
+  border-image-outset: 2;
+  border-color: var(--textarea-custom-border, var(--border-textarea, #000000));
+}
+
+.pixelTextarea:focus {
+  outline: none;
+}

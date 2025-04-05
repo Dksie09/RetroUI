@@ -1,0 +1,106 @@
+/* Accordion styles for Storybook */
+.accordion {
+  width: 100%;
+  font-family: "Minecraft", sans-serif;
+  font-size: 1rem;
+}
+
+.accordionItem {
+  margin-bottom: 1.25rem;
+  border-style: solid;
+  border-width: 5px;
+  overflow: hidden;
+  background-color: var(
+    --accordion-item-custom-bg,
+    var(--accordion-custom-bg, var(--bg-accordion, white))
+  );
+  color: var(
+    --accordion-item-custom-text,
+    var(--accordion-custom-text, var(--text-accordion, black))
+  );
+  border-image-slice: 3;
+  border-image-width: 2;
+  border-image-repeat: stretch;
+  border-image-outset: 2;
+  border-image-source: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M3 1h1v1h-1zM4 1h1v1h-1zM2 2h1v1h-1zM5 2h1v1h-1zM1 3h1v1h-1zM6 3h1v1h-1zM1 4h1v1h-1zM6 4h1v1h-1zM2 5h1v1h-1zM5 5h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1z' fill='currentColor'/%3E%3C/svg%3E");
+  box-shadow: 2px 2px 0 2px
+      var(
+        --accordion-item-custom-shadow,
+        var(--accordion-custom-shadow, var(--shadow-accordion, #000000))
+      ),
+    -2px -2px 0 2px
+      var(
+        --accordion-item-custom-bg,
+        var(--accordion-custom-bg, var(--bg-accordion, white))
+      );
+}
+
+.accordionTrigger {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.25rem 1rem;
+  text-align: left;
+  cursor: pointer;
+  background-color: var(
+    --accordion-item-custom-bg,
+    var(--accordion-custom-bg, var(--bg-accordion, white))
+  );
+  color: var(
+    --accordion-item-custom-text,
+    var(--accordion-custom-text, var(--text-accordion, black))
+  );
+}
+
+.accordionArrow {
+  width: 1.5rem;
+  height: 1.5rem;
+  transition: transform 0.3s ease-in-out;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512'%3E%3Cpath d='M127 21h44v43h43v42h43v43h42v43h43v42h42v44h-42v43h-43v42h-42v43h-43v42h-43v43h-44z' fill='currentColor' /%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512'%3E%3Cpath d='M127 21h44v43h43v42h43v43h42v43h43v42h42v44h-42v43h-43v42h-42v43h-43v42h-43v43h-44z' fill='currentColor' /%3E%3C/svg%3E");
+  background-color: currentColor;
+}
+
+.accordionContent {
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+  background-color: var(
+    --accordion-item-custom-bg,
+    var(--accordion-custom-bg, var(--bg-accordion, white))
+  );
+  color: var(
+    --accordion-item-custom-text,
+    var(--accordion-custom-text, var(--text-accordion, black))
+  );
+  max-height: 0;
+  opacity: 0;
+}
+
+.accordionContentInner {
+  padding: 1rem;
+  font-size: 0.875rem;
+  border-top-width: 1px;
+  border-color: #e5e7eb;
+}
+
+/* Active states */
+.accordionItem.active {
+  /* Add active styles here if needed */
+}
+
+.accordionContent.active {
+  max-height: 1000px;
+  opacity: 1;
+}
+
+/* Ensure arrow rotation works correctly */
+.accordionItem.active .accordionArrow {
+  transform: rotate(90deg);
+}

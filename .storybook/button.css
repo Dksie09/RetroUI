@@ -1,0 +1,27 @@
+/* Button styles for Storybook */
+.pixelButton {
+  position: relative;
+  display: inline-block;
+  border-style: solid;
+  border-width: 5px;
+  padding: 0.5rem;
+  margin: 0.75rem;
+  font-family: "Minecraft", sans-serif;
+  background-color: var(--button-custom-bg, var(--bg-button, #f0f0f0));
+  color: var(--button-custom-text, var(--text-button, #000000));
+  box-shadow: 2px 2px 0 2px
+      var(--button-custom-shadow, var(--shadow-button, #000000)),
+    -2px -2px 0 2px var(--button-custom-bg, var(--bg-button, #f0f0f0));
+  border-image-slice: 3;
+  border-image-width: 2;
+  border-image-repeat: stretch;
+  border-image-outset: 2;
+  border-color: var(--button-custom-border, var(--border-button, #000000));
+  cursor: pointer;
+}
+
+.pixelButton:active {
+  transform: translateY(2px);
+  box-shadow: 2px 2px 0 2px var(--button-custom-bg, var(--bg-button, #f0f0f0)),
+    -2px -2px 0 2px var(--button-custom-bg, var(--bg-button, #f0f0f0));
+}

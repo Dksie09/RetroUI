@@ -1,0 +1,18 @@
+/* Font declarations for Storybook */
+@font-face {
+  font-family: "Minecraft";
+  src: url("../fonts/Minecraft.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Minecraft";
+  src: url("../fonts/Minecraft-Bold.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+body {
+  font-family: "Minecraft", sans-serif;
+}
