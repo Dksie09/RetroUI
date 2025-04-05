@@ -31,7 +31,7 @@ describe("Accordion", () => {
   });
 
   it("expands and collapses items when clicked", () => {
-    renderAccordion();
+    renderAccordion({ collapsible: true });
 
     const trigger1 = screen.getByText("Trigger 1");
     const content1 = screen.getByText("Content 1");
