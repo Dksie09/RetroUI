@@ -9,7 +9,9 @@ import styles from "./Accordion.module.css";
 
 interface AccordionContextType {
   activeItem: string | null;
+  activeItems: string[];
   setActiveItem: React.Dispatch<React.SetStateAction<string | null>>;
+  setActiveItems: React.Dispatch<React.SetStateAction<string[]>>;
   bg?: string;
   textColor?: string;
   borderColor?: string;
@@ -32,7 +34,7 @@ export interface AccordionProps {
 
 export const Accordion = ({
   children,
-  collapsible = false,
+  collapsible = true,
   className = "",
   bg,
   textColor,
@@ -41,25 +43,8 @@ export const Accordion = ({
   style,
   ...props
 }: AccordionProps): JSX.Element => {
-  // Only set an initial active item if we're in a non-test environment
-  // or if specifically configured through props
-  const [activeItem, setActiveItem] = useState<string | null>(() => {
-    // During tests, we want to start with all items collapsed
-    const isTestEnvironment =
-      typeof process !== "undefined" && process.env.NODE_ENV === "test";
-
-    if (!collapsible && !isTestEnvironment) {
-      const childArray = React.Children.toArray(children);
-      const firstAccordionItem = childArray.find(
-        (child) => React.isValidElement(child) && child.props?.value
-      );
-
-      return React.isValidElement(firstAccordionItem)
-        ? firstAccordionItem.props.value
-        : null;
-    }
-    return null;
-  });
+  const [activeItem, setActiveItem] = useState<string | null>(null);
+  const [activeItems, setActiveItems] = useState<string[]>([]);
 
   const customStyle = {
     ...style,
@@ -72,8 +57,10 @@ export const Accordion = ({
   return (
     <AccordionContext.Provider
       value={{
-        activeItem,
-        setActiveItem,
+        activeItem: collapsible ? activeItem : null,
+        activeItems: collapsible ? [] : activeItems,
+        setActiveItem: collapsible ? setActiveItem : () => {},
+        setActiveItems: collapsible ? () => {} : setActiveItems,
         bg,
         textColor,
         borderColor,
@@ -112,7 +99,9 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
   shadowColor,
 }) => {
   const context = useContext(AccordionContext);
-  const isActive = context?.activeItem === value;
+  const isActive = context?.collapsible
+    ? context.activeItem === value
+    : context?.activeItems.includes(value);
 
   const borderSvg = useMemo(() => {
     const color = borderColor || context?.borderColor || "currentColor";
@@ -150,21 +139,31 @@ export const AccordionTrigger: React.FC<AccordionTriggerProps> = ({
   const context = useContext(AccordionContext);
   const item = useContext(AccordionItemContext);
 
+  const isActive = context?.collapsible
+    ? context.activeItem === item.value
+    : context?.activeItems.includes(item.value);
+
   const handleClick = () => {
-    if (context) {
-      context.setActiveItem((prevActiveItem) => {
-        if (!context.collapsible && prevActiveItem === item.value) {
-          return prevActiveItem;
+    if (!context) return;
+
+    if (context.collapsible) {
+      // Single item mode - only one can be open
+      context.setActiveItem((prev) =>
+        prev === item.value ? null : item.value
+      );
+    } else {
+      // Multiple items mode
+      context.setActiveItems((prev) => {
+        if (prev.includes(item.value)) {
+          // Remove this item
+          return prev.filter((i) => i !== item.value);
+        } else {
+          // Add this item
+          return [...prev, item.value];
         }
-        if (context.collapsible && prevActiveItem === item.value) {
-          return null;
-        }
-        return item.value;
       });
     }
   };
-
-  const isActive = context?.activeItem === item.value;
 
   const arrowSvg = useMemo(() => {
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512"><path d="M127 21h44v43h43v42h43v43h42v43h43v42h42v44h-42v43h-43v42h-42v43h-43v42h-43v43h-44z" fill="currentColor" /></svg>`;
@@ -200,7 +199,10 @@ export const AccordionContent: React.FC<AccordionContentProps> = ({
 }) => {
   const context = useContext(AccordionContext);
   const item = useContext(AccordionItemContext);
-  const isActive = context?.activeItem === item.value;
+
+  const isActive = context?.collapsible
+    ? context.activeItem === item.value
+    : context?.activeItems.includes(item.value);
 
   return (
     <div
