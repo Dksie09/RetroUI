@@ -1,12 +1,12 @@
 {
   "name": "pixel-retroui",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A retro-styled UI component library",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "pixel-retroui": "./bin/install.js"
+    "pixel-retroui": "bin/install.js"
   },
   "scripts": {
     "build": "rollup -c rollup.config.mjs",
