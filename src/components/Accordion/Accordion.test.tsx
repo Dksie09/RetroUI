@@ -31,11 +31,12 @@ describe("Accordion", () => {
   });
 
   it("expands and collapses items when clicked", () => {
-    renderAccordion();
+    renderAccordion({ collapsible: true }); // Explicitly set collapsible to true
 
     const trigger1 = screen.getByText("Trigger 1");
     const content1 = screen.getByText("Content 1");
 
+    // Check initial state - should be collapsed with collapsible=true
     expect(content1).not.toBeVisible();
 
     fireEvent.click(trigger1);
@@ -85,11 +86,12 @@ describe("Accordion", () => {
   });
 
   it("renders arrow icon and rotates it when item is active", () => {
-    renderAccordion();
+    renderAccordion({ collapsible: true }); // Set collapsible to true
 
     const trigger1 = screen.getByText("Trigger 1");
     const arrow = trigger1.querySelector(".accordionArrow") as HTMLElement;
 
+    // All items should start collapsed with collapsible=true
     expect(arrow).toHaveStyle("transform: rotate(0deg)");
 
     fireEvent.click(trigger1);
@@ -143,11 +145,12 @@ describe("Accordion", () => {
   });
 
   it("sets aria-expanded attribute correctly", () => {
-    renderAccordion();
+    renderAccordion({ collapsible: true }); // Set collapsible to true
 
     const trigger1 = screen.getByText("Trigger 1");
     const trigger2 = screen.getByText("Trigger 2");
 
+    // All items should start with aria-expanded="false"
     expect(trigger1).toHaveAttribute("aria-expanded", "false");
     expect(trigger2).toHaveAttribute("aria-expanded", "false");
 
