@@ -1,13 +1,60 @@
 #!/usr/bin/env node
-
+const { execSync } = require('child_process');
 const inquirer = require('inquirer');
 const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
 
 async function main() {
-    console.log(chalk.cyan('🎮 Setting up pixel-retroui...'));
+    console.log(
+        chalk.magenta('      ▄▀▄─────▄▀▄\n') +
+        chalk.magenta('     ▄█') + chalk.white('░░▀▀▀▀▀') + chalk.white('░░') + chalk.magenta('█▄\n') +
+        chalk.magenta('─▄▄──█') + chalk.white('░░░░░░░░░░') + chalk.white('░') + chalk.magenta('█──▄▄\n') +
+        chalk.magenta('█▄▄█─█') + chalk.white('░░▀') + chalk.white('░░┬░░') + chalk.white('▀') + chalk.white('░░') + chalk.magenta('█─█▄▄█')
+    );
+    console.log(chalk.cyan('Setting up pixel-retroui...'));
+    let isInstalled = false;
+    try {
+        // Try to read the package.json file
+        const packageJsonPath = path.join(process.cwd(), 'package.json');
+        if (fs.existsSync(packageJsonPath)) {
+            const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+            isInstalled = packageJson.dependencies && packageJson.dependencies['pixel-retroui'] ||
+                packageJson.devDependencies && packageJson.devDependencies['pixel-retroui'];
+        }
+    } catch (error) {
+        console.log(chalk.yellow('Could not check if pixel-retroui is already installed.'));
+    }
 
+    // If not installed, install it
+    if (!isInstalled) {
+        console.log(chalk.yellow('Installing pixel-retroui...'));
+        try {
+            // Detect package manager (npm, yarn, pnpm)
+            let packageManager = 'npm';
+            if (fs.existsSync(path.join(process.cwd(), 'yarn.lock'))) {
+                packageManager = 'yarn';
+            } else if (fs.existsSync(path.join(process.cwd(), 'pnpm-lock.yaml'))) {
+                packageManager = 'pnpm';
+            }
+
+            // Install the package
+            const installCommand = packageManager === 'npm' ?
+                'npm install pixel-retroui@latest' :
+                packageManager === 'yarn' ?
+                    'yarn add pixel-retroui@latest' :
+                    'pnpm add pixel-retroui@latest';
+
+            console.log(chalk.blue(`Using ${packageManager} to install...`));
+            execSync(installCommand, { stdio: 'inherit' });
+            console.log(chalk.green('✅ pixel-retroui installed successfully!'));
+        } catch (error) {
+            console.error(chalk.red('Failed to install pixel-retroui:'), error.message);
+            console.log(chalk.yellow('Please install manually: npm install pixel-retroui@latest'));
+        }
+    } else {
+        console.log(chalk.green('✅ pixel-retroui is already installed.'));
+    }
     const answers = await inquirer.prompt([
         {
             type: 'list',
