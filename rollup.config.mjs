@@ -15,6 +15,7 @@ export default [
                 file: 'dist/index.js',
                 format: 'esm',
                 sourcemap: true,
+                banner: "'use client';\n",
             },
         ],
         external: ['react', 'react-dom'],
@@ -24,6 +25,7 @@ export default [
                 declaration: true,
                 declarationDir: 'dist',
                 exclude: ["**/*.test.tsx", "**/*.test.ts"],
+
             }),
             postcss({
                 config: {
@@ -44,7 +46,14 @@ export default [
             }),
             resolve(),
             commonjs(),
-            terser(),
+            terser({
+                format: {
+                    comments: /^\s*('use client'|"use client");/,
+                },
+                compress: {
+                    directives: false,
+                },
+            }),
             copy({
                 targets: [
                     { src: 'fonts/*', dest: 'dist/fonts' }
