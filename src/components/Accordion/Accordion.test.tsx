@@ -123,7 +123,7 @@ describe("Accordion", () => {
     expect(content2).not.toBeVisible();
   });
 
-  it("keeps at least one item expanded when collapsible is false", () => {
+  it("allows independent toggling of items when collapsible is false", () => {
     renderAccordion({ collapsible: false });
 
     const trigger1 = screen.getByText("Trigger 1");
@@ -131,16 +131,24 @@ describe("Accordion", () => {
     const content1 = screen.getByText("Content 1");
     const content2 = screen.getByText("Content 2");
 
-    fireEvent.click(trigger1);
-    expect(content1).toBeVisible();
-    expect(content2).not.toBeVisible();
-
-    fireEvent.click(trigger1);
-    expect(content1).toBeVisible();
-    expect(content2).not.toBeVisible();
-
-    fireEvent.click(trigger2);
+    // Initially no items are visible
     expect(content1).not.toBeVisible();
+    expect(content2).not.toBeVisible();
+
+    // Click first item to open it
+    fireEvent.click(trigger1);
+    expect(content1).toBeVisible();
+    expect(content2).not.toBeVisible();
+
+    // Click first item again - it should close with the new behavior
+    fireEvent.click(trigger1);
+    expect(content1).not.toBeVisible();
+    expect(content2).not.toBeVisible();
+
+    // Open both items
+    fireEvent.click(trigger1);
+    fireEvent.click(trigger2);
+    expect(content1).toBeVisible();
     expect(content2).toBeVisible();
   });
 
@@ -161,5 +169,33 @@ describe("Accordion", () => {
     fireEvent.click(trigger2);
     expect(trigger1).toHaveAttribute("aria-expanded", "false");
     expect(trigger2).toHaveAttribute("aria-expanded", "true");
+  });
+
+  it("allows multiple items to be expanded when collapsible is false", () => {
+    renderAccordion({ collapsible: false });
+
+    const trigger1 = screen.getByText("Trigger 1");
+    const trigger2 = screen.getByText("Trigger 2");
+    const content1 = screen.getByText("Content 1");
+    const content2 = screen.getByText("Content 2");
+
+    // Initially no items are visible
+    expect(content1).not.toBeVisible();
+    expect(content2).not.toBeVisible();
+
+    // Click first item
+    fireEvent.click(trigger1);
+    expect(content1).toBeVisible();
+    expect(content2).not.toBeVisible();
+
+    // Click second item - both should be visible
+    fireEvent.click(trigger2);
+    expect(content1).toBeVisible();
+    expect(content2).toBeVisible();
+
+    // Click first item again - it should close
+    fireEvent.click(trigger1);
+    expect(content1).not.toBeVisible();
+    expect(content2).toBeVisible();
   });
 });
