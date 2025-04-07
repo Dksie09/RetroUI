@@ -90,3 +90,31 @@ CustomColors.args = {
     </>
   ),
 };
+
+export const MultipleOpen = Template.bind({});
+MultipleOpen.args = {
+  collapsible: false,
+  children: (
+    <>
+      <AccordionItem value="item-1">
+        <AccordionTrigger>FAQ Item 1</AccordionTrigger>
+        <AccordionContent>
+          <p>With collapsible=false, multiple items can be open at once.</p>
+          <p>Try clicking several headers to see them all open.</p>
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>FAQ Item 2</AccordionTrigger>
+        <AccordionContent>
+          <p>Each item can be toggled independently.</p>
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>FAQ Item 3</AccordionTrigger>
+        <AccordionContent>
+          <p>This mode is useful for FAQ pages or documentation.</p>
+        </AccordionContent>
+      </AccordionItem>
+    </>
+  ),
+};
