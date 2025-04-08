@@ -110,7 +110,7 @@ We welcome contributions! See our [contribution guidelines](CONTRIBUTING.md) for
 ## Support
 
 - [GitHub Issues](https://github.com/Dksie09/RetroUI/issues)
-- [Documentation repo](https://retroui.io/docs)
+- [Documentation repo](https://github.com/Dksie09/retroui-docs)
 
 ## License
 
