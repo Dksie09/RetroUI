@@ -1,98 +1,116 @@
-# Retro UI
+# Pixel RetroUI
 
-Welcome to **Retro UI** - A Simple, Pixelated UI Library for React Applications
+[RetroUI](https://www.retroui.io/) is a pixelated UI component library for React and Next.js applications with a retro gaming aesthetic.
 
-![Retro UI Screenshot](https://github.com/user-attachments/assets/11096142-1be8-44b4-b2f1-7cbdfecd0ba1)
-
-## Table of Contents
-
-- [Demo](#demo)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Components](#components)
-- [Customization](#customization)
-- [Contributing](#contributing)
-- [License](#license)
-
-## Demo
-
-Check out our interactive demo to see Retro UI in action:
-
-[View Demo](https://github.com/user-attachments/assets/4f2c3785-cf26-44ab-8e8e-d193eb850c6e)
+<img width="1512" alt="Pixel RetroUI Screenshot" src="https://github.com/user-attachments/assets/f54081b1-a913-4574-aac1-b5b043b566a4" />
 
 ## Features
 
-- 🎨 Pixelated, retro-style UI components
-- 🚀 Easy integration with React and Next.js projects
-- 📱 Responsive design for various screen sizes
-- 🛠 Built with TypeScript for type safety
-- 🎭 Customizable with Tailwind CSS
+- Pixelated, retro gaming-inspired components
+- Seamless integration with React and Next.js
+- TypeScript support
+- Tailwind CSS compatible
 
-## Installation
+## Quick Start
 
-Retro UI is designed to work seamlessly with your Next.js or React projects using TypeScript and Tailwind CSS.
+### Setup
 
-1. **Install the package**:
-
+#### CLI Setup (Recommended)
+1. In your terminal:
    ```bash
-   npx i pixel-retroui@latest
+   npx pixel-retroui
+   ```
+   Follow the instructions in the CLI. It will automatically install dependencies, configure your project, and create necessary setup files.
+
+2. For Next.js, in your layout.tsx file add: `import '@/lib/pixel-retroui-setup.js';`
+
+#### Manual Setup
+
+1. Install the package:
+    ```bash
+   npm i pixel-retroui@latest
    ```
 
-2. **Configure your project**:
-   Follow our detailed [Installation Guide](https://www.retroui.io/installation) to properly set up Retro UI in your project.
+3. Add to your CSS file:
+   ```css
+   @import 'pixel-retroui/dist/index.css';
+   /* For Minecraft font */
+   @import 'pixel-retroui/dist/fonts.css';
+   ```
 
-## Usage
-
-Here's a quick example of how to use a Retro UI component in your React application:
-
+### Basic Usage
+Simply import and use:
 ```jsx
-import { Button } from "pixel-retroui";
+import { Button, Card } from 'pixel-retroui';
 
-function MyComponent() {
-  return <Button onClick={() => console.log("Clicked!")}>Click me!</Button>;
+function App() {
+  return (
+    <div>
+      <h1 className="font-minecraft">Retro App</h1>
+      <Card className="p-4 mb-4">
+        <p>This is a pixel-styled card</p>
+      </Card>
+      <Button>Click me!</Button>
+    </div>
+  );
 }
 ```
 
-For more detailed usage instructions and examples, please refer to our [documentation](https://www.retroui.io/docs).
-
 ## Components
 
-Retro UI comes packed with a variety of components to bring your application to life. Here's a list of our current components:
+Pixel RetroUI includes the following components:
 
-### Basic Components
+| Component | Description |
+|-----------|-------------|
+| [Accordion](https://retroui.io/accordion) | Collapsible content sections |
+| [Bubble](https://retroui.io/bubble) | Speech/thought bubble elements |
+| [Button](https://retroui.io/button) | Customizable buttons with pixel styling |
+| [Card](https://retroui.io/card) | Container for content with pixel borders |
+| [Dropdown](https://retroui.io/dropdown) | Selectable dropdown menus |
+| [Input](https://retroui.io/input) | Text input fields |
+| [Popup](https://retroui.io/popup) | Modal dialogs and notifications |
+| [ProgressBar](https://retroui.io/progressbar) | Visual progress indicators |
+| [TextArea](https://retroui.io/textarea) | Multi-line text input fields |
 
-- [Button](https://www.retroui.io/button): Customizable button with retro styling
-- [Card](https://www.retroui.io/card): Container for grouping related content
-
-### Form Components
-
-- [Input](https://www.retroui.io/input): Text input field with pixelated design
-- [TextArea](https://www.retroui.io/textarea): Multi-line text input
-
-### UI Elements
-
-- [Progress Bar](https://www.retroui.io/progressbar): Visualize progress with a retro flair
-- [Popup](https://www.retroui.io/popup): Modal dialog for important messages or actions
-- [Accordion](https://www.retroui.io/accordion): Collapsible content sections for organizing information
-
-Explore all our components and their usage in our [Component Gallery](https://www.retroui.io/components).
+Visit our [components page](https://retroui.io/components) for detailed documentation and examples.
 
 ## Customization
 
-Retro UI is built with customization in mind. You can easily adjust the look and feel of components using Tailwind CSS classes or by using predefined props.
+Components can be customized using props and Tailwind CSS classes:
+
+```jsx
+<Button 
+  bg="#c381b5" 
+  textColor="#fefcd0"
+  shadow="#fefcd0"
+  className="px-6 py-2"
+>
+  Custom Button
+</Button>
+```
+
+## Troubleshooting
+
+Common issues:
+
+- **Fonts not loading**: Ensure you've imported `pixel-retroui/dist/fonts.css`
+- **Components not styled**: Check you've imported `pixel-retroui/dist/index.css`
+- **Tailwind conflicts**: Add `important: true` in your tailwind.config.js
 
 ## Contributing
 
-We welcome contributions from the community! If you'd like to contribute to Retro UI, please follow these steps:
+We welcome contributions! See our [contribution guidelines](CONTRIBUTING.md) for details.
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a pull request (make it as detailed as possible :))
 
-Please read our [Contributing Guidelines](CONTRIBUTING.md) for more information.
+## Support
+
+- [GitHub Issues](https://github.com/Dksie09/RetroUI/issues)
+- [Documentation repo](https://github.com/Dksie09/retroui-docs)
 
 ## License
 
@@ -100,4 +118,4 @@ This project is licensed under the BSD 3-Clause License - see the [LICENSE](LICE
 
 ---
 
-For any questions, issues, or feature requests, please [open an issue](https://github.com/Dksie09/RetroUI/issues) on our GitHub repository. We appreciate your feedback and support!
+If you find this library useful, consider [buying me a coffee](https://buymeacoffee.com/dakshiegoel) ☕
