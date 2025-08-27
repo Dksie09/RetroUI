@@ -1,6 +1,7 @@
 import React from "react";
 import { Meta, StoryFn } from "@storybook/react";
 import { Input } from "./Input";
+import { Search } from "lucide-react";
 
 const meta = {
   title: "Components/Input",
@@ -10,6 +11,9 @@ const meta = {
   },
   tags: ["autodocs"],
   argTypes: {
+    icon: {
+      control: { type: "text" },
+    },
     bg: { control: "color" },
     textColor: { control: "color" },
     borderColor: { control: "color" },
@@ -61,6 +65,13 @@ export const WithIcon = Template.bind({});
 WithIcon.args = {
   placeholder: "Search...",
   icon: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTE1LjUgMTRoLS43OWwtLjI4LS4yN0MxNS40MSAxMi41OSAxNiAxMS4xMSAxNiA5LjUgMTYgNS45MSAxMy4wOSAzIDkuNSAzUzMgNS45MSAzIDkuNSA1LjkxIDE2IDkuNSAxNmMxLjYxIDAgMy4wOS0uNTkgNC4yMy0xLjU3bC4yNy4yOHYuNzlsNSA0Ljk5TDIwLjQ5IDE5bC00Ljk5LTV6bS02IDBDNy4wMSAxNCA1IDExLjk5IDUgOS41UzcuMDEgNSA5LjUgNSAxNCA3LjAxIDE0IDkuNSAxMS45OSAxNCA5LjUgMTR6Ii8+PC9zdmc+",
+  onIconClick: () => alert("Search clicked"),
+};
+
+export const WithIconComponent = Template.bind({});
+WithIconComponent.args = {
+  placeholder: "Search...",
+  icon: <Search size={20} />,
   onIconClick: () => alert("Search clicked"),
 };
 

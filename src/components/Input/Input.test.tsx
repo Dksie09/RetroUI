@@ -2,6 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { Input } from "./Input";
+import { Search } from "lucide-react";
 
 describe("Input Component", () => {
   test("renders input element", () => {
@@ -25,6 +26,18 @@ describe("Input Component", () => {
     const mockOnIconClick = jest.fn();
     render(<Input icon="/icons/search-1.svg" onIconClick={mockOnIconClick} />);
     fireEvent.click(screen.getByAltText("Input icon"));
+    expect(mockOnIconClick).toHaveBeenCalledTimes(1);
+  });
+
+  test("renders icon when provided as a React component", () => {
+    render(<Input icon={<Search data-testid="search-icon" />} />);
+    expect(screen.getByTestId("search-icon")).toBeInTheDocument();
+  });
+
+  test("calls onIconClick when React component icon is clicked", () => {
+    const mockOnIconClick = jest.fn();
+    render(<Input icon={<Search data-testid="search-icon" />} onIconClick={mockOnIconClick} />);
+    fireEvent.click(screen.getByTestId("search-icon"));
     expect(mockOnIconClick).toHaveBeenCalledTimes(1);
   });
 });

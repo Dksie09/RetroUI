@@ -3,7 +3,7 @@ import styles from "./Input.module.css";
 
 export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "style"> {
-  icon?: string;
+  icon?: string | React.ReactNode;
   onIconClick?: () => void;
   bg?: string;
   textColor?: string;
@@ -50,11 +50,15 @@ export const Input = ({
       />
       {icon && (
         <button
-          className={`${styles.pixelInputIconButton} absolute right-0 top-0`}
+          className={`${styles.pixelInputIconButton} absolute right-0 top-0 flex items-center justify-center`}
           onClick={onIconClick}
           type="button"
         >
-          <img src={icon} alt="Input icon" className="w-5 h-5" />
+          {typeof icon === "string" ? (
+            <img src={icon} alt="Input icon" className="w-5 h-5" />
+          ) : (
+            <span className="w-5 h-5 flex items-center justify-center">{icon}</span>
+          )}
         </button>
       )}
     </div>
